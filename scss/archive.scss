@@ -1,0 +1,146 @@
+@import "variables/variables";
+
+.post-type-archive-reviews {
+    @media (min-width: 768px) {
+        &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 1169px;
+            height: 1165px;
+            left: 0;
+            top: 0;
+            opacity: 0.1;
+            border: 1px solid #FFFFFF;
+            border-radius: 50%;
+            z-index: -1;
+        }
+    }
+
+    .page-header {
+        @media (max-width: 767px) {
+            margin-top: 3em;
+        }
+    }
+
+}
+
+.archiveReviewSlider {
+    margin: 2em 0 1.56em;
+    opacity: 0;
+    transition: opacity 0.3s;
+
+    &.slick-initialized {
+        opacity: 1;
+    }
+
+    @media (min-width: 768px) {
+        margin: 2em auto 3.56em;
+        width: 56.625em;
+    }
+
+    .slick-list {
+        overflow: inherit;
+    }
+
+    &__wrapper {
+        overflow: hidden;
+        margin: 0;
+        border-bottom: $main_border;
+
+        @media (min-width: 768px) {
+            margin: 0 -5.7em;
+        }
+    }
+
+    &__item {
+        transform: scale(0.8);
+        transition: transform 0.3s;
+
+        &.slick-current {
+            transform: scale(1);
+        }
+    }
+
+    &__footer {
+        @media (max-width: 767px) {
+            font-size: 0.6em;
+        }
+    }
+
+    &__count {
+        font-weight: bold;
+        font-size: 2.5em;
+        line-height: 150.4%;
+        color: #FF3E00;
+    }
+
+    &__arrows {}
+
+    &__prev {}
+
+    &__next {}
+
+}
+
+.archiveReview {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -1.2em;
+    padding: 1.875em 1.2em;
+    border-bottom: $main_border;
+
+    @media (min-width: 768px) {
+        gap: 1.875em;
+    }
+
+    @media (min-width: 768px) {
+        margin: 0 -5.7em 3.75em;
+        padding: 1.875em 5.7em 3.75em;
+    }
+
+    &__item {
+        padding: 1.75em 1.25em;
+        background: #262626;
+        margin-bottom: 1em;
+
+        @media (min-width: 768px) {
+            width: calc(33.3% - 1.875em);
+            padding: 2.75em 2.25em;
+            margin-bottom: 0;
+        }
+    }
+
+    &__head {
+        display: flex;
+        margin-bottom: 1.4375em;
+    }
+
+    &__photo {
+        flex: none;
+        width: 4.0625em;
+        height: 4.0625em;
+        margin-right: 1.4375em;
+        border-radius: 50%;
+        overflow: hidden;
+
+        img {
+            display: block;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &__name {
+        font-size: 1.5em;
+        line-height: 1.189;
+        color: #fff;
+    }
+
+    &__text {
+        font-size: 1.125em;
+        line-height: 1.5;
+    }
+
+}

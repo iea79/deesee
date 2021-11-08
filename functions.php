@@ -162,6 +162,18 @@ function frondendie_scripts() {
 		wp_enqueue_script( 'panther', get_template_directory_uri() . '/js/panther.js', '', _S_VERSION, true );
 	}
 
+	if ( is_singular( 'projects' ) ) {
+		wp_enqueue_style( 'projects-style', get_template_directory_uri() . '/css/projects.css', array(), _S_VERSION );
+		wp_enqueue_script( 'gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js', '', _S_VERSION, true );
+		wp_enqueue_script( 'gsap-st', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/ScrollTrigger.min.js', '', _S_VERSION, true );
+		wp_enqueue_script( 'projects-scripts', get_template_directory_uri() . '/js/projects.js', '', _S_VERSION, true );
+	}
+
+	if ( is_archive() ) {
+		wp_enqueue_style( 'archive-style', get_template_directory_uri() . '/css/archive.css', array(), _S_VERSION );
+		wp_enqueue_script( 'archive-scripts', get_template_directory_uri() . '/js/archive.js', array('jquery', 'slick-slider'), _S_VERSION, true );
+	}
+
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
@@ -195,6 +207,16 @@ require get_template_directory() . '/inc/customizer.php';
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
+
+/**
+ * Template case developement
+ */
+require get_template_directory() . '/inc/case-developement-template.php';
+
+/**
+ * Template projects
+ */
+require get_template_directory() . '/inc/projects-template.php';
 
 /**
 * Customize menu
@@ -231,3 +253,162 @@ class description_walker extends Walker_Nav_Menu {
 		$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 	}
 }
+
+
+add_action( 'init', 'reviews_register_post_type_init' ); // Использовать функцию только внутри хука init
+
+function reviews_register_post_type_init() {
+	$labels = array(
+		'name' => 'Reviews',
+		'singular_name' => 'Review', // админ панель Добавить->Функцию
+		'add_new' => 'Add review',
+		'add_new_item' => 'Add new review', // заголовок тега <title>
+		'edit_item' => 'Edit review',
+		'new_item' => 'New review',
+		'all_items' => 'All reviews',
+		'view_item' => 'Show reviews in site',
+		'search_items' => 'Search review',
+		'not_found' =>  'Review not found',
+		'not_found_in_trash' => 'Reviews not found in trash',
+		'menu_name' => 'Reviews' // ссылка в меню в админке
+	);
+	$args = array(
+		'labels' => $labels,
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'show_in_nav_menus'  => true,
+		'query_var'          => true,
+		'rewrite'            => true,
+		'capability_type'    => 'post',
+		'has_archive'        => true,
+		'menu_icon' => 'dashicons-admin-comments', // иконка в меню
+		'menu_position' => 22, // порядок в меню
+		'supports' => array( 'title', 'editor', 'thumbnail')
+	);
+	register_post_type('reviews', $args);
+}
+
+add_action( 'init', 'cases_register_post_type_init' ); // Использовать функцию только внутри хука init
+
+function cases_register_post_type_init() {
+	$labels = array(
+		'name'			 	=> 'Projects',
+		'singular_name'	 	=> 'Project', // админ панель Добавить->Функцию
+		'add_new' 		 	=> 'Add project',
+		'add_new_item' 	 	=> 'Add new project', // заголовок тега <title>
+		'edit_item' 	 	=> 'Edit project',
+		'new_item'		 	=> 'New project',
+		'all_items'	  	 	=> 'All projects',
+		'view_item'		 	=> 'Show projects in site',
+		'search_items' 	 	=> 'Search project',
+		'not_found' 	 	=>  'Project not found',
+		'not_found_in_trash' => 'Projects not found in trash',
+		'menu_name' 	 	=> 'Projects' // ссылка в меню в админке
+	);
+	$args = array(
+		'labels' => $labels,
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'show_in_nav_menus'  => true,
+		'query_var'          => true,
+		'rewrite'            => true,
+		'capability_type'    => 'post',
+		'has_archive'        => true,
+		'menu_icon'			 => 'dashicons-layout', // иконка в меню
+		'menu_position' 	 => 21, // порядок в меню
+		'supports' 			 => array( 'title', 'thumbnail', 'page-attributes'),
+		'taxonomies' 		 => array( 'category' )
+	);
+	register_post_type('projects', $args);
+}
+
+function breadcrumbs(){
+
+	// получаем номер текущей страницы
+	$page_num = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+
+	$separator = '<span class="sep"></span>'; //  разделяем обычным слэшем, но можете чем угодно другим
+
+	echo '<div class="container_center"><div class="breadcrumbs">';
+	// если главная страница сайта
+	if( is_front_page() ){
+
+		if( $page_num > 1 ) {
+			echo '<a href="' . site_url() . '">Main page</a>' . $separator . $page_num . '';
+		} else {
+			echo 'Вы находитесь на главной странице';
+		}
+
+	} else { // не главная
+
+		echo '<a href="' . site_url() . '">Main page</a>' . $separator;
+
+		if (is_singular( array('projects') )) {
+
+			echo '<a href="' . site_url() . '/' . get_post_type() . '">' . get_post_type() . '</a>' . $separator . get_the_title();
+
+		} elseif ( is_single() ){ // записи
+
+			the_category( ', ' ); echo $separator; the_title();
+
+		} elseif ( is_page() ){ // страницы WordPress
+
+			the_title();
+
+		} elseif ( is_category() ) {
+
+			single_cat_title();
+
+		} elseif( is_archive() ) {
+			if ( is_post_type_archive( 'reviews' ) ) {
+				echo "Testimonials";
+			} else {
+				echo ucfirst(get_post_type());
+			}
+
+		// } elseif ( is_day() ) { // архивы (по дням)
+		//
+		// 	echo '<a href="' . get_year_link( get_the_time( 'Y' ) ) . '">' . get_the_time( 'Y' ) . '</a>' . $separator;
+		// 	echo '<a href="' . get_month_link( get_the_time( 'Y' ), get_the_time( 'm' ) ) . '">' . get_the_time( 'F' ) . '</a>' . $separator;
+		// 	echo get_the_time('d');
+		//
+		// } elseif ( is_month() ) { // архивы (по месяцам)
+		//
+		// 	echo '<a href="' . get_year_link( get_the_time( 'Y' ) ) . '">' . get_the_time( 'Y' ) . '</a>' . $separator;
+		// 	echo get_the_time('F');
+		//
+		// } elseif ( is_year() ) { // архивы (по годам)
+		//
+		// 	echo get_the_time( 'Y' );
+		//
+		// } elseif ( is_author() ) { // архивы по авторам
+		//
+		// 	global $author;
+		// 	$userdata = get_userdata( $author );
+		// 	echo 'Published ' . $userdata->display_name;
+
+		} elseif ( is_404() ) { // если страницы не существует
+
+			echo 'Error 404';
+
+		}
+
+		if ( $page_num > 1 ) { // номер текущей страницы
+			echo '' . $page_num . '';
+		}
+
+	}
+
+	echo '</div></div>';
+
+}
+
+
+## Удаляет "Рубрика: ", "Метка: " и т.д. из заголовка архива
+add_filter( 'get_the_archive_title', function( $title ){
+	return preg_replace('~^[^:]+: ~', '', $title );
+});

@@ -29,7 +29,7 @@
 				);
 				?>
 			</div>
-			<div class="footer__copy">2020 © All rights reserved</div>
+			<div class="footer__copy"><?php echo date('Y'); ?> © All rights reserved</div>
 			<div class="footer__terms">
 				<a href="">Terms of use</a>
 				<a href="">Privacy</a>

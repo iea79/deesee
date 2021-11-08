@@ -1,0 +1,62 @@
+.slick {
+    &-arrow {
+        height: 6.25em;
+        width: 6.25em;
+        border-radius: 50%;
+        border: 1px solid rgba($color_withe, 0.2);
+        margin-left: 1.6em;
+        cursor: pointer;
+        background: center no-repeat;
+        background-size: 2.1em;
+        transition: background 0.5s;
+
+        &.slick-disabled {
+            cursor: default;
+
+            @media (max-width: 767px) {
+                display: none;
+            }
+        }
+
+        &:hover {
+            background-position: left 1.5em center;
+        }
+    }
+
+    &-prev {
+        background-image: url("img/prev.svg");
+
+    }
+
+    &-next {
+        background-image: url("img/prev.svg");
+        transform: rotate(180deg);
+    }
+
+    &-dots {
+        list-style: none;
+        padding: 0;
+        margin: 1em 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        li {
+            border: $main_border;
+            width: 1em;
+            height: 1em;
+            margin: 0 1em;
+            border-radius: 1em;
+            cursor: pointer;
+
+            &.slick-active {
+                cursor: default;
+                background: red;
+            }
+        }
+
+        button {
+            display: none;
+        }
+    }
+}

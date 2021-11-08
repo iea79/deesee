@@ -1,0 +1,23 @@
+.slider {
+    &__head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 2.3em;
+
+        @media (min-width: 768px) {
+            margin-bottom: 7.3em;
+        }
+
+        .section {
+            &__title {
+                margin-bottom: 0;
+            }
+
+        }
+    }
+
+    &__arrow {
+        display: flex;
+    }
+}

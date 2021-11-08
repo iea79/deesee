@@ -1,0 +1,32 @@
+.bottomBox {
+
+    @media (min-width: 768px) {
+        position: relative;
+
+        &:after,
+        &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            z-index: -1;
+        }
+
+        &:before {
+
+            @media (min-width: 768px) {
+                // border-left: $main_border;
+                // left: 5.7em;
+                // height: 50%;
+            }
+        }
+
+        &:after {
+            width: 134.3em;
+            height: 134.3em;
+            border: $main_border;
+            border-radius: 50%;
+            left: -63.2em;
+        }
+    }
+}

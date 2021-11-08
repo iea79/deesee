@@ -1,0 +1,63 @@
+.claimOffer {
+    padding: 4em 0;
+
+    @media (min-width: 768px) {
+        padding: 4.2em 0;
+    }
+
+    .section {
+        &__title {}
+
+        &__sub {}
+
+    }
+
+    &__content {
+        @media (min-width: 768px) {
+            display: flex;
+        }
+    }
+
+    &__left {
+        overflow: hidden;
+        background: #2A2A2A;
+        padding: 2.4em 2em;
+        position: relative;
+
+        @media (min-width: 768px) {
+            padding: 5.4em 5em 5em;
+
+            &:before {
+                content: '';
+                position: absolute;
+                z-index: 0;
+                top: 0;
+                right: -8.6em;
+                display: block;
+
+                width: 111.8%;
+                padding-bottom: 111%;
+                border: $main_border;
+                border-radius: 50%;
+            }
+        }
+    }
+
+    &__right {
+
+        @media (min-width: 768px) {
+            display: flex;
+            flex: none;
+            width: 35.6em;
+        }
+    }
+
+    .btn {
+        width: 100%;
+
+        @media (min-width: 768px) {
+            font-size: 1.9em;
+
+        }
+    }
+}

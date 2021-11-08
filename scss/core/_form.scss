@@ -1,8 +1,11 @@
 .form {
 	&__row {
 		margin-bottom: -1px;
-		width: 50%;
-		margin-left: -1px;
+
+		@media (min-width: 768px) {
+			width: 50%;
+			margin-left: -1px;
+		}
 
 		&_full {
 			// margin-left: 0;
@@ -31,12 +34,18 @@
 	}
 
 	&__action {
-		margin-top: 2.5em;
+		@media (min-width: 768px) {
+			margin-top: 2.5em;
+		}
 
 		.btn {
-			font-size: 1.9em;
-			width: 9em;
-			height: 9em;
+			width: 100%;
+
+			@media (min-width: 768px) {
+				font-size: 1.9em;
+				width: 9em;
+				height: 9em;
+			}
 		}
 	}
 }
@@ -53,7 +62,7 @@ input[type=url],
 textarea {
 	background-color: transparent;
 	border: 1px solid $input_border_color;
-	padding: 2.15em 2.6em;
+	padding: 1.5em;
 	outline: none;
 	font-size: 1.13em;
 	font-weight: 400;
@@ -62,6 +71,10 @@ textarea {
 	transition: all 0.3s;
 	position: relative;
 	color: $color_withe;
+
+	@media (min-width: 768px) {
+		padding: 2.15em 2.6em;
+	}
 
 	&:hover {
 		border: 1px solid $input_hover_border_color;

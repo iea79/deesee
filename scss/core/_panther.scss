@@ -1,0 +1,52 @@
+.panther {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    @media (min-width: 768px) {
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -0.5em;
+            width: 60.94em;
+            height: 60.94em;
+            border-radius: 50%;
+            border: $main_border;
+        }
+    }
+
+    &__text {
+        display: none;
+        @media (min-width: 768px) {
+            display: block;
+            font-weight: 300;
+            text-transform: uppercase;
+            font-size: 2.44em;
+            letter-spacing: 0.88em;
+            opacity: 0.2;
+            transform: rotate(-90deg);
+            position: relative;
+            left: -2.5em;
+            bottom: 0.4em;
+        }
+    }
+
+    &__img {
+        position: fixed;
+        top: 13.7em;
+        right: -26.5em;
+        width: 40.5em;
+        height: auto;
+
+        @media (min-width: 768px) {
+            top: 13.7em;
+            right: -11.5em;
+            width: 82.5em;
+        }
+    }
+
+}

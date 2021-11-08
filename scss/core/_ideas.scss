@@ -1,0 +1,174 @@
+.ideas {
+    border-bottom: $main_border;
+    overflow: hidden;
+    position: relative;
+
+    @media (min-width: 768px) {
+        &:after {
+            content: '';
+            position: absolute;
+            // $rr: 80.1em;
+            border: $main_border;
+            border-radius: 50%;
+            top: 0;
+            right: -10.9em;
+            // width: $rr;
+            height: 100%;
+            padding-left: 79.5%;
+            z-index: 0;
+        }
+    }
+
+    &__content {
+        padding: 4em 0;
+        position: relative;
+        z-index: 2;
+
+        @media (min-width: 768px) {
+            padding: 11.7em 0 0;
+            border-left: $main_border;
+        }
+    }
+
+    &__slider {
+        margin: 0 -1.2em 4em;
+        @media (min-width: 768px) {
+            margin: 0;
+        }
+
+        .slick-list {
+            @media (min-width: 768px) {
+                width: 100%;
+                overflow: inherit;
+            }
+        }
+
+        .slick-track {
+            // display: flex;
+
+            &:after,
+            &:before {
+                // display: none;
+            }
+
+            &:before {}
+
+            &:after {}
+        }
+    }
+
+    &__item {
+        opacity: 0;
+        // flex-grow: 1;
+        @media (min-width: 768px) {
+            height: auto;
+        }
+
+        &.slick {
+            &-active {
+                opacity: 1;
+            }
+
+            &-current {
+                padding-left: 0;
+            }
+        }
+    }
+
+    &__img {
+        margin: 0 0 2em;
+
+        @media (min-width: 768px) {
+            margin: 0 0 2.6em 10em;
+            height: 28.5em;
+        }
+
+        transition: 0.5s;
+        transition-property: margin height;
+
+        .slick-current & {
+
+            @media (min-width: 768px) {
+                margin-bottom: 3.1em;
+                margin-left: 0;
+                height: 34.38em;
+                margin-right: 1em;
+            }
+        }
+
+        img {
+            display: block;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &__text {
+        line-height: 1.5;
+        padding: 0 1.2em;
+
+        @media (min-width: 768px) {
+            margin-left: 10em;
+            padding: 0;
+
+            .slick-current & {
+                margin-left: 0;
+            }
+        }
+
+        h3 {
+            font-size: 1.5em;
+            letter-spacing: 0.175em;
+            font-weight: 600;
+            margin: 0 0 0.8em;
+            line-height: 1.11;
+            text-transform: uppercase;
+            color: $color_withe;
+            transition: margin 0.5s;
+
+            @media (min-width: 768px) {
+                margin: 0;
+                font-size: 2em;
+
+                .slick-current & {
+                    margin: 0 0 0.8em;
+                }
+            }
+
+        }
+
+        p {
+            font-size: 1.13em;
+            margin: 1em 0;
+
+            @media (min-width: 768px) {
+                height: 0;
+                overflow: hidden;
+                transition: margin 0.5s;
+
+                .slick-current & {
+                    height: auto;
+                    margin: 1em 0;
+                }
+            }
+        }
+    }
+
+    &__action {
+        display: flex;
+        justify-content: flex-end;
+
+        .btn {
+            width: 100%;
+
+            @media (min-width: 768px) {
+                width: 17em;
+                height: 17em;
+                margin-top: -3.3em;
+                margin-right: 12em;
+            }
+        }
+    }
+
+}

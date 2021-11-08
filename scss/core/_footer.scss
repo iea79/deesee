@@ -2,22 +2,38 @@
  ----------------------------------------------------------------------------- */
 .footer {
 	position: relative;
-	padding: 4em 0;
+	padding: 3em 0;
 	// background-color: #ddd;
 	border-top: 1px solid rgba($color_withe, 0.1);
 
+	@media (min-width: 768px) {
+		padding: 4em 0;
+	}
+
 	&__content {
 		@extend .container_center;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
+		@media (min-width: 768px) {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
 	}
 
 	&__soc {
 		font-size: 2em;
 
+		.menu {
+			display: flex;
+		}
+
 		.menu-item {
-			margin-right: 0.7em;
+			margin-right: 0.5em;
+			margin-bottom: 1em;
+
+			@media (min-width: 768px) {
+				margin-right: 0.7em;
+				margin-bottom: 0;
+			}
 		}
 
 		a {
@@ -35,6 +51,11 @@
 
 	&__copy {
 		font-size: 1.125em;
+		margin-bottom: 2em;
+
+		@media (min-width: 768px) {
+			margin-bottom: 0;
+		}
 	}
 
 	&__terms {
@@ -43,7 +64,12 @@
 		a {
 			color: #B3B3B3;
 			text-decoration-color: transparent;
-			margin-left: 3em;
+			margin-right: 3em;
+
+			@media (min-width: 768px) {
+				margin-left: 3em;
+				margin-right: 0;
+			}
 
 			&:hover {
 				text-decoration-color: inherit;

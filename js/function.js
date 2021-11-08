@@ -16,6 +16,21 @@ var app = {
     touchDevice: function() { return navigator.userAgent.match(/iPhone|iPad|iPod|Android|BlackBerry|Opera Mini|IEMobile/i); }
 };
 
+jQuery(function ($) {
+    $.fn.hScroll = function (amount) {
+        amount = amount || 120;
+        $(this).bind("DOMMouseScroll mousewheel", function (event) {
+            var oEvent = event.originalEvent,
+                direction = oEvent.detail ? oEvent.detail * -amount : oEvent.wheelDelta,
+                position = $(this).scrollLeft();
+            position += direction > 0 ? -amount : amount;
+            $(this).scrollLeft(position);
+            event.preventDefault();
+        })
+    };
+});
+
+
 function isLgWidth() { return $(window).width() >= app.lgWidth; } // >= 1200
 function isMdWidth() { return $(window).width() >= app.mdWidth && $(window).width() < app.lgWidth; } //  >= 992 && < 1200
 function isSmWidth() { return $(window).width() >= app.smWidth && $(window).width() < app.mdWidth; } // >= 768 && < 992
@@ -39,7 +54,7 @@ $(document).ready(function() {
     // $('[name=tel]').inputmask("+9(999)999 99 99",{ showMaskOnHover: false });
     // formSubmit();
 
-    // checkOnResize();
+    checkOnResize();
 
     // stikyMenu();
 
@@ -65,26 +80,28 @@ $(document).ready(function() {
         ]
     });
 
-    $('.testimonials__slider').slick({
-        dots: false,
-        infinite: true,
-        speed: 500,
-        arrows: true,
-        adaptiveHeight: true,
-        nextArrow: $('.testimonials__next'),
-        prevArrow: $('.testimonials__prev'),
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        responsive: [
-            {
-                breakpoint: 450,
-                settings: {
-                    arrows: false,
-                    dots: true
-                }
-            }
-        ]
-    });
+    // $('.review__slider').slick({
+    //     dots: false,
+    //     infinite: true,
+    //     speed: 500,
+    //     arrows: true,
+    //     adaptiveHeight: true,
+    //     nextArrow: $('.review__next'),
+    //     prevArrow: $('.review__prev'),
+    //     slidesToShow: 1,
+    //     slidesToScroll: 1,
+    //     responsive: [
+    //         {
+    //             breakpoint: 450,
+    //             settings: {
+    //                 arrows: false,
+    //                 dots: true
+    //             }
+    //         }
+    //     ]
+    // });
+
+    $('.horizontallScroll').hScroll(0);
 
 });
 
@@ -103,11 +120,34 @@ $(window).resize(function(event) {
     if (app.resized == windowWidth) { return; }
     app.resized = windowWidth;
 
-	// checkOnResize();
+	checkOnResize();
 });
 
 function checkOnResize() {
-    // fontResize();
+    replaceMenu();
+    replaceDesignTabs();
+}
+
+function replaceMenu() {
+    const subnav = $('#site-navigation-2');
+
+    if (isXsWidth()) {
+        subnav.appendTo('.nav');
+    } else {
+        subnav.appendTo('.header__right');
+
+    }
+}
+
+function replaceDesignTabs() {
+    $('[data-plate]').each(function(index, el) {
+        let id = $(el).data('plate');
+        if (isXsWidth()) {
+            $(el).insertAfter('[data-tab='+id+']');
+        } else {
+            $(el).appendTo('.design__content');
+        }
+    });
 }
 
 // Stiky menu // Липкое меню. При прокрутке к элементу #header добавляется класс .stiky который и стилизуем
@@ -163,6 +203,8 @@ function openMobileNav() {
         var wrapp = $('.nav');
 
         wrapp.toggleClass('open');
+        $(this).toggleClass('active');
+        $('body').toggleClass('nav_open');
     });
 }
 openMobileNav();
@@ -208,38 +250,67 @@ checkDirectionScroll();
 
 // Видео youtube для страницы
 function uploadYoutubeVideo() {
+    let resolutionImg = 'maxresdefault';
+    if (isXsWidth()) {
+        resolutionImg = 'hqdefault';
+    }
     if ($(".js-youtube")) {
 
         $(".js-youtube").each(function () {
             // Зная идентификатор видео на YouTube, легко можно найти его миниатюру
-            $(this).css('background-image', 'url(http://i.ytimg.com/vi/' + this.id + '/sddefault.jpg)');
+            $(this).css('background-image', 'url(http://i.ytimg.com/vi/' + this.id + '/'+resolutionImg+'.jpg)');
 
             // Добавляем иконку Play поверх миниатюры, чтобы было похоже на видеоплеер
-            $(this).append($('<img src="img/play.svg" alt="Play" class="video__play">'));
+            // $(this).append($('<img src="img/play.svg" alt="Play" class="video__play">'));
 
         });
 
-        $('.video__play, .video__prev').on('click', function () {
+        $('.video__play:not([data-video-id])').on('click', function () {
             // создаем iframe со включенной опцией autoplay
             let wrapp = $(this).closest('.js-youtube'),
                 videoId = wrapp.attr('id'),
-                iframe_url = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&autohide=1";
+                url = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&autohide=1&modestbranding=1&rel=0&playlist="+videoId+"&fs=0&showinfo=0&iv_load_policy=3";
 
-            if ($(this).data('params')) iframe_url += '&' + $(this).data('params');
+            if (wrapp.data('params')) url += '&' + wrapp.data('params');
 
             // Высота и ширина iframe должны быть такими же, как и у родительского блока
             let iframe = $('<iframe/>', {
                 'frameborder': '0',
-                'src': iframe_url,
-                'allow': "autoplay"
-            })
+                'src': url,
+                'allow': "autoplay",
+            });
 
             // Заменяем миниатюру HTML5 плеером с YouTube
             $(this).closest('.video__wrapper').append(iframe);
 
         });
     }
-};
+}
+
+uploadYoutubeVideo();
+
+function openVideoModal() {
+    let modal = $('.videoReview'),
+        modalBody = $('.videoReview .video__wrapper'),
+        play = $('[data-video-id]');
+
+    play.on('click', function() {
+        let id = $(this).data('videoId'),
+            iframe = $('<iframe/>', {
+                'frameborder': '0',
+                'src': "https://www.youtube.com/embed/" + id + "?autoplay=1&autohide=1",
+                'allow': "autoplay"
+            });
+
+        modalBody.append(iframe);
+        modal.modal('show');
+    });
+
+    modal.on('hide.bs.modal', () => {
+        modalBody.html('');
+    });
+}
+openVideoModal();
 
 
 // Деление чисел на разряды Например из строки 10000 получаем 10 000

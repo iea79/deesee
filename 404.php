@@ -11,12 +11,14 @@ get_header();
 ?>
 
 	<section class="error-404 not-found">
-		<header class="page-header">
-			<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'frondendie' ); ?></h1>
-		</header><!-- .page-header -->
+		<!-- Begin container_center -->
+		<div class="container_center">
+			<header class="page-header">
+				<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'frondendie' ); ?></h1>
+			</header><!-- .page-header -->
 
-		<div class="page-content">
-			<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'frondendie' ); ?></p>
+			<div class="page-content">
+				<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'frondendie' ); ?></p>
 
 				<?php
 				get_search_form();
@@ -49,7 +51,9 @@ get_header();
 				the_widget( 'WP_Widget_Tag_Cloud' );
 				?>
 
-		</div><!-- .page-content -->
+			</div><!-- .page-content -->
+		</div>
+		<!-- End container_center -->
 	</section><!-- .error-404 -->
 
 <?php

@@ -16,6 +16,9 @@ ScrollTrigger.defaults({
 });
 
 gsap.timeline()
+    // .to('body', {
+    //     overflow: 'hidden',
+    // })
     .from('.header__center', {
         y: '-100%',
         opacity: 0
@@ -30,17 +33,20 @@ gsap.timeline()
         xPercent: -100
     })
     .from('.firstScreen__left', {
-        x: '-100%',
+        y: '50%',
         opacity: 0
     })
     .from('.firstScreen__right', {
-        x: '100%',
+        y: '50%',
         opacity: 0
     })
     .from('.panther', {
         duration: 1.5,
         opacity: 0
     })
+    // .to('body', {
+    //     overflow: 'inherit',
+    // })
     .from('.firstScreen__bottom', {
         y: '100%',
         opacity: 0
@@ -60,43 +66,171 @@ gsap.to(panther, {
     opacity: -0.5
 });
 
-gsap.from('.facts__number', {
-    scrollTrigger: {
-        trigger: '.facts',
-        start: "top 80%",
-        end: 'bottom 40%',
-        // scrub: true,
-        // pin: true,
-    },
-    // stagger: 0.1,
-    y: '30%',
-    opacity: 0
+let titleHei = $('.facts__title').innerHeight();
+let scrollHei = $('.facts').innerHeight() - titleHei;
+if ($(window).width() > 767) {
+    gsap.to('.facts__trap', {
+            scrollTrigger: {
+                trigger: '.facts',
+                start: "top top",
+                end: "bottom "+titleHei+"px",
+                scrub: true,
+            },
+            y: scrollHei,
+            ease: 'linear',
+    });
+}
+
+gsap.utils.toArray('.facts__item').forEach(item => {
+    const text = item.querySelector('.facts__text'),
+          num = item.querySelector('.facts__number');
+
+    gsap.from(text, {
+        scrollTrigger: {
+            trigger: item,
+            start: "top 50%",
+            end: 'bottom bottom',
+            // scrub: true,
+        },
+        // stagger: 0.1,
+        y: '50%',
+        duration: 1,
+        delay: 0.2,
+        opacity: 0,
+        ease: "power2.out",
+        // stagger: 0.5
+    });
+
+    gsap.from(num, {
+        scrollTrigger: {
+            trigger: item,
+            start: "top 50%",
+            end: 'bottom bottom',
+            // scrub: true,
+        },
+        // stagger: 0.1,
+        y: '50%',
+        duration: 1,
+        opacity: 0,
+        ease: "power2.out",
+        // stagger: 0.5
+    });
 });
 
-gsap.from('.facts__text', {
-    scrollTrigger: {
-        trigger: '.facts',
-        start: "top 90%",
-        end: 'bottom 20%',
-        // scrub: true,
-        // pin: true,
-    },
-    // stagger: 0.1,
-    y: '30%',
-    opacity: 0
+gsap.utils.toArray('.canHelp__item').forEach(item => {
+    const text = item.querySelector('.canHelp__text'),
+          letter = item.querySelector('.canHelp__preffix'),
+          name = item.querySelector('.canHelp__name'),
+          btn = item.querySelector('.btn'),
+          more = item.querySelector('.canHelp__more');
+
+    const options = {
+        scrollTrigger: {
+            trigger: item,
+            start: "top 50%",
+            end: 'bottom bottom',
+        },
+        y: '50%',
+        x: 0,
+        duration: 1,
+        opacity: 0,
+        delay: 0,
+        ease: "power2.out",
+    };
+
+    gsap.from(letter, options);
+
+    options.delay = 0.2;
+    gsap.from(name, options);
+
+    options.delay = 0.4;
+    gsap.from(text, options);
+
+    options.delay = 0.6;
+    options.y = 100;
+    gsap.from(more, options);
+
+    options.delay = 1;
+    options.y = 0;
+    options.x = 100;
+    ease = 'none';
+    gsap.from(btn, options);
 });
 
+gsap.utils.toArray('.speaks__item:not(:first-child)').forEach((item, i) => {
+    const options = {
+        scrollTrigger: {
+            trigger: item,
+            start: "top 70%",
+            end: 'bottom bottom',
+        },
+        y: '50%',
+        x: 0,
+        duration: 1,
+        opacity: 0,
+        delay: i/10,
+        // stagger: 0.2
+    };
+    // setTimeout(function () {
+    //
+    // }, 10);
+    gsap.from(item, options);
+});
 
-gsap.from('.fadeRight', {
+// gsap.from('.speaks__item:not(:first-child)', {
+//     scrollTrigger: {
+//         trigger: '.speaks',
+//         start: "top 30%",
+//         end: 'bottom bottom',
+//     },
+//     y: '50%',
+//     x: 0,
+//     duration: 1,
+//     opacity: 0,
+//     delay: 0,
+//     stagger: 0.2
+// });
+
+gsap.utils.toArray('.fadeRight').forEach(item => {
+    gsap.from(item, {
+        scrollTrigger: {
+            trigger: item,
+            start: "top 90%",
+            end: 'bottom 40%',
+            // scrub: true,
+            // pin: true,
+        },
+        stagger: 0.1,
+        x: '-10%',
+        opacity: 0
+    });
+});
+
+gsap.utils.toArray('.review__box').forEach(item => {
+    gsap.from(item, {
+        scrollTrigger: {
+            trigger: item,
+            start: "top 90%",
+            end: 'bottom 40%',
+            // scrub: true,
+            // pin: true,
+        },
+        stagger: 0.1,
+        y: '20%',
+        opacity: 0
+    });
+});
+
+gsap.from('.review__video', {
     scrollTrigger: {
-        trigger: '.fadeRight',
+        trigger: '.review__video',
         start: "top 90%",
         end: 'bottom 40%',
         // scrub: true,
         // pin: true,
     },
     stagger: 0.1,
-    x: '-10%',
+    x: '-20%',
     opacity: 0
 });
 

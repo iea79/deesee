@@ -24,17 +24,46 @@
 	position: relative;
 	z-index: 2;
 	overflow: hidden;
+	transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+
+	&:before {
+		content: '';
+		display: block;
+		position: absolute;
+		top: 0;
+		right: 0;
+		height: 100%;
+		width: 0;
+		z-index: -1;
+		background: $color_withe;
+		transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+	}
 
 	&:hover {
 		// background-color: darken($btn_default_bg_color, 7%);
-		// color: $color_withe;
+		color: $btn_default_bg_color;
 		text-decoration: none;
+
+		&:before {
+			right: auto;
+			left: 0;
+			width: 100%;
+		}
 	}
 
 	&:active,
 	&:focus {
 		// background-color: lighten($btn_default_bg_color, 7%);
-		color: $color_withe;
+		background: $color_withe;
+		color: $btn_default_bg_color;
+
+		@media (max-width: 767px) {
+			&:before {
+				right: auto;
+				left: 0;
+				width: 100%;
+			}
+		}
 	}
 	@each $status_el, $color_bg in $el_colors {
 		&_#{$status_el} {
@@ -55,36 +84,59 @@
 		}
 	}
 
-	&_round {
-		border-radius: 50%;
-
-		.btn__overlay {
+	@media (min-width: 768px) {
+		&_round {
 			border-radius: 50%;
+
+			&:before {
+				top: 50%;
+				right: 50%;
+				height: 0;
+				width: 0;
+				transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+				border-radius: 50%;
+			}
+
+			&:hover {
+				// right: 0;
+				// left: auto;
+				&:before {
+					left: auto;
+					top: 0;
+					right: 0;
+					height: 100%;
+					width: 100%;
+				}
+			}
+
+			.btn__overlay {}
 		}
-	}
 
-	&_border {
-		border: 1px solid $btn_default_bg_color;
-		background-color: transparent;
-		color: $btn_default_bg_color;
-		font-weight: 400;
-		font-family: $main_font_family;
-		font-size: 1.5em;
-		letter-spacing: 0.05em;
+		&_border {
+			border: 1px solid $btn_default_bg_color;
+			background-color: transparent;
+			color: $btn_default_bg_color;
+			font-weight: 400;
+			font-family: $main_font_family;
+			font-size: 1.5em;
+			letter-spacing: 0.05em;
+			transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
 
-		.btn__overlay {
-			background-color: $btn_default_bg_color;
-		}
+			// .btn__overlay {
+			// 	background-color: $btn_default_bg_color;
+			// }
 
-		&:hover {
-			color: $color_withe;
+			&:hover {
+				// color: $color_withe;
+
+			}
 		}
 	}
 
 	&__overlay {
 		display: block;
 		position: absolute;
-		background-color: rgba(lighten($btn_default_bg_color, 14%), 0.7);
+		// background-color: rgba(lighten($btn_default_bg_color, 14%), 0.7);
 		animation: btnNover 0.5s forwards linear;
 		z-index: -1;
 		width: 0;

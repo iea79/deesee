@@ -1,0 +1,169 @@
+.design {
+    padding: 4em 0;
+
+    @media (min-width: 768px) {
+        padding: 6.8em 0;
+    }
+
+    .section {
+        &__title {
+            @media (min-width: 768px) {
+                flex: none;
+                width: 52.9%;
+                padding-right: 1em;
+            }
+        }
+
+        &__sub {
+            @media (min-width: 768px) {
+                max-width: 22.1em;
+            }
+        }
+    }
+
+    &__head {
+        margin-bottom: 2.4em;
+
+        @media (min-width: 768px) {
+            display: flex;
+        }
+    }
+
+    &__content {
+        line-height: 1.5;
+
+        @media (min-width: 768px) {
+            display: flex;
+        }
+    }
+
+    &__tabs {
+        counter-reset: tabs;
+
+        @media (min-width: 768px) {
+            flex: none;
+            width: 34.5em;
+            margin-right: 7em;
+        }
+    }
+
+    &__tab {
+        border: $main_border;
+        counter-increment: tabs;
+        display: flex;
+        align-items: center;
+        font-size: 1.13em;
+        padding-right: 2em;
+        transition: 0.5s;
+        transition-property: border color;
+        cursor: pointer;
+
+        &:nth-child(n+2) {
+            @media (min-width: 768px) {
+                border-top: 0;
+            }
+        }
+
+        &:before {
+            content: '0' counter(tabs) '.';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: none;
+            align-self: stretch;
+            border-right: $main_border;
+            font-size: 1.3em;
+            width: 3.6em;
+            margin-right: 1em;
+            padding: 1em 0.9em;
+            transition: 0.5s;
+            transition-property: border color;
+
+            @media (min-width: 768px) {
+                padding: 1.4em 0.9em;
+                margin-right: 1.9em;
+            }
+        }
+
+        &:hover {
+            color: $color_withe;
+        }
+
+        &.active {
+            color: $color_withe;
+            border-color: $color_withe;
+            color: $color_withe;
+            border-top: 1px solid;
+            cursor: default;
+
+            &:before {
+                border-right-color: $color_withe;
+            }
+        }
+
+    }
+
+    &__plate {
+        display: none;
+        margin-top: 1em;
+        // animation: slidePane 1s;
+
+        @media (min-width: 768px) {
+            max-width: 59em;
+            margin-top: -2.2em;
+        }
+
+        &.active {
+            display: block;
+        }
+    }
+
+    &__img {
+        height: 10em;
+        margin-bottom: 1.5em;
+        animation: slidePane 1s;
+
+        @media (min-width: 768px) {
+            height: 16.13em;
+            margin-bottom: 2.5em;
+        }
+
+        img {
+            width: auto;
+            height: 100%;
+        }
+    }
+
+    &__text {
+        font-size: 1.13em;
+        animation: slidePane 1s;
+
+        h3 {
+            font-size: 1.7em;
+            color: $color_withe;
+            margin: 0 0 0.8em;
+            font-weight: normal;
+
+            @media (min-width: 768px) {
+                font-size: 2.2em;
+            }
+        }
+
+        p {
+            margin: 1.2em 0;
+            animation: slidePane 1s;
+        }
+    }
+}
+
+@keyframes slidePane {
+    0% {
+        opacity: 0;
+        transform: translateX(4em);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

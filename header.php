@@ -30,7 +30,7 @@
 			<div class="menu__toggle"></div>
 			<div class="header__mobile mobile"></div>
 			<div class="header__left">
-				<nav id="site-navigation-1" class="main-navigation">
+				<nav id="site-navigation-1" class="nav">
 					<?php
 					wp_nav_menu(
 						array(

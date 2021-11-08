@@ -1,0 +1,95 @@
+.facts {
+    &__content {
+        position: relative;
+        overflow: hidden;
+        border-bottom: $main_border;
+
+        @media (min-width: 768px) {
+            display: flex;
+        }
+    }
+
+    &__trap {
+        // top: 0;
+        // position: sticky;
+        @media (min-width: 768px) {
+            align-self: flex-start;
+        }
+    }
+
+    &__title {
+        font-size: 1.9em;
+        line-height: 1.3;
+        // border-top: $main_border;
+        font-weight: 200;
+        font-family: $second_font_family;
+        text-transform: uppercase;
+        letter-spacing: 0.88em;
+        padding: 1em;
+        border-bottom: $main_border;
+
+        @media (min-width: 768px) {
+            line-height: 1.11;
+            font-size: 2.44em;
+            flex: none;
+            transform: rotate(180deg);
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            white-space: nowrap;
+            text-align: right;
+            padding: 1.6em 2.35em 0.7em 2.5em;
+            border-bottom: 0;
+        }
+    }
+
+    &__list {
+        @media (min-width: 768px) {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    }
+
+    &__item {
+        border-bottom: $main_border;
+        padding: 2em 1.2em;
+
+        @media (min-width: 768px) {
+            width: 50%;
+            padding: 6em 10.9em 5em 7.4em;
+            border-left: $main_border;
+
+            &:nth-last-child(-n+2) {
+                border-bottom: 0;
+            }
+        }
+    }
+
+    &__number {
+        font-size: 6.3em;
+        line-height: 1.11;
+        font-weight: 100;
+        font-family: $second_font_family;
+        color: $color_withe;
+
+        @media (min-width: 768px) {
+            font-size: 8.75em;
+        }
+
+        span {
+            line-height: 1;
+            font-size: 0.19em;
+            font-weight: 400;
+            text-transform: uppercase;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            margin-left: -0.8em;
+        }
+    }
+
+    &__text {
+        font-size: 1.13em;
+        line-height: 1.5;
+    }
+
+}
