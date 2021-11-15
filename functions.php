@@ -166,6 +166,7 @@ function frondendie_scripts() {
 		wp_enqueue_style( 'projects-style', get_template_directory_uri() . '/css/projects.css', array(), _S_VERSION );
 		wp_enqueue_script( 'gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js', '', _S_VERSION, true );
 		wp_enqueue_script( 'gsap-st', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/ScrollTrigger.min.js', '', _S_VERSION, true );
+		wp_enqueue_script( 'lottie', get_template_directory_uri() . '/js/lottie.js', '', _S_VERSION, true );
 		wp_enqueue_script( 'projects-scripts', get_template_directory_uri() . '/js/projects.js', '', _S_VERSION, true );
 	}
 
@@ -407,8 +408,39 @@ function breadcrumbs(){
 
 }
 
+// Allow JSON File Uploads In WordPress
+function cc_mime_types($mimes) {
+	$mimes['json'] = 'application/json';
+	$mimes['svg'] = 'image/svg+xml';
+	return $mimes;
+}
+
+add_filter('upload_mimes', 'cc_mime_types');
+
 
 ## Удаляет "Рубрика: ", "Метка: " и т.д. из заголовка архива
 add_filter( 'get_the_archive_title', function( $title ){
 	return preg_replace('~^[^:]+: ~', '', $title );
 });
+
+
+// the_excerpt_max_charlength( 10, 140 );
+
+function the_excerpt_max_charlength( $id,  $charlength ){
+	$excerpt = get_the_excerpt($id);
+	$charlength++;
+
+	if ( mb_strlen( $excerpt ) > $charlength ) {
+		$subex = mb_substr( $excerpt, 0, $charlength - 5 );
+		$exwords = explode( ' ', $subex );
+		$excut = - ( mb_strlen( $exwords[ count( $exwords ) - 1 ] ) );
+		if ( $excut < 0 ) {
+			echo mb_substr( $subex, 0, $excut );
+		} else {
+			echo $subex;
+		}
+		echo '...';
+	} else {
+		echo $excerpt;
+	}
+}

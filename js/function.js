@@ -18,14 +18,37 @@ var app = {
 
 jQuery(function ($) {
     $.fn.hScroll = function (amount) {
-        amount = amount || 120;
-        $(this).bind("DOMMouseScroll mousewheel", function (event) {
-            var oEvent = event.originalEvent,
+        amount = amount || 100;
+        $(this).on("DOMMouseScroll mousewheel", function (event) {
+            let oEvent = event.originalEvent,
                 direction = oEvent.detail ? oEvent.detail * -amount : oEvent.wheelDelta,
-                position = $(this).scrollLeft();
+                position = $(this).scrollLeft(), start, end,
+                scrollWidth = $(this).get(0).scrollWidth,
+                pageWidth = document.querySelector('body').offsetWidth;
+
+            start = position;
+            // console.log('scrollWidth', scrollWidth);
+            // console.log('event', oEvent);
+            // console.log('direction', direction);
+            // console.log('start', start);
             position += direction > 0 ? -amount : amount;
+            // console.log($(this).innerWidth());
+            end = position;
+            // console.log('end', position);
+            // console.log(app.pageScroll);
             $(this).scrollLeft(position);
             event.preventDefault();
+
+            // if (app.pageScroll === 'down') {
+                // if (pageWidth !== scrollWidth - start || start !== 0) {
+                // }
+            // } else {
+                // if (start !== 0 ) {
+                //     $(this).scrollLeft(position);
+                //     event.preventDefault();
+                // }
+                // event.preventDefault();
+            // }
         })
     };
 });
@@ -220,15 +243,6 @@ function srollToId() {
     });
 }
 
-function fontResize() {
-    var windowWidth = $(window).width();
-    if (windowWidth >= 1200) {
-    	var fontSize = windowWidth/19.05;
-    } else if (windowWidth < 1200) {
-    	var fontSize = 60;
-    }
-	$('body').css('fontSize', fontSize + '%');
-}
 
 // Проверка направления прокрутки вверх/вниз
 function checkDirectionScroll() {

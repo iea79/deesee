@@ -1,4 +1,4 @@
-console.log('panther');
+// console.log('panther');
 // import { gsap } from 'gsap';
 // import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -29,11 +29,12 @@ gsap.timeline()
         opacity: 0
     })
     .from('.header__border', {
-        duration: 0.3,
+        duration: 0.1,
         xPercent: -100
     })
     .from('.firstScreen__left', {
         y: '50%',
+        // delay: -0.1,
         opacity: 0
     })
     .from('.firstScreen__right', {
@@ -41,7 +42,7 @@ gsap.timeline()
         opacity: 0
     })
     .from('.panther', {
-        duration: 1.5,
+        duration: 0.5,
         opacity: 0
     })
     // .to('body', {
@@ -131,8 +132,7 @@ gsap.utils.toArray('.canHelp__item').forEach(item => {
             end: 'bottom bottom',
         },
         y: '50%',
-        x: 0,
-        duration: 1,
+        duration: 0.7,
         opacity: 0,
         delay: 0,
         ease: "power2.out",
@@ -150,31 +150,43 @@ gsap.utils.toArray('.canHelp__item').forEach(item => {
     options.y = 100;
     gsap.from(more, options);
 
-    options.delay = 1;
-    options.y = 0;
-    options.x = 100;
-    ease = 'none';
+    options.delay = 0;
+    // options.y = 0;
+    // options.x = 0;
+    ease = 'linear';
     gsap.from(btn, options);
 });
 
-gsap.utils.toArray('.speaks__item:not(:first-child)').forEach((item, i) => {
-    const options = {
-        scrollTrigger: {
-            trigger: item,
-            start: "top 70%",
-            end: 'bottom bottom',
-        },
-        y: '50%',
-        x: 0,
-        duration: 1,
-        opacity: 0,
-        delay: i/10,
-        // stagger: 0.2
-    };
-    // setTimeout(function () {
-    //
-    // }, 10);
-    gsap.from(item, options);
+// gsap.utils.toArray('.speaks__item:not(:first-child)').forEach((item, i) => {
+//     const options = {
+//         scrollTrigger: {
+//             trigger: '.speaks',
+//             start: "top 30%",
+//             end: 'bottom bottom',
+//         },
+//         y: '50%',
+//         x: 0,
+//         duration: 0.7,
+//         opacity: 0,
+//         delay: i/700,
+//         // stagger: 0.7
+//     };
+//     // setTimeout(function () {
+//     //
+//     // }, 10);
+//     gsap.from(item, options);
+// });
+gsap.from('.speaks__item:not(:first-child)', {
+    scrollTrigger: {
+        trigger: '.speaks',
+        start: "top 30%",
+        end: 'bottom bottom',
+    },
+    y: '50%',
+    x: 0,
+    duration: 0.5,
+    opacity: 0,
+    stagger: 0.4
 });
 
 // gsap.from('.speaks__item:not(:first-child)', {
@@ -233,29 +245,3 @@ gsap.from('.review__video', {
     x: '-20%',
     opacity: 0
 });
-
-
-function hoverBtn() {
-    let btn = document.querySelectorAll('.btn');
-
-    btn.forEach((item) => {
-        let overlay = document.createElement('span');
-
-        overlay.classList.add('btn__overlay');
-        overlay.style.display = 'none';
-        item.appendChild(overlay);
-
-        item.addEventListener('mouseenter', (e) => {
-            let left = e.offsetX,
-                top = e.offsetY;
-            overlay.style.cssText = 'display: block; left: '+left+'px; top: '+top+'px';
-        });
-
-        item.addEventListener('mouseleave', () => {
-            overlay.style.display = 'none';
-        });
-
-    });
-
-}
-hoverBtn();

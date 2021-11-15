@@ -93,6 +93,11 @@
 						<img src="<?php echo get_template_directory_uri() ?>/img/play.svg" alt="Play" class="video__play" />
 					</div>
 					<?php
+				} elseif (SCF::get( 'structure__json' )) {
+					?>
+					<div class="lotti" data-path="<?php echo wp_get_attachment_url(SCF::get( 'structure__json' )); ?>" data-anim-loop="false" data-name="structure__json"></div>
+					<?php
+
 				} elseif (SCF::get( 'structure__img' )) {
 					echo wp_get_attachment_image(SCF::get( 'structure__img' ), 'full');
 				}

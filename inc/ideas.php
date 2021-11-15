@@ -1,3 +1,15 @@
+<?php
+$posts = get_posts( array(
+	'numberposts' => 6,
+	'category'    => 0,
+	// 'include'     => array(),
+	// 'exclude'     => array(),
+	// 'meta_key'    => '',
+	// 'meta_value'  =>'',
+	'post_type'   => 'post',
+	// 'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+) );
+?>
 <!-- begin ideas -->
 <section id="ideas" class="ideas section">
 	<div class="container_center">
@@ -10,46 +22,29 @@
 				</div>
 			</div>
 			<div class="ideas__slider">
-				<div class="ideas__item">
-					<div class="ideas__img">
-						<?php echo wp_get_attachment_image(33, 'full') ?>
-					</div>
-					<div class="ideas__text">
-						<h3>How to create a good product</h3>
-						<p>UX, or user experience, is every interaction your business has with people on your website, mobile site, apps, and online properties or services. That might sound like an exhausting number of situations to consider, but creating good UX design means focusing on the user, no matter where they are.</p>
-					</div>
-				</div>
-				<div class="ideas__item">
-					<div class="ideas__img">
-						<?php echo wp_get_attachment_image(32, 'full') ?>
-					</div>
-					<div class="ideas__text">
-						<h3>10 rules how to get money with your website</h3>
-						<p>X, or user experience, is every interaction your business has with people on your website, mobile site, apps, and online properties or services. That might sound like an exhausting number of situations to consider, but creating good UX design means focusing on the user, no matter where they are.</p>
-					</div>
-				</div>
-				<div class="ideas__item">
-					<div class="ideas__img">
-						<?php echo wp_get_attachment_image(30, 'full') ?>
-					</div>
-					<div class="ideas__text">
-						<h3>How to create a good product</h3>
-						<p>X, or user experience, is every interaction your business has with people on your website, mobile site, apps, and online properties or services. That might sound like an exhausting number of situations to consider, but creating good UX design means focusing on the user, no matter where they are.</p>
-					</div>
-				</div>
-				<div class="ideas__item">
-					<div class="ideas__img">
-						<?php echo wp_get_attachment_image(30, 'full') ?>
-					</div>
-					<div class="ideas__text">
-						<h3>How to create a good product</h3>
-						<p>X, or user experience, is every interaction your business has with people on your website, mobile site, apps, and online properties or services. That might sound like an exhausting number of situations to consider, but creating good UX design means focusing on the user, no matter where they are.</p>
-					</div>
-				</div>
+				<?php
+				foreach( $posts as $post ){
+			        setup_postdata( $post );
+			        $post_id = $post->ID;
+			        $category = get_the_category($post_id);
+					?>
+					<a href="<?php echo get_the_permalink($post_id); ?>" class="ideas__item">
+						<div class="ideas__img">
+							<?php echo get_the_post_thumbnail($post_id, 'full') ?>
+						</div>
+						<div class="ideas__text">
+							<h3><?php echo get_the_title($post_id); ?></h3>
+							<p><?php echo the_excerpt_max_charlength($post_id, 260); ?></p>
+						</div>
+					</a>
+					<?php
+			    }
+			    wp_reset_postdata();
+				 ?>
 			</div>
 
 			<div class="ideas__action">
-				<a href="#" class="btn btn_round btn_border">Read More</a>
+				<a href="/blog" class="btn btn_round btn_border">Read More</a>
 			</div>
 		</div>
 	</div>

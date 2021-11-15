@@ -15,8 +15,13 @@ if ($speaks) {
 				foreach ($speaks as $item) {
 					$image = $item['speaks__img'];
 					$text = $item['speaks__text'];
+					$link = $item['speaks__link'];
 					?>
-					<div class="speaks__item">
+                    <?php if ($link !== ''): ?>
+                        <a href="<?php echo $link ?>" class="speaks__item">
+                    <?php else: ?>
+                        <div class="speaks__item">
+                    <?php endif; ?>
 					<?php
 					if ($image) {
 						?>
@@ -33,7 +38,13 @@ if ($speaks) {
 						</div>
 						<?php
 					}
-					?></div><?php
+					?>
+                    <?php if ($link !== ''): ?>
+                        </a>
+                    <?php else: ?>
+                        </div>
+                    <?php endif; ?>
+                    <?php
 				};
 			?>
 			<div class="speaks__item">

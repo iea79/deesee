@@ -17,12 +17,47 @@
     players.forEach((player, i) => {
     });
 
-    onVisible( '.video__wrapper' );
+    document.querySelectorAll('.lotti').forEach((el, i) => {
+        lottie.loadAnimation({
+            container: el, // the dom element that will contain the animation
+            renderer: 'svg',
+            autoplay: false,
+            loop: false,
+            path: el.dataset.path,
+            name: el.dataset.name,
+            rendererSettings: {
+                // context: canvasContext, // the canvas context
+                // scaleMode: 'noScale',
+                // clearCanvas: false,
+                progressiveLoad: false, // Boolean, only svg renderer, loads dom elements when needed. Might speed up initialization for large number of elements.
+                // hideOnTransparent: true //Boolean, only svg renderer, hides elements when opacity reaches 0 (defaults to true)
+            }
+        });
+    });
 
-    function onVisible( selector ) {
+    onVisible( '.lotti', function (el) {
+        // let svg = el.querySelector('svg');
+        lottie.play(el.dataset.name);
+    }, function(el) {
+        lottie.stop(el.dataset.name);
+    }, [0.1]);
+
+    onVisible( '.video__wrapper', function(elem) {
+        let frame = elem.querySelector('iframe');
+        if (!frame) {
+            elem.querySelector('.video__play:not([data-video-id])').click();
+        }
+    }, function(elem) {
+        let frame = elem.querySelector('iframe');
+        if (frame) {
+            elem.querySelector('iframe').remove();
+        }
+    } );
+
+    function onVisible( selector, callback, playback, threshold=[0.5] ) {
 
         let options = {
-            threshold: [ 0.5 ]
+            threshold: threshold
         };
         let observer = new IntersectionObserver( onEntry, options );
         let elements = document.querySelectorAll( selector );
@@ -37,13 +72,11 @@
                 let elem = change.target;
                 let frame = elem.querySelector('iframe');
                 if ( change.isIntersecting ) {
-                    if (!frame) {
-                        elem.querySelector('.video__play:not([data-video-id])').click();
-                    }
+                    // console.log('show', elem);
+                    callback(elem);
                 } else {
-                    if (frame) {
-                        elem.querySelector('iframe').remove();
-                    }
+                    // console.log('hidden', elem);
+                    playback(elem);
                 }
             } );
         }

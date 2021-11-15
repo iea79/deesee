@@ -138,6 +138,12 @@ function project_benchmark_section_fields( $settings, $type, $id, $meta_type, $t
 					'type'        => 'text',
 					'notes'       => 'Video ID from YouTube'
 				),
+				array(
+					'name'        => 'benchmark__json',
+					'label'       => 'Benchmarking svg animation',
+					'type'        => 'file',
+					'notes'       => 'Json file from After Effect'
+				),
 			)
 		);
 
@@ -191,6 +197,12 @@ function project_structure_section_fields( $settings, $type, $id, $meta_type, $t
 					'label'       => 'Site structure video',
 					'type'        => 'text',
 					'notes'       => 'Video ID from YouTube'
+				),
+				array(
+					'name'        => 'structure__json',
+					'label'       => 'Site structure svg animation',
+					'type'        => 'file',
+					'notes'       => 'Json file from After Effect'
 				),
 			)
 		);

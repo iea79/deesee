@@ -21,7 +21,7 @@
             </div>
             <div class="getTouch__right">
                 <div class="map">
-                    <?php echo wp_get_attachment_image(36, 'full') ?>
+                    <?php echo wp_get_attachment_image(241, 'full') ?>
                 </div>
             </div>
         </div>
