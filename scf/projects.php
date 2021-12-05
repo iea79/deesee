@@ -2,12 +2,16 @@
 if ( ! defined( 'PROJ_TYPE_NAME' ) ) {
 	define( 'PROJ_TYPE_NAME', 'projects' );
 }
+// if ( ! defined( 'SEO_TEMPL_NAME' ) ) {
+// 	define( 'SEO_TEMPL_NAME', 'seo-template.php' );
+// }
 
 // Регистрация метабоксов и произвольных полей.
 function project_first_section_fields( $settings, $type, $id, $meta_type, $types ) {
 	// Отображаем поля только на странице редактирования Записи
 	// var_dump($type);
-	if ( $type === PROJ_TYPE_NAME ) {
+	// echo get_page_template_slug( $id );
+	if ( $type === PROJ_TYPE_NAME && get_page_template_slug( $id ) == '' ) {
 
 		// Создаем блок настроек (метабокс).
 		$Section = SCF::add_setting( 'project-1', 'First section' );
@@ -33,7 +37,7 @@ function project_first_section_fields( $settings, $type, $id, $meta_type, $types
 				array(
 					'name'        => 'first__video',
 					'label'       => 'Youtube video ID',
-					'type'        => 'text',
+					'type'        => 'file',
 					'notes'       => ''
 				),
 				array(
@@ -66,7 +70,7 @@ add_filter( 'smart-cf-register-fields', 'project_first_section_fields', 10, 5 );
 function project_dev_section_fields( $settings, $type, $id, $meta_type, $types ) {
 	// Отображаем поля только на странице редактирования Записи
 	// var_dump($type);
-	if ( $type === PROJ_TYPE_NAME ) {
+	if ( $type === PROJ_TYPE_NAME && get_page_template_slug( $id ) == '' ) {
 
 		// Создаем блок настроек (метабокс).
 		$Section = SCF::add_setting( 'project-2', 'Development section' );
@@ -102,7 +106,7 @@ add_filter( 'smart-cf-register-fields', 'project_dev_section_fields', 10, 5 );
 function project_benchmark_section_fields( $settings, $type, $id, $meta_type, $types ) {
 	// Отображаем поля только на странице редактирования Записи
 	// var_dump($type);
-	if ( $type === PROJ_TYPE_NAME ) {
+	if ( $type === PROJ_TYPE_NAME && get_page_template_slug( $id ) == '' ) {
 
 		// Создаем блок настроек (метабокс).
 		$Section = SCF::add_setting( 'project-3', 'Benchmarking section' );
@@ -135,7 +139,7 @@ function project_benchmark_section_fields( $settings, $type, $id, $meta_type, $t
 				array(
 					'name'        => 'benchmark__video',
 					'label'       => 'Benchmarking video',
-					'type'        => 'text',
+					'type'        => 'file',
 					'notes'       => 'Video ID from YouTube'
 				),
 				array(
@@ -162,7 +166,7 @@ add_filter( 'smart-cf-register-fields', 'project_benchmark_section_fields', 10, 
 function project_structure_section_fields( $settings, $type, $id, $meta_type, $types ) {
 	// Отображаем поля только на странице редактирования Записи
 	// var_dump($type);
-	if ( $type === PROJ_TYPE_NAME ) {
+	if ( $type === PROJ_TYPE_NAME && get_page_template_slug( $id ) == '' ) {
 
 		// Создаем блок настроек (метабокс).
 		$Section = SCF::add_setting( 'project-4', 'Site structure section' );
@@ -195,7 +199,7 @@ function project_structure_section_fields( $settings, $type, $id, $meta_type, $t
 				array(
 					'name'        => 'structure__video',
 					'label'       => 'Site structure video',
-					'type'        => 'text',
+					'type'        => 'file',
 					'notes'       => 'Video ID from YouTube'
 				),
 				array(
@@ -222,7 +226,7 @@ add_filter( 'smart-cf-register-fields', 'project_structure_section_fields', 10, 
 function project_content_section_fields( $settings, $type, $id, $meta_type, $types ) {
 	// Отображаем поля только на странице редактирования Записи
 	// var_dump($type);
-	if ( $type === PROJ_TYPE_NAME ) {
+	if ( $type === PROJ_TYPE_NAME && get_page_template_slug( $id ) == '' ) {
 
 		// Создаем блок настроек (метабокс).
 		$Section = SCF::add_setting( 'project-5', 'Content creation section' );
@@ -275,7 +279,7 @@ add_filter( 'smart-cf-register-fields', 'project_content_section_fields', 10, 5 
 function project_visual_section_fields( $settings, $type, $id, $meta_type, $types ) {
 	// Отображаем поля только на странице редактирования Записи
 	// var_dump($type);
-	if ( $type === PROJ_TYPE_NAME ) {
+	if ( $type === PROJ_TYPE_NAME && get_page_template_slug( $id ) == '' ) {
 
 		// Создаем блок настроек (метабокс).
 		$Section = SCF::add_setting( 'project-6', 'Visuals section' );
@@ -309,7 +313,7 @@ function project_visual_section_fields( $settings, $type, $id, $meta_type, $type
 				array(
 					'name'        => 'visual__video',
 					'label'       => 'Visuals video',
-					'type'        => 'text',
+					'type'        => 'file',
 					'notes'       => 'Video ID from YouTube'
 				),
 				array(
@@ -336,7 +340,7 @@ add_filter( 'smart-cf-register-fields', 'project_visual_section_fields', 10, 5 )
 function project_moodboard_section_fields( $settings, $type, $id, $meta_type, $types ) {
 	// Отображаем поля только на странице редактирования Записи
 	// var_dump($type);
-	if ( $type === PROJ_TYPE_NAME ) {
+	if ( $type === PROJ_TYPE_NAME && get_page_template_slug( $id ) == '' ) {
 
 		// Создаем блок настроек (метабокс).
 		$Section = SCF::add_setting( 'project-7', 'Moodboard section' );
@@ -395,7 +399,7 @@ add_filter( 'smart-cf-register-fields', 'project_moodboard_section_fields', 10, 
 function project_concept_section_fields( $settings, $type, $id, $meta_type, $types ) {
 	// Отображаем поля только на странице редактирования Записи
 	// var_dump($type);
-	if ( $type === PROJ_TYPE_NAME ) {
+	if ( $type === PROJ_TYPE_NAME && get_page_template_slug( $id ) == '' ) {
 
 		// Создаем блок настроек (метабокс).
 		$Section = SCF::add_setting( 'project-8', 'Concepts section' );
@@ -440,7 +444,7 @@ function project_concept_section_fields( $settings, $type, $id, $meta_type, $typ
 				array(
 					'name'        => 'concept__file',
 					'label'       => 'Concepts gallery video',
-					'type'        => 'text',
+					'type'        => 'file',
 					'notes'       => 'video id from YouTube'
 				),
 			)
@@ -461,7 +465,7 @@ add_filter( 'smart-cf-register-fields', 'project_concept_section_fields', 10, 5 
 function project_details_section_fields( $settings, $type, $id, $meta_type, $types ) {
 	// Отображаем поля только на странице редактирования Записи
 	// var_dump($type);
-	if ( $type === PROJ_TYPE_NAME ) {
+	if ( $type === PROJ_TYPE_NAME && get_page_template_slug( $id ) == '' ) {
 
 		// Создаем блок настроек (метабокс).
 		$Section = SCF::add_setting( 'project-9', 'Details section' );
@@ -501,7 +505,7 @@ function project_details_section_fields( $settings, $type, $id, $meta_type, $typ
 				array(
 					'name'        => 'details__file',
 					'label'       => 'Details gallery video',
-					'type'        => 'text',
+					'type'        => 'file',
 					'notes'       => 'video id from YouTube'
 				),
 			)
@@ -522,7 +526,7 @@ add_filter( 'smart-cf-register-fields', 'project_details_section_fields', 10, 5 
 function project_frontend_section_fields( $settings, $type, $id, $meta_type, $types ) {
 	// Отображаем поля только на странице редактирования Записи
 	// var_dump($type);
-	if ( $type === PROJ_TYPE_NAME ) {
+	if ( $type === PROJ_TYPE_NAME && get_page_template_slug( $id ) == '' ) {
 
 		// Создаем блок настроек (метабокс).
 		$Section = SCF::add_setting( 'project-10', 'Froontend section' );
@@ -576,7 +580,7 @@ add_filter( 'smart-cf-register-fields', 'project_frontend_section_fields', 10, 5
 function project_mobile_section_fields( $settings, $type, $id, $meta_type, $types ) {
 	// Отображаем поля только на странице редактирования Записи
 	// var_dump($type);
-	if ( $type === PROJ_TYPE_NAME ) {
+	if ( $type === PROJ_TYPE_NAME && get_page_template_slug( $id ) == '' ) {
 
 		// Создаем блок настроек (метабокс).
 		$Section = SCF::add_setting( 'project-11', 'Adaptation section' );
@@ -610,7 +614,7 @@ function project_mobile_section_fields( $settings, $type, $id, $meta_type, $type
 				array(
 					'name'        => 'desktop__video',
 					'label'       => 'Descktop video',
-					'type'        => 'text',
+					'type'        => 'file',
 					'notes'       => 'video id from YouTube'
 				),
 				array(
@@ -623,7 +627,7 @@ function project_mobile_section_fields( $settings, $type, $id, $meta_type, $type
 				array(
 					'name'        => 'mobile__video',
 					'label'       => 'Mobile background',
-					'type'        => 'text',
+					'type'        => 'file',
 					'notes'       => 'video id from YouTube'
 				),
 			)
@@ -644,7 +648,7 @@ add_filter( 'smart-cf-register-fields', 'project_mobile_section_fields', 10, 5 )
 function project_seo_section_fields( $settings, $type, $id, $meta_type, $types ) {
 	// Отображаем поля только на странице редактирования Записи
 	// var_dump($type);
-	if ( $type === PROJ_TYPE_NAME ) {
+	if ( $type === PROJ_TYPE_NAME && get_page_template_slug( $id ) == '' ) {
 
 		// Создаем блок настроек (метабокс).
 		$Section = SCF::add_setting( 'project-12', 'Seo otimization section' );
@@ -692,7 +696,7 @@ add_filter( 'smart-cf-register-fields', 'project_seo_section_fields', 10, 5 );
 function project_qa_section_fields( $settings, $type, $id, $meta_type, $types ) {
 	// Отображаем поля только на странице редактирования Записи
 	// var_dump($type);
-	if ( $type === PROJ_TYPE_NAME ) {
+	if ( $type === PROJ_TYPE_NAME && get_page_template_slug( $id ) == '' ) {
 
 		// Создаем блок настроек (метабокс).
 		$Section = SCF::add_setting( 'project-13', 'QA section' );
@@ -737,10 +741,52 @@ function project_qa_section_fields( $settings, $type, $id, $meta_type, $types ) 
 add_filter( 'smart-cf-register-fields', 'project_qa_section_fields', 10, 5 );
 
 // Регистрация метабоксов и произвольных полей.
+function project_team_template_fields( $settings, $type, $id, $meta_type, $types ) {
+
+	// Отображаем поля только на странице редактирования Записи
+	if ( $type === PROJ_TYPE_NAME && get_page_template_slug( $id ) == '' ) {
+
+        // Создаем блок настроек (метабокс).
+        $Section = SCF::add_setting( 'project-13-5', 'Team section' );
+
+        // Добавляем в метабокс произвольные поля.
+		$Section->add_group(
+			// ID группы полей.
+			'team_top',
+			// Повторяемая группа полей? Да - true, Нет - false.
+			false,
+			// Массив полей.
+			array(
+				array(
+					'name'        => 'team__title',
+					'label'       => 'Team title',
+					'type'        => 'wysiwyg',
+					'default'     => '<p>Worked on the <span style="color: red">project</span></p>',
+				),
+				array(
+					'name'        => 'top_member',
+					'label'       => 'Team members',
+					'type'        => 'relation',
+					'post-type'   => array('teams'),
+					'limit'       => -1,
+					'notes'       => 'no limits',
+				),
+			)
+		);
+
+        // Добавляем информацию о наших полях в общий массив.
+        $settings[] = $Section;
+    }
+
+	return $settings;
+}
+add_filter( 'smart-cf-register-fields', 'project_team_template_fields', 10, 5 );
+
+// Регистрация метабоксов и произвольных полей.
 function project_started_section_fields( $settings, $type, $id, $meta_type, $types ) {
 	// Отображаем поля только на странице редактирования Записи
 	// var_dump($type);
-	if ( $type === PROJ_TYPE_NAME ) {
+	if ( $type === PROJ_TYPE_NAME && get_page_template_slug( $id ) == '' ) {
 
 		// Создаем блок настроек (метабокс).
 		$Section = SCF::add_setting( 'project-14', 'Get started section' );

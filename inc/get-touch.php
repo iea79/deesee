@@ -4,20 +4,7 @@
         <div class="getTouch__content">
             <div class="getTouch__left">
                 <h2 class="section__title">Get in <span style="color: red">touch</span></h2>
-                <div class="getTouch__form">
-                    <div class="form__row">
-                        <input type="text" placeholder="Name">
-                    </div>
-                    <div class="form__row">
-                        <input type="text" placeholder="Email">
-                    </div>
-                    <div class="form__row form__row_full">
-                        <textarea placeholder="Comment"></textarea>
-                    </div>
-                    <div class="form__action">
-                        <button type="submit" class="btn btn_round">Send</button>
-                    </div>
-                </div>
+                <?php echo do_shortcode( '[contact-form-7 id="256" title="Get in touch"]' ); ?>
             </div>
             <div class="getTouch__right">
                 <div class="map">

@@ -1,0 +1,13 @@
+.cases-template {
+    .speaks {
+        @media (min-width: 768px) {
+            margin-top: 0;
+        }
+    }
+
+    .claimOffer {
+        @media (min-width: 768px) {
+            padding-bottom: 0;
+        }
+    }
+}

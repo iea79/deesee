@@ -1,0 +1,89 @@
+.aboutSection {
+    position: relative;
+    z-index: 1;
+
+    .container_center {
+        display: flex;
+    }
+
+    &__bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90.29deg, #202020 6.71%, rgba(32, 32, 32, 0.79) 56.32%, rgba(32, 32, 32, 0.6) 100%);
+            @media (min-width: 768px) {
+                background: linear-gradient(90.29deg, #202020 6.71%, rgba(32, 32, 32, 0.79) 56.32%, rgba(32, 32, 32, 0.36) 99.69%);
+            }
+        }
+
+        img {
+            display: block;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &__content {
+        position: relative;
+        padding: 4em 0;
+        color: $color_withe;
+        // width: 52.69em;
+
+        @media (min-width: 768px) {
+            width: 52.69em;
+            padding: 9.37em 0 11.78em;
+            color: $main_color;
+        }
+
+        h2 {
+            color: $color_withe;
+            font-family: $second_font_family;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 2.2em;
+            margin: 0 0 0.58em;
+            letter-spacing: 0.175em;
+            line-height: 1.11;
+
+            @media (min-width: 768px) {
+                font-size: 4.5em;
+                line-height: 1.11;
+                margin: 0 0 0.74em;
+            }
+        }
+
+        p {
+            line-height: 1.5;
+            @media (min-width: 768px) {
+                font-size: 1.49em;
+            }
+        }
+    }
+
+    &:nth-of-type(even) {
+        .aboutSection__bg {
+            &:after {
+                @media (min-width: 768px) {
+                    background: linear-gradient(90.29deg, #202020 6.71%, rgba(32, 32, 32, 0.79) 52.72%, rgba(32, 32, 32, 0.17) 99.69%);
+                    transform: matrix(-1, 0, 0, 1, 0, 0);
+                }
+            }
+        }
+
+        .container_center {
+            justify-content: flex-end;
+        }
+    }
+
+}

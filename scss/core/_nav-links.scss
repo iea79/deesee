@@ -1,0 +1,36 @@
+.nav-links {
+    display: none;
+    @media (min-width: 768px) {
+        display: grid;
+        grid-gap: 2em;
+        grid-template-columns: 50% 50%;
+        padding: 3em 0 0;
+    }
+
+    .nav-next,
+    .nav-previous {
+        a {
+            color: $color_withe;
+            text-decoration: none;
+        }
+    }
+
+    .nav-previous {
+        grid-column: 1;
+    }
+
+    .nav-next {
+        grid-column: 2;
+        text-align: right;
+    }
+
+    .nav-subtitle {}
+
+    .nav-title {
+        display: none;
+        @media (min-width: 768px) {
+            display: block;
+        }
+    }
+
+}

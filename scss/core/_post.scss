@@ -1,0 +1,123 @@
+.post {
+    &__header {
+        padding: 2em 0;
+        position: relative;
+
+        @media (min-width: 768px) {
+            padding: 0 0 5.5625em;
+
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            left: -1.2em;
+            right: -1.2em;
+            bottom: 0;
+            border-bottom: $main_border;
+
+            @media (min-width: 768px) {
+                left: -5.7em;
+                right: -5.7em;
+            }
+        }
+
+        h1 {
+            font-weight: bold;
+            font-size: 2.2em;
+            line-height: 111.4%;
+            letter-spacing: 0.175em;
+            text-transform: uppercase;
+            color: #FFFFFF;
+            margin: 0;
+            max-width: 24em;
+
+            @media (min-width: 768px) {
+                font-size: 4em;
+            }
+        }
+    }
+
+    &__body {
+        position: relative;
+
+        @media (min-width: 768px) {
+            margin-bottom: 5em;
+            display: flex;
+        }
+
+        &:after {
+
+            @media (min-width: 768px) {
+                content: '';
+                display: block;
+                position: absolute;
+                bottom: 0;
+                border-bottom: $main_border;
+                left: -5.7em;
+                right: -5.7em;
+            }
+        }
+    }
+
+    &__content {
+        flex: none;
+        padding: 2em 0;
+        line-height: 1.5;
+
+        @media (min-width: 768px) {
+            font-size: 1.125em;
+            border-right: $main_border;
+            width: 62.6em;
+            padding: 4em 3em 6.0625em 0;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            margin: 0.8em 0;
+            font-weight: 400;
+            color: $color_withe;
+
+            @media (min-width: 768px) {
+                font-size: 2.2em;
+            }
+        }
+
+        h3 {
+            font-size: 1.5em;
+            font-weight: 400;
+            margin: 1.1em 0;
+
+            @media (min-width: 768px) {
+                font-size: 1.55em;
+            }
+        }
+
+        h4 {}
+
+        h5 {}
+
+        * {
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+
+        a {
+            color: lighten(#B3B3B3, 10%);
+            // text-decoration: 1px dashed inherit;
+            text-decoration: underline;
+            // text-decoration-style: dotted;
+
+            u {
+                text-decoration: none;
+            }
+
+            &:hover {
+                text-decoration-color: transparent;
+            }
+        }
+    }
+
+    &__aside {}
+}

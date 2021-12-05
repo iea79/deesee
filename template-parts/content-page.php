@@ -7,6 +7,7 @@
  * @package frondendie
  */
 
+breadcrumbs();
 ?>
 
 <div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -29,3 +30,6 @@
 	</div>
 
 </div><!-- #post-<?php the_ID(); ?> -->
+
+<?php
+require get_template_directory() . '/inc/get-touch.php';

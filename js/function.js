@@ -36,9 +36,10 @@ jQuery(function ($) {
             end = position;
             // console.log('end', position);
             // console.log(app.pageScroll);
-            $(this).scrollLeft(position);
-            event.preventDefault();
-
+            if (scrollWidth > pageWidth) {
+                $(this).scrollLeft(position);
+                event.preventDefault();
+            }
             // if (app.pageScroll === 'down') {
                 // if (pageWidth !== scrollWidth - start || start !== 0) {
                 // }
@@ -126,7 +127,47 @@ $(document).ready(function() {
 
     $('.horizontallScroll').hScroll(0);
 
+    selectStyler();
+
+    $('#projectTypeToggle').on('change', function() {
+        $('.form__pane').removeClass('active');
+        $('#' + $(this).val()).addClass('active');
+        $('[project-type]').val($(this).val());
+    });
+
+    showPlaceholderInDateField();
+    // toggleRequiredEmail();
+
 });
+
+function showPlaceholderInDateField() {
+    const date = $('[type=date]');
+    date.attr('type', 'text');
+    date.on('focus', function() {
+        $(this).attr('type', 'date');
+    });
+
+    date.on('blur', function() {
+        if (!$(this).val()) {
+            $(this).attr('type', 'text');
+        }
+    });
+}
+
+function toggleRequiredEmail() {
+
+    const form = $('.pageGetTouch__form'),
+          email = form.find('[type=email]'),
+          tel = form.find('[type=tel]');
+
+    email.blur(function() {
+        if ($(this).val()) {
+            tel.removeAttr('aria-required').removeClass('wpcf7-validates-as-required');
+        } else {
+            tel.attr('aria-required', 'true').addClass('wpcf7-validates-as-required');
+        }
+    });
+}
 
 // $(window).on('scroll', function(){
 //     let scrollPos = $(window).scrollTop();
@@ -326,142 +367,90 @@ function openVideoModal() {
 }
 openVideoModal();
 
+function onVisible( selector, callback, playback, threshold=[0.5] ) {
 
-// Деление чисел на разряды Например из строки 10000 получаем 10 000
-// Использование: thousandSeparator(1000) или используем переменную.
-// function thousandSeparator(str) {
-//     var parts = (str + '').split('.'),
-//         main = parts[0],
-//         len = main.length,
-//         output = '',
-//         i = len - 1;
+    let options = {
+        threshold: threshold
+    };
+    let observer = new IntersectionObserver( onEntry, options );
+    let elements = document.querySelectorAll( selector );
+    // let play = selector.querySelector('.video__play');
 
-//     while(i >= 0) {
-//         output = main.charAt(i) + output;
-//         if ((len - i) % 3 === 0 && i > 0) {
-//             output = ' ' + output;
-//         }
-//         --i;
-//     }
+    for ( let elm of elements ) {
+        observer.observe( elm );
+    }
 
-//     if (parts.length > 1) {
-//         output += '.' + parts[1];
-//     }
-//     return output;
-// };
+    function onEntry( entry ) {
+        entry.forEach( change => {
+            let elem = change.target;
+            let frame = elem.querySelector('iframe');
+            if ( change.isIntersecting ) {
+                // console.log('show', elem);
+                callback(elem);
+            } else {
+                // console.log('hidden', elem);
+                playback(elem);
+            }
+        } );
+    }
+}
 
+function selectStyler() {
+    $('select').each(function () {
+        var $this = $(this),
+            numberOfOptions = $(this).children('option').length;
 
-// Хак для яндекс карт втавленных через iframe
-// Страуктура:
-//<div class="map__wrap" id="map-wrap">
-//  <iframe style="pointer-events: none;" src="https://yandex.ru/map-widget/v1/-/CBqXzGXSOB" width="1083" height="707" frameborder="0" allowfullscreen="true"></iframe>
-//</div>
-// Обязательное свойство в style которое и переключет скрипт
-// document.addEventListener('click', function(e) {
-//     var map = document.querySelector('#map-wrap iframe')
-//     if(e.target.id === 'map-wrap') {
-//         map.style.pointerEvents = 'all'
-//     } else {
-//         map.style.pointerEvents = 'none'
-//     }
-// })
+        $this.addClass('s-hidden');
+        $this.wrap('<div class="select"></div>');
+        $this.after('<div class="select__current"></div>');
 
-// Простая проверка форм на заполненность и отправка аяксом
-// function formSubmit() {
-//     $("[type=submit]").on('click', function (e){
-//         e.preventDefault();
-//         var form = $(this).closest('.form');
-//         var url = form.attr('action');
-//         var form_data = form.serialize();
-//         var field = form.find('[required]');
-//         // console.log(form_data);
+        var $styledSelect = $this.next('div.select__current');
+            $styledSelect.text($this.children('option').eq(0).text());
 
-//         empty = 0;
+        var $list = $('<ul />', {
+            'class': 'select__options'
+        }).insertAfter($styledSelect);
 
-//         field.each(function() {
-//             if ($(this).val() == "") {
-//                 $(this).addClass('invalid');
-//                 // return false;
-//                 empty++;
-//             } else {
-//                 $(this).removeClass('invalid');
-//                 $(this).addClass('valid');
-//             }
-//         });
+        for (var i = 0; i < numberOfOptions; i++) {
+            $('<li />', {
+                text: $this.children('option').eq(i).text(),
+                rel: $this.children('option').eq(i).val()
+            }).appendTo($list);
+        }
 
-//         // console.log(empty);
+        var $listItems = $list.children('li');
 
-//         if (empty > 0) {
-//             return false;
-//         } else {
-//             $.ajax({
-//                 url: url,
-//                 type: "POST",
-//                 dataType: "html",
-//                 data: form_data,
-//                 success: function (response) {
-//                     // $('#success').modal('show');
-//                     // console.log('success');
-//                     console.log(response);
-//                     // console.log(data);
-//                     // document.location.href = "success.html";
-//                 },
-//                 error: function (response) {
-//                     // $('#success').modal('show');
-//                     // console.log('error');
-//                     console.log(response);
-//                 }
-//             });
-//         }
+        $styledSelect.click(function (e) {
+            e.stopPropagation();
+            $('div.select__current.active').each(function () {
+                $(this).removeClass('active').next('ul.select__options').hide();
+            });
+            $(this).toggleClass('active').next('ul.select__options').toggle();
+        });
 
-//     });
+        $listItems.click(function (e) {
+            e.stopPropagation();
+            $styledSelect.text($(this).text()).removeClass('active');
+            $this.val($(this).attr('rel')).change();
+            $list.hide();
+        });
 
-//     $('[required]').on('blur', function() {
-//         if ($(this).val() != '') {
-//             $(this).removeClass('invalid');
-//         }
-//     });
-
-//     $('.form__privacy input').on('change', function(event) {
-//         event.preventDefault();
-//         var btn = $(this).closest('.form').find('.btn');
-//         if ($(this).prop('checked')) {
-//             btn.removeAttr('disabled');
-//             // console.log('checked');
-//         } else {
-//             btn.attr('disabled', true);
-//         }
-//     });
-// }
+        $(document).click(function () {
+            $styledSelect.removeClass('active');
+            $list.hide();
+        });
+    });
+}
 
 
-// Проверка на возможность ввода только русских букв, цифр, тире и пробелов
-// $('#u_l_name').on('keypress keyup', function () {
-//     var that = this;
-//
-//     setTimeout(function () {
-//         if (that.value.match(/[ -]/) && that.value.length == 1) {
-//             that.value = '';
-//         }
-//
-//         if (that.value.match(/-+/g)) {
-//             that.value = that.value.replace(/-+/g, '-');
-//         }
-//
-//         if (that.value.match(/ +/g)) {
-//             that.value = that.value.replace(/ +/g, ' ');
-//         }
-//
-//         var res = /[^а-яА-Я -]/g.exec(that.value);
-//
-//         if (res) {
-//             removeErrorMsg('#u_l_name');
-//             $('#u_l_name').after('<div class="j-required-error b-check__errors">Измените язык ввода на русский</div>');
-//         }
-//         else {
-//             removeErrorMsg('#u_l_name');
-//         }
-//
-//         that.value = that.value.replace(res, '');
-//     }, 0);
-// });
+onVisible( 'video', function(video) {
+    // console.log('visible');
+    video.play();
+    // if (!video.onplaying) {
+    // }
+}, function(video) {
+    // console.log('hidden');
+    video.pause();
+    // if (video.onplaying) {
+    // }
+});

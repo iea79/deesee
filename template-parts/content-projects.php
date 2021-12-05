@@ -26,9 +26,14 @@
 
 			if (SCF::get( 'first__video' ) !== "") {
 				?>
-				<div class="video__wrapper js-youtube" id="<?php echo SCF::get( 'first__video' ); ?>">
-					<img src="<?php echo get_template_directory_uri() ?>/img/play.svg" alt="Play" class="video__play" />
+				<!-- <div class="video__wrapper js-youtube" id="<?php //echo SCF::get( 'first__video' ); ?>">
+					<img src="<?php //echo get_template_directory_uri() ?>/img/play.svg" alt="Play" class="video__play" />
+				</div> -->
+				<div class="video__wrapper">
+					<video src="<?php echo wp_get_attachment_url(SCF::get( 'first__video' )) ?>" muted loop preload="auto" playsinline>
+					</video>
 				</div>
+
 				<?php
 			} elseif (SCF::get( 'first__image' )) {
 				?>
@@ -62,8 +67,8 @@
 				<?php
 				if (SCF::get( 'benchmark__video' ) !== "") {
 					?>
-					<div class="video__wrapper js-youtube" id="<?php echo SCF::get( 'benchmark__video' ); ?>">
-						<img src="<?php echo get_template_directory_uri() ?>/img/play.svg" alt="Play" class="video__play" />
+					<div class="video__wrapper">
+						<video src="<?php echo wp_get_attachment_url(SCF::get( 'benchmark__video' )) ?>" muted loop preload="auto" playsinline></video>
 					</div>
 					<?php
 				} elseif (SCF::get( 'benchmark__img' )) {
@@ -89,8 +94,8 @@
 				<?php
 				if (SCF::get( 'structure__video' ) !== "") {
 					?>
-					<div class="video__wrapper js-youtube" id="<?php echo SCF::get( 'structure__video' ); ?>">
-						<img src="<?php echo get_template_directory_uri() ?>/img/play.svg" alt="Play" class="video__play" />
+					<div class="video__wrapper">
+						<video src="<?php echo wp_get_attachment_url(SCF::get( 'structure__video' )) ?>" muted loop preload="auto" playsinline></video>
 					</div>
 					<?php
 				} elseif (SCF::get( 'structure__json' )) {
@@ -144,8 +149,8 @@
 				<?php
 				if (SCF::get( 'visual__video' ) !== "") {
 					?>
-					<div class="video__wrapper js-youtube" id="<?php echo SCF::get( 'visual__video' ); ?>">
-						<img src="<?php echo get_template_directory_uri() ?>/img/play.svg" alt="Play" class="video__play" />
+					<div class="video__wrapper">
+						<video src="<?php echo wp_get_attachment_url(SCF::get( 'visual__video' )) ?>" muted loop preload="auto" playsinline></video>
 					</div>
 					<?php
 				} elseif (SCF::get( 'visual__img' )) {
@@ -210,13 +215,13 @@
 						$conceptVideo = $item['concept__file'];
 						$conceptImg = $item['concept__img'];
 						if ($conceptVideo !== '' && !$conceptImg) {
-							echo  '
+							?>
 							<div class="projectConcept__item">
-								<div class="video__wrapper js-youtube" id="'.$conceptVideo.'">
-									<img src="'.get_template_directory_uri().'/img/play.svg" alt="Play" class="video__play" />
+								<div class="video__wrapper">
+									<video src="<?php echo wp_get_attachment_url($conceptVideo) ?>" muted loop preload="auto" playsinline></video>
 								</div>
 							</div>
-							';
+							<?php
 						}
 						if ($conceptImg && $conceptVideo === '') {
 							echo  '<div class="projectConcept__item">
@@ -248,8 +253,8 @@
 						echo '<div class="projectDetail__item item-'.$itemCount.'">';
 						if ($conceptVideo !== '' && !$conceptImg) {
 							echo  '
-							<div class="video__wrapper js-youtube" id="'.$conceptVideo.'">
-								<img src="'.get_template_directory_uri().'/img/play.svg" alt="Play" class="video__play" data-video-id="'.$conceptVideo.'" />
+							<div class="video__wrapper">
+								<video src="<?php echo wp_get_attachment_url('.$conceptVideo.') ?>" muted loop preload="auto" playsinline></video>
 							</div>
 							';
 						}
@@ -275,7 +280,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <a href="#" class="modal-close" data-dismiss="modal"></a>
-            <div class="video__wrapper"></div>
+            <!-- <div class="video__wrapper"></div> -->
         </div>
     </div>
 </div>
@@ -315,8 +320,8 @@
 					<?php
 					if (SCF::get( 'desktop__video' ) !== "") {
 						?>
-						<div class="video__wrapper js-youtube" data-params="loop=1&controls=0" id="<?php echo SCF::get( 'desktop__video' ); ?>">
-							<img src="<?php echo get_template_directory_uri() ?>/img/play.svg" alt="Play" class="video__play" />
+						<div class="video__wrapper">
+							<video src="<?php echo wp_get_attachment_url(SCF::get( 'desktop__video' )) ?>" muted loop preload="auto" playsinline></video>
 						</div>
 						<?php
 					} elseif (SCF::get( 'desktop__img' )) {
@@ -330,8 +335,8 @@
 					<?php
 					if (SCF::get( 'mobile__video' ) !== "") {
 						?>
-						<div class="video__wrapper js-youtube" data-params="loop=1&controls=0" id="<?php echo SCF::get( 'mobile__video' ); ?>">
-							<img src="<?php echo get_template_directory_uri() ?>/img/play.svg" alt="Play" class="video__play" />
+						<div class="video__wrapper">
+							<video src="<?php echo wp_get_attachment_url(SCF::get( 'mobile__video' )) ?>" muted loop preload="auto" playsinline></video>
 						</div>
 						<?php
 					} elseif (SCF::get( 'mobile__img' )) {
@@ -376,6 +381,40 @@
 	</div>
 </section>
 <!-- end projectQa -->
+
+<!-- begin projectMembers -->
+<section id="projectMembers" class="projectMembers section">
+    <div class="container_center">
+		<h2 class="section__title"><?php echo SCF::get( 'team__title' ); ?></h2>
+        <div class="projectMembers__content">
+			<?php
+			$members = get_posts([
+                'posts_per_page'  =>  -1,
+                'post_type'       => 'teams',
+                'include'         => SCF::get('top_member'),
+				'order'			  => 'ASC'
+            ]);
+
+            foreach ($members as $member) {
+                setup_postdata( $member );
+                // var_dump($member);
+
+                $memberMeta = SCF::gets($member);
+                ?>
+				<div class="projectMembers__item">
+					<div class="projectMembers__photo">
+						<?php echo get_the_post_thumbnail($member, 'full') ?>
+					</div>
+					<div class="projectMembers__name"><?php echo get_the_title($member); ?></div>
+					<div class="projectMembers__prof"><?php echo $memberMeta['team__prof']; ?></div>
+				</div>
+                <?php
+            }
+            wp_reset_postdata();			?>
+        </div>
+    </div>
+</section>
+<!-- end projectMembers -->
 
 <!-- begin getStarted -->
 <section id="getStarted" class="getStarted">

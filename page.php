@@ -17,9 +17,10 @@ get_header();
 
 
 	<?php
-	if (is_front_page()) {
+	if ( is_front_page() ) {
 		get_template_part( 'template-parts/content', 'home' );
 	} else {
+
 		while ( have_posts() ) :
 			the_post();
 

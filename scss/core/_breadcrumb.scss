@@ -10,6 +10,8 @@
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
+		position: relative;
+		z-index: 2;
 
 		.sep {
 			border: 1px solid;

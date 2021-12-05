@@ -1,0 +1,97 @@
+.casePrice {
+    padding: 3em 0;
+    position: relative;
+
+    @media (min-width: 768px) {
+        padding: 10.875em 0 13.3125em;
+    }
+
+    .container_center {
+        @media (min-width: 768px) {
+            &:before {
+                content: '';
+                display: block;
+                top: 0;
+                bottom: 0;
+                border-left: $main_border;
+            }
+        }
+    }
+
+    .section__title {
+        margin-bottom: 1.5em;
+        @media (min-width: 768px) {
+            margin-bottom: 0.9em;
+        }
+    }
+
+    &__list {
+        margin: 0 -1.2em;
+
+        @media (min-width: 768px) {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0;
+        }
+    }
+
+    &__item {
+        line-height: 1.5;
+        padding: 2em 1.2em 0;
+        margin: 2.5em 0 0;
+        border-top: $main_border;
+
+        @media (min-width: 768px) {
+            width: 25%;
+            margin: 0;
+            padding: 0 2em 0 0;
+            border: 0;
+
+            &:before {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                border-left: $main_border;
+            }
+        }
+
+    }
+
+    &__city {
+        font-size: 2.2em;
+        font-weight: 100;
+        margin-bottom: 0.2em;
+
+        @media (min-width: 768px) {
+            font-size: 3.75em;
+        }
+    }
+
+    &__price {
+        font-size: 1.7em;
+        color: $color_withe;
+        margin-bottom: 0.5em;
+
+        @media (min-width: 768px) {
+            font-size: 2.5em;
+            margin-bottom: 0.6em;
+        }
+    }
+
+    &__lists {
+        color: $color_withe;
+        font-size: 1.125em;
+        margin: 1em 0;
+
+        @media (min-width: 768px) {
+            margin: 1.8em 0;
+        }
+    }
+
+    &__descr {
+        font-size: 1.125em;
+    }
+
+}

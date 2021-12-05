@@ -15,6 +15,7 @@
 
 		.btn,
 		input:not([type]),
+		input[type=date],
 		input[type=datetime],
 		input[type=email],
 		input[type=number],
@@ -28,8 +29,212 @@
 		}
 
 		textarea {
+			width: 100%;
 			resize: vertical;
 			min-height: 10.16em;
+		}
+	}
+
+	&__top {
+		margin-bottom: 3em;
+
+		@media (min-width: 768px) {
+			width: 76.5625em;
+			margin-bottom: 6.25em;
+
+		}
+
+		label {
+			color: $color_withe;
+			margin-bottom: 0.5em;
+			display: block;
+
+			@media (min-width: 768px) {
+				margin-bottom: 0;
+				flex: none;
+				font-size: 1.5em;
+				width: 17em;
+			}
+		}
+
+		input {
+			width: 100%;
+		}
+	}
+
+	&__line {
+		margin-bottom: 1.4em;
+
+		@media (min-width: 768px) {
+			display: flex;
+			align-items: center;
+			margin-bottom: 1.875em;
+		}
+
+		// textarea {
+		// 	width: 100%;
+		// }
+
+	}
+
+	&__legend {
+		font-size: 1.5em;
+		line-height: 150.4%;
+		color: #FFFFFF;
+		margin-bottom: 0.7em;
+
+		@media (min-width: 768px) {
+			font-size: 2.5em;
+		}
+	}
+
+	&__col {
+
+		@media (min-width: 768px) {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+		}
+
+		textarea {
+			width: 100%;
+			display: block;
+			margin-bottom: 1em;
+
+			@media (min-width: 768px) {
+				margin-bottom: 0;
+
+				&:nth-child(n+2) {
+					margin-top: -1px;
+				}
+			}
+		}
+	}
+
+	&__group {
+		.btn,
+		input:not([type]),
+		input[type=date],
+		input[type=datetime],
+		input[type=email],
+		input[type=number],
+		input[type=password],
+		input[type=search],
+		input[type=tel],
+		input[type=text],
+		input[type=url],
+		textarea {
+			width: 100%;
+		}
+
+		@media (min-width: 768px) {
+			width: 100%;
+			display: flex;
+			align-items: stretch;
+			min-height: 6.4375em;
+		}
+
+		.select,
+		select {
+			width: 100%;
+		}
+
+		label:not([class]) {
+			display: block;
+			color: $color_withe;
+			margin-bottom: 0.5em;
+
+			@media (min-width: 768px) {
+				padding-left: 2em;
+				margin-bottom: 0;
+				display: flex;
+				align-items: center;
+				width: 100%;
+				font-size: 1.5em;
+				border: 1px solid $color_withe;
+
+			}
+		}
+
+		.form__check {
+			display: flex;
+			align-items: center;
+			color: $color_withe;
+
+			@media (min-width: 768px) {
+				border: 1px solid $color_withe;
+				width: 100%;
+				padding-left: 3.2em;
+				min-height: 6.4375em;
+			}
+
+			input {
+				margin-right: 0.625em;
+			}
+
+			span {
+				// font-size: 1.125em;
+
+				&.wpcf7-list-item-label {
+					// font-size: 0.8em;
+				}
+			}
+		}
+
+		.form__field {
+			margin-bottom: 1em;
+
+			@media (min-width: 768px) {
+				display: flex;
+				flex: none;
+				margin-bottom: 0;
+
+				&:nth-child(n+2) {
+					margin-left: -1px;
+				}
+
+				&:nth-child(1) {
+					width: 45.5625em;
+				}
+
+				&:nth-child(2) {
+					width: 30.8em;
+				}
+
+				&:nth-child(3) {
+					flex-grow: 1;
+					min-width: 0;
+				}
+			}
+
+		}
+	}
+
+	&__grid {
+
+		@media (min-width: 768px) {
+			display: flex;
+			flex-wrap: wrap;
+			flex-grow: 1;
+			min-width: 0;
+
+		}
+
+		.form__check {
+			margin-bottom: 1em;
+
+			@media (min-width: 768px) {
+				width: 50%;
+				border-left: 0;
+				margin-bottom: 0;
+
+				&:nth-child(odd) {}
+
+				&:nth-child(n+3) {
+					border-top: 0;
+				}
+			}
+
 		}
 	}
 
@@ -48,9 +253,19 @@
 			}
 		}
 	}
+
+	&__pane {
+		display: none;
+
+		&.active {
+			display: block;
+		}
+	}
 }
 // Input text and textarea ================================================
+.select__current,
 input:not([type]),
+input[type=date],
 input[type=datetime],
 input[type=email],
 input[type=number],
@@ -59,8 +274,9 @@ input[type=search],
 input[type=tel],
 input[type=text],
 input[type=url],
+select,
 textarea {
-	background-color: transparent;
+	background-color: #202020;
 	border: 1px solid $input_border_color;
 	padding: 1.5em;
 	outline: none;
@@ -78,23 +294,42 @@ textarea {
 
 	&:hover {
 		border: 1px solid $input_hover_border_color;
-		background-color: transparent;
+		background-color: #202020;
 		z-index: 1;
 	}
 
 	&:focus {
 		border: 1px solid $input_focus_border_color;
-		background-color: transparent;
+		background-color: #202020;
 	}
 
 	&.invalid {
-		background-color: transparent;
+		background-color: #202020;
 		border: 1px solid red;
 	}
 	// Placeholder for input +++++++++++++++
 	@include placeholder {
 		color: $color_withe;
 	}
+
+}
+
+input[type=date] {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+	display: none;
+	-webkit-appearance: none;
+}
+
+textarea {
+	width: 100%;
+	resize: vertical;
+	height: 9.56em;
 }
 
 input[type=search]::-webkit-search-cancel-button,
@@ -120,16 +355,17 @@ input[type=number] {
 input[type=checkbox],
 input[type=radio] {
 	padding: 0;
-	display: inline-block;
-	height: 14px;
-	width: 14px;
-	border: 1px solid #aaa;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	height: 1.8125em;
+	width: 1.8125em;
+	background: #262626;
+	border: 1px solid #FFFFFF;
 	overflow: hidden;
-	margin-top: -4px;
 	vertical-align: middle;
 	-webkit-appearance: none;
 	outline: 0;
-	background: 0 0;
 	text-align: center;
 	position: relative;
 	flex: none;
@@ -153,18 +389,20 @@ input[type=radio] {
 input[type=radio] {
 	border-radius: 50%;
 
-	&:checked:before {
-		content: '';
-		width: 6px;
-		height: 6px;
-		top: 50%;
-		left: 50%;
-		margin-top: -3px;
-		margin-left: -3px;
-		display: block;
-		position: absolute;
-		border-radius: 50%;
-		background: #000;
+	&:checked {
+		background: #FF3E00;
+		border-color: #FF3E00;
+
+		&:before {
+			content: '';
+			position: absolute;
+			width: 0.6875em;
+			height: 0.6875em;
+			display: block;
+			position: absolute;
+			border-radius: 50%;
+			background: $color_withe;
+		}
 	}
 
 	&:disabled:checked:before {
@@ -173,18 +411,27 @@ input[type=radio] {
 }
 
 input[type=checkbox] {
-	&:checked:before,
-	&:indeterminate:before {
-		content: "\2714";
-		font-size: 12px;
-		-webkit-font-smoothing: antialiased;
-		text-align: center;
-		line-height: 13px;
-		color: #000;
+	&:checked,
+	&:indeterminate {
+		background: #FF3E00;
+		border-color: #FF3E00;
+		color: $color_withe;
+
+		&:before {
+			content: "";
+			position: absolute;
+			height: 10px;
+			width: 8px;
+			border-right: 3px solid;
+			border-bottom: 3px solid;
+			transform: rotate(45deg);
+			-webkit-font-smoothing: antialiased;
+			text-align: center;
+		}
 	}
 
 	&:indeterminate:before {
-		content: "\f068";
+		content: "";
 	}
 
 	&:disabled:checked:before,

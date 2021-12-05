@@ -212,12 +212,33 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 /**
  * Template case developement
  */
-require get_template_directory() . '/inc/case-developement-template.php';
+require get_template_directory() . '/scf/case-template.php';
+
+/**
+ * Template SEO project page
+ */
+require get_template_directory() . '/scf/seo-template.php';
 
 /**
  * Template projects
  */
-require get_template_directory() . '/inc/projects-template.php';
+require get_template_directory() . '/scf/projects.php';
+
+/**
+ * Scf blog page
+ */
+require get_template_directory() . '/scf/blog.php';
+
+/**
+ * Scf team members
+ */
+require get_template_directory() . '/scf/team.php';
+
+/**
+ * Get About us pages template
+ */
+require get_template_directory() . '/scf/about-us.php';
+
 
 /**
 * Customize menu
@@ -283,7 +304,7 @@ function reviews_register_post_type_init() {
 		'query_var'          => true,
 		'rewrite'            => true,
 		'capability_type'    => 'post',
-		'has_archive'        => true,
+		'has_archive'        => 'testimonials',
 		'menu_icon' => 'dashicons-admin-comments', // иконка в меню
 		'menu_position' => 22, // порядок в меню
 		'supports' => array( 'title', 'editor', 'thumbnail')
@@ -316,15 +337,51 @@ function cases_register_post_type_init() {
 		'show_in_menu'       => true,
 		'show_in_nav_menus'  => true,
 		'query_var'          => true,
-		'rewrite'            => true,
+		'rewrite'            => array( 'slug'=>'project', 'with_front' => false ),
 		'capability_type'    => 'post',
-		'has_archive'        => true,
+		'has_archive'        => 'portfolio',
 		'menu_icon'			 => 'dashicons-layout', // иконка в меню
 		'menu_position' 	 => 21, // порядок в меню
 		'supports' 			 => array( 'title', 'thumbnail', 'page-attributes'),
 		'taxonomies' 		 => array( 'category' )
 	);
 	register_post_type('projects', $args);
+}
+
+add_action( 'init', 'team_register_post_type_init' ); // Использовать функцию только внутри хука init
+
+function team_register_post_type_init() {
+	$labels = array(
+		'name'			 	=> 'Team',
+		'singular_name'	 	=> 'Team member', // админ панель Добавить->Функцию
+		'add_new' 		 	=> 'Add team member',
+		'add_new_item' 	 	=> 'Add new team member', // заголовок тега <title>
+		'edit_item' 	 	=> 'Edit team member',
+		'new_item'		 	=> 'New team member',
+		'all_items'	  	 	=> 'All team members',
+		'view_item'		 	=> 'Show team members in site',
+		'search_items' 	 	=> 'Search team member',
+		'not_found' 	 	=>  'Team member not found',
+		'not_found_in_trash' => 'Team members not found in trash',
+		'menu_name' 	 	=> 'Our team' // ссылка в меню в админке
+	);
+	$args = array(
+		'labels' => $labels,
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'show_in_nav_menus'  => true,
+		'query_var'          => true,
+		'rewrite'            => true,
+		'capability_type'    => 'post',
+		'has_archive'        => false,
+		'menu_icon'			 => 'dashicons-groups', // иконка в меню
+		'menu_position' 	 => 22, // порядок в меню
+		'supports' 			 => array( 'title', 'editor', 'thumbnail'),
+		'taxonomies' 		 => array()
+	);
+	register_post_type('teams', $args);
 }
 
 function breadcrumbs(){
@@ -350,15 +407,19 @@ function breadcrumbs(){
 
 		if (is_singular( array('projects') )) {
 
-			echo '<a href="' . site_url() . '/' . get_post_type() . '">' . get_post_type() . '</a>' . $separator . get_the_title();
+			echo '<a href="' . site_url() . '/portfolio/">' . get_post_type() . '</a>' . $separator . get_the_title();
 
-		} elseif ( is_single() ){ // записи
+		} elseif ( is_single() && !is_front_page() ){ // записи
 
-			the_category( ', ' ); echo $separator; the_title();
+			echo '<a href="' . site_url() . '/blog">Blog</a>' . $separator . get_the_title();
 
-		} elseif ( is_page() ){ // страницы WordPress
+		} elseif ( is_page() && !is_front_page() ){ // страницы WordPress
 
 			the_title();
+
+		} elseif ( !is_front_page() && is_home() ){ // страницы WordPress
+
+			echo "Blog";
 
 		} elseif ( is_category() ) {
 
@@ -367,8 +428,10 @@ function breadcrumbs(){
 		} elseif( is_archive() ) {
 			if ( is_post_type_archive( 'reviews' ) ) {
 				echo "Testimonials";
+			} elseif ( is_post_type_archive( 'projects' ) ) {
+				echo 'Portfolio';
 			} else {
-				echo ucfirst(get_post_type());
+				echo "Archive";
 			}
 
 		// } elseif ( is_day() ) { // архивы (по дням)
@@ -427,8 +490,11 @@ add_filter( 'get_the_archive_title', function( $title ){
 // the_excerpt_max_charlength( 10, 140 );
 
 function the_excerpt_max_charlength( $id,  $charlength ){
-	$excerpt = get_the_excerpt($id);
+	$excerpt = get_the_content($id);
+	$excerpt = preg_replace('#(<h1.*?>).*?(</h1>)#', '$1$2', $excerpt);
+	$excerpt = strip_tags($excerpt);
 	$charlength++;
+
 
 	if ( mb_strlen( $excerpt ) > $charlength ) {
 		$subex = mb_substr( $excerpt, 0, $charlength - 5 );
@@ -443,4 +509,69 @@ function the_excerpt_max_charlength( $id,  $charlength ){
 	} else {
 		echo $excerpt;
 	}
+}
+
+function get_post_content() {
+	$content = get_the_content();
+	$content = preg_replace('#(<h1.*?>).*?(</h1>)#', '', $content);
+	echo $content;
+}
+
+function get_post_title($id = null) {
+	$titles = [];
+	if (preg_match_all("/\<h1.*\<\/h1>/iu", get_the_content($id), $titles)) {
+		foreach ($titles as $item) {
+			foreach ($item as $title) {
+				echo strip_tags($title, '<span>');
+			}
+		}
+	} else {
+		echo get_the_title($id);
+	}
+}
+
+
+
+add_action('add_meta_boxes', 'add_sticky_project_option');
+
+function add_sticky_project_option(){
+	$screens = array( 'projects' );
+	add_meta_box( 'pseudosticky', 'Status & visibility', 'add_box_sticky', $screens, 'side', 'high' );
+}
+
+function add_box_sticky($post, $metabox) {
+	$entered = get_post_meta($post->ID, 'pseudosticky', true);
+	?>
+	<label><input name="pseudosticky" type="checkbox"<?php if($entered=="on")echo' checked="checked"';?>> Stick to the top of the archive</label>
+	<?php
+}
+
+
+add_action( 'save_post', 'save_sticky_project_option' );
+
+function save_sticky_project_option( $post_id ) {
+	// Убедимся что поле установлено.
+	if ( ! isset( $_POST['pseudosticky'] ) )
+		return;
+
+	// если это автосохранение ничего не делаем
+	if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE )
+		return;
+
+	// проверяем права юзера
+	if( ! current_user_can( 'edit_post', $post_id ) )
+		return;
+
+	$allposts = get_posts( 'numberposts=-1&post_type=projects&post_status=any' );
+
+	foreach( $allposts as $postinfo) {
+		delete_post_meta( $postinfo->ID, 'pseudosticky' );
+	}
+
+	// Все ОК. Теперь, нужно найти и сохранить данные
+	// Очищаем значение поля input.
+	$my_data = sanitize_text_field( $_POST['pseudosticky'] );
+
+	// Обновляем данные в базе данных.
+	update_post_meta( $post_id, 'pseudosticky', $my_data );
 }

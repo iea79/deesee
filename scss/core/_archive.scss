@@ -1,0 +1,35 @@
+.archive {
+    .main {
+        @media (max-width: 767px) {
+            padding-top: 3em;
+        }
+    }
+
+    &List {
+        position: relative;
+        padding-top: 3em;
+
+        @media (min-width: 768px) {
+            padding-top: 8.38em;
+
+            &:after,
+            &:before {
+                content: '';
+                position: absolute;
+                display: block;
+                border-left: $main_border;
+                top: 0;
+                bottom: 0;
+            }
+
+            &:before {
+                left: 0;
+            }
+
+            &:after {
+                right: 0;
+            }
+        }
+
+    }
+}
