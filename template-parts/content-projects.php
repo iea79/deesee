@@ -71,6 +71,11 @@
 						<video src="<?php echo wp_get_attachment_url(SCF::get( 'benchmark__video' )) ?>" muted loop preload="auto" playsinline></video>
 					</div>
 					<?php
+				} elseif (SCF::get( 'benchmark__json' )) {
+					?>
+					<div class="lotti" data-path="<?php echo wp_get_attachment_url(SCF::get( 'benchmark__json' )); ?>" data-anim-loop="false" data-name="benchmark__json"></div>
+					<?php
+
 				} elseif (SCF::get( 'benchmark__img' )) {
 					echo wp_get_attachment_image(SCF::get( 'benchmark__img' ), 'full');
 				}
@@ -127,7 +132,11 @@
 		</div>
 		<div class="projectContent__img">
 			<?php echo wp_get_attachment_image(SCF::get( 'content__img' ), 'full') ?>
-			<?php echo wp_get_attachment_image(SCF::get( 'content__decor' ), 'full') ?>
+			<?php if (SCF::get( 'content__json' )): ?>
+				<div class="lotti" data-path="<?php echo wp_get_attachment_url(SCF::get( 'content__json' )); ?>" data-anim-loop="false" data-name="content__json"></div>
+			<?php else: ?>
+				<?php echo wp_get_attachment_image(SCF::get( 'content__decor' ), 'full') ?>
+			<?php endif; ?>
 		</div>
 	</div>
 </section>
@@ -147,11 +156,9 @@
 			</div>
 			<div class="projectVisual__img">
 				<?php
-				if (SCF::get( 'visual__video' ) !== "") {
+				if (SCF::get( 'visual__json' ) !== "") {
 					?>
-					<div class="video__wrapper">
-						<video src="<?php echo wp_get_attachment_url(SCF::get( 'visual__video' )) ?>" muted loop preload="auto" playsinline></video>
-					</div>
+					<div class="lotti" data-path="<?php echo wp_get_attachment_url(SCF::get( 'visual__json' )); ?>" data-anim-loop="false" data-name="visual__json"></div>
 					<?php
 				} elseif (SCF::get( 'visual__img' )) {
 					echo wp_get_attachment_image(SCF::get( 'visual__img' ), 'full');
@@ -173,19 +180,23 @@
 				<div class="project__text"><?php echo SCF::get( 'moodboard__text' ); ?></div>
 			</div>
 			<div class="projectMoodboard__right">
+				<div class="video__wrapper">
+					<video src="<?php echo wp_get_attachment_url(SCF::get( 'moodboard__video' )) ?>" muted loop preload="auto" playsinline></video>
+				</div>
 				<div class="projectMoodboard__gallery">
-					<?php
-						$moodboard_gallery = SCF::get('moodboard-gallery');
 
-						foreach ($moodboard_gallery as $item) {
-							$moodImage = wp_get_attachment_image($item['moodboard__img'], 'full');
-							$moodUrl = wp_get_attachment_url($item['moodboard__img']);
-							echo '
-							<a href="'.$moodUrl.'">
-								'.$moodImage.'
-							</a>
-							';
-						};
+					<?php
+						// $moodboard_gallery = SCF::get('moodboard-gallery');
+						//
+						// foreach ($moodboard_gallery as $item) {
+						// 	$moodImage = wp_get_attachment_image($item['moodboard__img'], 'full');
+						// 	$moodUrl = wp_get_attachment_url($item['moodboard__img']);
+						// 	echo '
+						// 	<a href="'.$moodUrl.'">
+						// 		'.$moodImage.'
+						// 	</a>
+						// 	';
+						// };
 					?>
 				</div>
 			</div>
@@ -254,7 +265,7 @@
 						if ($conceptVideo !== '' && !$conceptImg) {
 							echo  '
 							<div class="video__wrapper">
-								<video src="<?php echo wp_get_attachment_url('.$conceptVideo.') ?>" muted loop preload="auto" playsinline></video>
+								<video src="'.wp_get_attachment_url($conceptVideo).'" muted loop preload="auto" playsinline></video>
 							</div>
 							';
 						}
@@ -262,7 +273,7 @@
 							echo  wp_get_attachment_image($conceptImg, 'full');
 						}
 						echo "</div>";
-						if ($itemCount == 6) {
+						if ($itemCount == 7) {
 							$itemCount = 1;
 						} else {
 							$itemCount++;
@@ -299,7 +310,13 @@
 				<div class="project__text"><?php echo SCF::get( 'frontend__text' ); ?></div>
 			</div>
 			<div class="projectFrontend__img">
-				<?php echo wp_get_attachment_image(SCF::get( 'frontend__img' ), 'full') ?>
+				<?php if (SCF::get( 'frontend__video' )): ?>
+					<div class="video__wrapper">
+						<video src="<?php echo wp_get_attachment_url(SCF::get( 'frontend__video' )) ?>" muted loop preload="auto" playsinline></video>
+					</div>
+				<?php elseif (SCF::get( 'frontend__img' )): ?>
+					<?php echo wp_get_attachment_image(SCF::get( 'frontend__img' ), 'full') ?>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>
@@ -360,7 +377,11 @@
 				<div class="project__text"><?php echo SCF::get( 'seo__text' ); ?></div>
 			</div>
 			<div class="projectSeo__img">
-				<?php echo wp_get_attachment_image(SCF::get( 'seo__img' ), 'full') ?>
+				<?php if ( SCF::get( 'seo__json' ) ): ?>
+					<div class="lotti" data-path="<?php echo wp_get_attachment_url(SCF::get( 'seo__json' )); ?>" data-anim-loop="false" data-name="seo__json"></div>
+				<?php elseif( SCF::get( 'seo__img' ) ): ?>
+					<?php echo wp_get_attachment_image(SCF::get( 'seo__img' ), 'full') ?>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>

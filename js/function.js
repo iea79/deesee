@@ -125,7 +125,21 @@ $(document).ready(function() {
     //     ]
     // });
 
-    $('.horizontallScroll').hScroll(0);
+    // $('.horizontallScroll').hScroll(0);
+
+    let $hor = $(".horizontallScroll");
+
+    // $("body").css('padding-bottom', $hor[0].scrollWidth - $hor.outerWidth());
+    //
+    // $(window).on('scroll', function () {
+    //     let top = $(document).scrollTop(),
+    //         lim = $hor.position().top - $hor[0].scrollLeft - ($(window).height() - $hor.outerHeight()) / 2,
+    //         width = $hor[0].scrollWidth - $hor.outerWidth(),
+    //         delta = Math.min(Math.max(top - lim, 0), width);
+    //
+    //     $hor[0].scrollLeft = delta;
+    //     $("body").css({'padding-top': delta, 'padding-bottom': width - delta});
+    // });
 
     selectStyler();
 

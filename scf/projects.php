@@ -261,6 +261,11 @@ function project_content_section_fields( $settings, $type, $id, $meta_type, $typ
 					'type'        => 'image',
 					'size'        => 'small',
 				),
+				array(
+					'name'        => 'content__json',
+					'label'       => 'Content decoration json animation',
+					'type'        => 'file',
+				),
 			)
 		);
 
@@ -311,10 +316,9 @@ function project_visual_section_fields( $settings, $type, $id, $meta_type, $type
 					'notes'       => 'either video or image'
 				),
 				array(
-					'name'        => 'visual__video',
-					'label'       => 'Visuals video',
+					'name'        => 'visual__json',
+					'label'       => 'Visuals json animation',
 					'type'        => 'file',
-					'notes'       => 'Video ID from YouTube'
 				),
 				array(
 					'name'        => 'visual__bg',
@@ -364,25 +368,30 @@ function project_moodboard_section_fields( $settings, $type, $id, $meta_type, $t
 					'label'       => 'Moodboard text',
 					'type'        => 'wysiwyg',
 				),
+				array(
+					'name'        => 'moodboard__video',
+					'label'       => 'Moodboard video',
+					'type'        => 'file',
+				),
 			)
 		);
 
 		// Добавляем в метабокс произвольные поля.
-		$Section->add_group(
-			// ID группы полей.
-			'moodboard-gallery',
-			// Повторяемая группа полей? Да - true, Нет - false.
-			true,
-			// Массив полей.
-			array(
-				array(
-					'name'        => 'moodboard__img',
-					'label'       => 'Moodboard gallery image',
-					'type'        => 'image',
-					'size'        => 'small',
-				),
-			)
-		);
+		// $Section->add_group(
+		// 	// ID группы полей.
+		// 	'moodboard-gallery',
+		// 	// Повторяемая группа полей? Да - true, Нет - false.
+		// 	true,
+		// 	// Массив полей.
+		// 	array(
+		// 		array(
+		// 			'name'        => 'moodboard__img',
+		// 			'label'       => 'Moodboard gallery image',
+		// 			'type'        => 'image',
+		// 			'size'        => 'small',
+		// 		),
+		// 	)
+		// );
 
 		// Добавляем информацию о наших полях в общий массив.
 		$settings[] = $Section;
@@ -445,7 +454,7 @@ function project_concept_section_fields( $settings, $type, $id, $meta_type, $typ
 					'name'        => 'concept__file',
 					'label'       => 'Concepts gallery video',
 					'type'        => 'file',
-					'notes'       => 'video id from YouTube'
+					// 'notes'       => 'video id from YouTube'
 				),
 			)
 		);
@@ -529,7 +538,7 @@ function project_frontend_section_fields( $settings, $type, $id, $meta_type, $ty
 	if ( $type === PROJ_TYPE_NAME && get_page_template_slug( $id ) == '' ) {
 
 		// Создаем блок настроек (метабокс).
-		$Section = SCF::add_setting( 'project-10', 'Froontend section' );
+		$Section = SCF::add_setting( 'project-10', 'Frontend section' );
 
 
 		// Добавляем в метабокс произвольные поля.
@@ -542,23 +551,28 @@ function project_frontend_section_fields( $settings, $type, $id, $meta_type, $ty
 			array(
 				array(
 					'name'        => 'frontend__title',
-					'label'       => 'Froontend title',
+					'label'       => 'Frontend title',
 					'type'        => 'text',
 				),
 				array(
 					'name'        => 'frontend__text',
-					'label'       => 'Froontend text',
+					'label'       => 'Frontend text',
 					'type'        => 'wysiwyg',
 				),
 				array(
 					'name'        => 'frontend__img',
-					'label'       => 'Froontend image',
+					'label'       => 'Frontend image',
 					'type'        => 'image',
 					'size'        => 'small',
 				),
 				array(
+					'name'        => 'frontend__video',
+					'label'       => 'Frontend video',
+					'type'        => 'file',
+				),
+				array(
 					'name'        => 'frontend__bg',
-					'label'       => 'Froontend background',
+					'label'       => 'Frontend background',
 					'type'        => 'image',
 					'size'        => 'small',
 				),
@@ -677,6 +691,11 @@ function project_seo_section_fields( $settings, $type, $id, $meta_type, $types )
 					'label'       => 'Seo otimization image',
 					'type'        => 'image',
 					'size'        => 'small',
+				),
+				array(
+					'name'        => 'seo__json',
+					'label'       => 'Seo otimization json animation',
+					'type'        => 'file',
 				),
 			)
 		);

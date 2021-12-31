@@ -575,3 +575,6 @@ function save_sticky_project_option( $post_id ) {
 	// Обновляем данные в базе данных.
 	update_post_meta( $post_id, 'pseudosticky', $my_data );
 }
+
+// Disable Wordpress Big Image Size Scaling
+add_filter( 'big_image_size_threshold', '__return_false' );
