@@ -1,11 +1,12 @@
 .teamList {
-    padding-bottom: 5em;
+    // padding-bottom: 5em;
     // padding-top: 1em;
     position: relative;
+    border-top: $main_border;
 
     @media (min-width: 768px) {
         // padding-top: 0;
-        padding-bottom: 16.6em;
+        // padding-bottom: 16.6em;
         display: flex;
         flex-wrap: wrap;
     }
@@ -15,119 +16,158 @@
         position: absolute;
         display: block;
         border-top: $main_border;
-        bottom: 4em;
+        bottom: 0;
         left: -1.2em;
         right: -1.2em;
 
         @media (min-width: 768px) {
-            bottom: 13em;
+            bottom: 0;
             left: -5.7em;
             right: -5.7em;
         }
     }
 
     &__item {
-        margin-bottom: 3em;
+        // margin-bottom: 3em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 2em 0;
+
+        @media (max-width: 767px) {
+            border-top: $main_border;
+        }
 
         @media (min-width: 768px) {
-            width: 50%;
-            display: flex;
-            margin-bottom: 8.1em;
+            width: 25%;
+            padding: 3.125em 0 3.9375em;
+            // margin-bottom: 8.1em;
 
-            &:nth-child(n+3) {
-                width: 25%;
-                display: block;
-                margin-bottom: 4em;
-
-                .teamList {
-                    &__photo {
-                        width: 7.25em;
-                        height: 7.25em;
-                        float: left;
-                        margin-right: 1.9em;
-
-                        &:after {
-                            content: '';
-                            display: table;
-                            width: 100%;
-                            clear: both;
-                        }
-                    }
-
-                    &__wrap {
-                        padding-top: 1.2em;
-                    }
-
-                    &__text {
-                        padding-top: 1.5em;
-
-                        &:before {
-                            content: '';
-                            display: table;
-                            width: 100%;
-                            clear: both;
-                        }
-
-                    }
-                }
+            &:nth-child(n+2) {
+                border-left: $main_border;
             }
+
+            &:nth-child(4n+5) {
+                border-left: 0;
+            }
+
+            &:nth-child(3) {
+                // border-left: $main_border;
+            }
+
+            &:nth-child(n+5) {
+                border-top: $main_border;
+            }
+
+            &:last-child:not(:nth-child(3n)) {
+                border-right: $main_border;
+            }
+
+            // &:nth-child(n+3) {
+            //     width: 33.3%;
+            //     display: block;
+            //     margin-bottom: 4em;
+            //
+            //     .teamList {
+            //         &__photo {
+            //             width: 9.25em;
+            //             height: 9.25em;
+            //             float: left;
+            //             margin-right: 1.9em;
+            //
+            //             &:after {
+            //                 content: '';
+            //                 display: table;
+            //                 width: 100%;
+            //                 clear: both;
+            //             }
+            //         }
+            //
+            //         &__wrap {
+            //             padding-top: 1.2em;
+            //         }
+            //
+            //         &__text {
+            //             padding-top: 1.5em;
+            //
+            //             &:before {
+            //                 content: '';
+            //                 display: table;
+            //                 width: 100%;
+            //                 clear: both;
+            //             }
+            //
+            //         }
+            //     }
+            // }
         }
     }
 
     &__photo {
         flex: none;
-        width: 16.3em;
-        height: 16.3em;
-        margin-right: 2.8em;
+        width: 9.6875em;
+        height: 9.6875em;
+        // margin-right: 2.8em;
+        margin-bottom: 0.625em;
+        background: #262626;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        flex: none;
 
         @media (min-width: 768px) {
-            width: 16.3em;
-            margin-right: 2.8em;
-            height: auto;
+            // margin-right: 2.8em;
         }
 
         img {
             display: block;
-            object-fit: cover;
-            width: 100%;
-            height: 100%;
+            object-fit: contain;
+            width: 90%;
+            height: 90%;
+            position: relative;
+            // bottom: -2em;
         }
     }
 
     &__wrap {
-        padding-top: 1em;
+        // padding-top: 1em;
 
         @media (min-width: 768px) {
-            padding-right: 3em;
-            padding-top: 2.3em;
+            // padding-right: 3em;
+            // padding-top: 2.3em;
         }
     }
 
     &__name {
         font-size: 1.5em;
+        line-height: 1.5;
         color: $color_withe;
         margin-bottom: 0.2em;
         overflow: hidden;
     }
 
     &__prof {
-        margin-bottom: 1em;
+        // margin-bottom: 1em;
         font-size: 1em;
         overflow: hidden;
         color: $color_withe;
 
         @media (min-width: 768px) {
-            margin-bottom: 1.875em;
+            // margin-bottom: 1.875em;
         }
     }
 
-    &__text {
+    &__text:not(:empty) {
         font-size: 1.125em;
         line-height: 1.5;
-        margin: 1em 0;
+        margin: 1em 0 0;
 
         @media (min-width: 768px) {
-            margin: 1.7em 0;
+            margin: 1.7em 0 0;
         }
     }
 }

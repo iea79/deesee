@@ -84,6 +84,14 @@ function project_dev_section_fields( $settings, $type, $id, $meta_type, $types )
 			// Массив полей.
 			array(
 				array(
+					'type'        => 'boolean',
+					'name'        => 'dev_show',
+					'label'       => 'Show section',
+					'default'     => true,
+					'true_label'  => 'Yes',
+					'false_label' => 'No',
+				),
+				array(
 					'name'        => 'dev__title',
 					'label'       => 'Section title',
 					'type'        => 'wysiwyg',
@@ -119,6 +127,14 @@ function project_benchmark_section_fields( $settings, $type, $id, $meta_type, $t
 			false,
 			// Массив полей.
 			array(
+				array(
+					'type'        => 'boolean',
+					'name'        => 'benchmark_show',
+					'label'       => 'Show section',
+					'default'     => true,
+					'true_label'  => 'Yes',
+					'false_label' => 'No',
+				),
 				array(
 					'name'        => 'benchmark__name',
 					'label'       => 'Benchmarking title',
@@ -180,6 +196,14 @@ function project_structure_section_fields( $settings, $type, $id, $meta_type, $t
 			// Массив полей.
 			array(
 				array(
+					'type'        => 'boolean',
+					'name'        => 'structure_show',
+					'label'       => 'Show section',
+					'default'     => true,
+					'true_label'  => 'Yes',
+					'false_label' => 'No',
+				),
+				array(
 					'name'        => 'structure__name',
 					'label'       => 'Site structure title',
 					'type'        => 'text',
@@ -240,6 +264,14 @@ function project_content_section_fields( $settings, $type, $id, $meta_type, $typ
 			// Массив полей.
 			array(
 				array(
+					'type'        => 'boolean',
+					'name'        => 'content_show',
+					'label'       => 'Show section',
+					'default'     => true,
+					'true_label'  => 'Yes',
+					'false_label' => 'No',
+				),
+				array(
 					'name'        => 'content__name',
 					'label'       => 'Content title',
 					'type'        => 'text',
@@ -298,6 +330,14 @@ function project_visual_section_fields( $settings, $type, $id, $meta_type, $type
 			false,
 			// Массив полей.
 			array(
+				array(
+					'type'        => 'boolean',
+					'name'        => 'visual_show',
+					'label'       => 'Show section',
+					'default'     => true,
+					'true_label'  => 'Yes',
+					'false_label' => 'No',
+				),
 				array(
 					'name'        => 'visual__title',
 					'label'       => 'Visuals title',
@@ -358,6 +398,14 @@ function project_moodboard_section_fields( $settings, $type, $id, $meta_type, $t
 			false,
 			// Массив полей.
 			array(
+				array(
+					'type'        => 'boolean',
+					'name'        => 'moodboard_show',
+					'label'       => 'Show section',
+					'default'     => true,
+					'true_label'  => 'Yes',
+					'false_label' => 'No',
+				),
 				array(
 					'name'        => 'moodboard__title',
 					'label'       => 'Moodboard title',
@@ -422,6 +470,14 @@ function project_concept_section_fields( $settings, $type, $id, $meta_type, $typ
 			false,
 			// Массив полей.
 			array(
+				array(
+					'type'        => 'boolean',
+					'name'        => 'concept_show',
+					'label'       => 'Show section',
+					'default'     => true,
+					'true_label'  => 'Yes',
+					'false_label' => 'No',
+				),
 				array(
 					'name'        => 'concept__title',
 					'label'       => 'Concepts title',
@@ -489,6 +545,14 @@ function project_details_section_fields( $settings, $type, $id, $meta_type, $typ
 			// Массив полей.
 			array(
 				array(
+					'type'        => 'boolean',
+					'name'        => 'details_show',
+					'label'       => 'Show section',
+					'default'     => true,
+					'true_label'  => 'Yes',
+					'false_label' => 'No',
+				),
+				array(
 					'name'        => 'details__title',
 					'label'       => 'Details title',
 					'type'        => 'text',
@@ -550,6 +614,14 @@ function project_frontend_section_fields( $settings, $type, $id, $meta_type, $ty
 			// Массив полей.
 			array(
 				array(
+					'type'        => 'boolean',
+					'name'        => 'frontend_show',
+					'label'       => 'Show section',
+					'default'     => true,
+					'true_label'  => 'Yes',
+					'false_label' => 'No',
+				),
+				array(
 					'name'        => 'frontend__title',
 					'label'       => 'Frontend title',
 					'type'        => 'text',
@@ -608,6 +680,14 @@ function project_mobile_section_fields( $settings, $type, $id, $meta_type, $type
 			false,
 			// Массив полей.
 			array(
+				array(
+					'type'        => 'boolean',
+					'name'        => 'mobile_show',
+					'label'       => 'Show section',
+					'default'     => true,
+					'true_label'  => 'Yes',
+					'false_label' => 'No',
+				),
 				array(
 					'name'        => 'mobile__title',
 					'label'       => 'Adaptation title',
@@ -677,6 +757,14 @@ function project_seo_section_fields( $settings, $type, $id, $meta_type, $types )
 			// Массив полей.
 			array(
 				array(
+					'type'        => 'boolean',
+					'name'        => 'seo_show',
+					'label'       => 'Show section',
+					'default'     => true,
+					'true_label'  => 'Yes',
+					'false_label' => 'No',
+				),
+				array(
 					'name'        => 'seo__title',
 					'label'       => 'Seo otimization title',
 					'type'        => 'text',
@@ -730,6 +818,14 @@ function project_qa_section_fields( $settings, $type, $id, $meta_type, $types ) 
 			// Массив полей.
 			array(
 				array(
+					'type'        => 'boolean',
+					'name'        => 'qa_show',
+					'label'       => 'Show section',
+					'default'     => true,
+					'true_label'  => 'Yes',
+					'false_label' => 'No',
+				),
+				array(
 					'name'        => 'qa__title',
 					'label'       => 'QA title',
 					'type'        => 'text',
@@ -777,6 +873,14 @@ function project_team_template_fields( $settings, $type, $id, $meta_type, $types
 			// Массив полей.
 			array(
 				array(
+					'type'        => 'boolean',
+					'name'        => 'team_show',
+					'label'       => 'Show section',
+					'default'     => true,
+					'true_label'  => 'Yes',
+					'false_label' => 'No',
+				),
+				array(
 					'name'        => 'team__title',
 					'label'       => 'Team title',
 					'type'        => 'wysiwyg',
@@ -819,6 +923,14 @@ function project_started_section_fields( $settings, $type, $id, $meta_type, $typ
 			false,
 			// Массив полей.
 			array(
+				array(
+					'type'        => 'boolean',
+					'name'        => 'started_show',
+					'label'       => 'Show section',
+					'default'     => true,
+					'true_label'  => 'Yes',
+					'false_label' => 'No',
+				),
 				array(
 					'name'        => 'started__title',
 					'label'       => 'Get started title',

@@ -44,7 +44,7 @@ breadcrumbs();
           $members = get_posts([
               'posts_per_page'  =>  -1,
               'post_type'       => 'teams',
-              'exclude'         => $teamTop
+              'exclude'         => $teamTop,
           ]);
 
           foreach ($members as $member) {
@@ -52,15 +52,16 @@ breadcrumbs();
               // var_dump($member);
 
               $memberMeta = SCF::gets($member);
+              // echo $member->ID;
               ?>
               <div class="teamList__item">
                   <div class="teamList__photo">
                       <?php echo get_the_post_thumbnail($member, 'full') ?>
                   </div>
                   <div class="teamList__wrap">
-                      <div class="teamList__name"><?php echo get_the_title(); ?></div>
+                      <div class="teamList__name"><?php echo get_the_title($member->ID); ?></div>
                       <div class="teamList__prof"><?php echo $memberMeta['team__prof']; ?></div>
-                      <div class="teamList__text"><?php echo get_the_content(null, null, $member); ?></div>
+                      <div class="teamList__text"><?php echo get_the_content(null, null, $member->ID); ?></div>
                   </div>
               </div>
               <?php

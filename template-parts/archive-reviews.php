@@ -1,4 +1,4 @@
-<?php 
+<?php
 global $post;
 
 $videoReviewQuery = new WP_Query( [
@@ -11,6 +11,10 @@ $videoReviewQuery = new WP_Query( [
             'key' => 'review__video',
             'value' => '',
             'compare' => '!='
+        ],
+        [
+            'key' => 'review__video_file',
+            'compare' => 'EXISTS'
         ]
     ]
 ] );
@@ -36,24 +40,20 @@ if ( $videoReviewQuery->have_posts() ) {
         <?php
             while ( $videoReviewQuery->have_posts() ) {
                 $videoReviewQuery->the_post();
-                // var_dump(get_post_meta($post->ID, 'review__video')[0]);
-
+                $youtubeVideo = get_post_meta($post->ID, 'review__video')[0];
+                $video = get_post_meta($post->ID, 'review__video_file')[0];
                 ?>
                 <div class="archiveReviewSlider__item">
-                    <div class="video__wrapper js-youtube" id="<?php echo get_post_meta($post->ID, 'review__video')[0]; ?>">
-                        <img src="<?php echo get_template_directory_uri() . '/img/play.svg' ?>" alt="" class="video__play">
-                    </div>
+                    <?php if ($video): ?>
+                        <div class="video__wrapper">
+                            <video src="<?php echo wp_get_attachment_url($video); ?>" controls></video>
+                        </div>
+                    <?php elseif ( $youtubeVideo ): ?>
+                        <div class="video__wrapper js-youtube" id="<?php echo $youtubeVideo ?>">
+                            <img src="<?php echo get_template_directory_uri() . '/img/play.svg' ?>" alt="" class="video__play">
+                        </div>
+                    <?php endif; ?>
                 </div>
-                <!-- <div class="archiveReviewSlider__item">
-                    <div class="video__wrapper js-youtube" id="<?php echo get_post_meta($post->ID, 'review__video')[0]; ?>">
-                        <img src="<?php echo get_template_directory_uri() . '/img/play.svg' ?>" alt="" class="video__play">
-                    </div>
-                </div>
-                <div class="archiveReviewSlider__item">
-                    <div class="video__wrapper js-youtube" id="<?php echo get_post_meta($post->ID, 'review__video')[0]; ?>">
-                        <img src="<?php echo get_template_directory_uri() . '/img/play.svg' ?>" alt="" class="video__play">
-                    </div>
-                </div> -->
                 <?php
             }
         ?>

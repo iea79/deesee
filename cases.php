@@ -157,10 +157,18 @@ get_header();
 					foreach ($case__price__list as $item) {
 						?>
 						<div class="casePrice__item">
-							<div class="casePrice__city"><?php echo $item['price__city'] ?></div>
-							<div class="casePrice__price"><?php echo $item['price__price'] ?></div>
-							<div class="casePrice__lists"><?php echo $item['price__list'] ?></div>
-							<div class="casePrice__descr"><?php echo $item['price__descr'] ?></div>
+							<?php if ($item['price__city']): ?>
+								<div class="casePrice__city"><?php echo $item['price__city'] ?></div>
+							<?php endif; ?>
+							<?php if ($item['price__price']): ?>
+								<div class="casePrice__price"><?php echo $item['price__price'] ?></div>
+							<?php endif; ?>
+							<?php if ($item['price__list']): ?>
+								<div class="casePrice__lists"><?php echo $item['price__list'] ?></div>
+							<?php endif; ?>
+							<?php if ($item['price__descr']): ?>
+								<div class="casePrice__descr"><?php echo $item['price__descr'] ?></div>
+							<?php endif; ?>
 						</div>
 						<?php
 					};

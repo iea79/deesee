@@ -35,11 +35,11 @@
 				</div>
 
 				<?php
-			} elseif (SCF::get( 'first__image' )) {
+			} elseif (SCF::get( 'first__img' )) {
 				?>
 				<div class="projectHome__img">
 				<?php
-				echo wp_get_attachment_image(SCF::get( 'first__image' ), 'full');
+				echo wp_get_attachment_image(SCF::get( 'first__img' ), 'full');
 				?>
 				</div>
 				<?php
@@ -50,42 +50,47 @@
 </section>
 <!-- end projectHome -->
 
-<div class="container_center">
-	<h2 class="section__title"><?php echo SCF::get( 'dev__title' ); ?></h2>
-</div>
-
-<!-- begin projectBenchmark -->
-<section id="projectBenchmark" class="projectBenchmark">
+<?php if (SCF::get( 'dev_show' )): ?>
 	<div class="container_center">
-		<div class="projectBenchmark__content">
-			<div class="projectBenchmark__left">
-				<div class="projectCount"></div>
-				<h2 class="project__title"><?php echo SCF::get( 'benchmark__name' ); ?></h2>
-				<div class="project__text"><?php echo SCF::get( 'benchmark__text' ); ?></div>
-			</div>
-			<div class="projectBenchmark__img">
-				<?php
-				if (SCF::get( 'benchmark__video' ) !== "") {
-					?>
-					<div class="video__wrapper">
-						<video src="<?php echo wp_get_attachment_url(SCF::get( 'benchmark__video' )) ?>" muted loop preload="auto" playsinline></video>
-					</div>
-					<?php
-				} elseif (SCF::get( 'benchmark__json' )) {
-					?>
-					<div class="lotti" data-path="<?php echo wp_get_attachment_url(SCF::get( 'benchmark__json' )); ?>" data-anim-loop="false" data-name="benchmark__json"></div>
-					<?php
+		<h2 class="section__title"><?php echo SCF::get( 'dev__title' ); ?></h2>
+	</div>
+<?php endif; ?>
 
-				} elseif (SCF::get( 'benchmark__img' )) {
-					echo wp_get_attachment_image(SCF::get( 'benchmark__img' ), 'full');
-				}
-				?>
+<?php if (SCF::get( 'benchmark_show' )): ?>
+	<!-- begin projectBenchmark -->
+	<section id="projectBenchmark" class="projectBenchmark">
+		<div class="container_center">
+			<div class="projectBenchmark__content">
+				<div class="projectBenchmark__left">
+					<div class="projectCount"></div>
+					<h2 class="project__title"><?php echo SCF::get( 'benchmark__name' ); ?></h2>
+					<div class="project__text"><?php echo SCF::get( 'benchmark__text' ); ?></div>
+				</div>
+				<div class="projectBenchmark__img">
+					<?php
+					if (SCF::get( 'benchmark__video' ) !== "") {
+						?>
+						<div class="video__wrapper">
+							<video src="<?php echo wp_get_attachment_url(SCF::get( 'benchmark__video' )) ?>" muted loop preload="auto" playsinline></video>
+						</div>
+						<?php
+					} elseif (SCF::get( 'benchmark__json' )) {
+						?>
+						<div class="lotti" data-path="<?php echo wp_get_attachment_url(SCF::get( 'benchmark__json' )); ?>" data-anim-loop="false" data-name="benchmark__json"></div>
+						<?php
+
+					} elseif (SCF::get( 'benchmark__img' )) {
+						echo wp_get_attachment_image(SCF::get( 'benchmark__img' ), 'full');
+					}
+					?>
+				</div>
 			</div>
 		</div>
-	</div>
-</section>
-<!-- end projectBenchmark -->
+	</section>
+	<!-- end projectBenchmark -->
+<?php endif; ?>
 
+<?php if (SCF::get( 'structure_show' )): ?>
 <!-- begin projectStructure -->
 <section id="projectStructure" class="projectStructure">
 	<div class="container_center">
@@ -117,59 +122,65 @@
 	</div>
 </section>
 <!-- end projectStructure -->
+<?php endif; ?>
 
-<!-- begin projectContent -->
-<section id="projectContent" class="projectContent">
-	<div class="container_center">
-		<div class="projectContent__content">
-			<div class="projectContent__left">
-				<div class="projectCount"></div>
-				<h2 class="project__title"><?php echo SCF::get( 'content__name' ); ?></h2>
+<?php if (SCF::get( 'content_show' )): ?>
+	<!-- begin projectContent -->
+	<section id="projectContent" class="projectContent">
+		<div class="container_center">
+			<div class="projectContent__content">
+				<div class="projectContent__left">
+					<div class="projectCount"></div>
+					<h2 class="project__title"><?php echo SCF::get( 'content__name' ); ?></h2>
+				</div>
+				<div class="projectContent__right">
+					<div class="project__text"><?php echo SCF::get( 'content__text' ); ?></div>
+				</div>
 			</div>
-			<div class="projectContent__right">
-				<div class="project__text"><?php echo SCF::get( 'content__text' ); ?></div>
+			<div class="projectContent__img">
+				<?php echo wp_get_attachment_image(SCF::get( 'content__img' ), 'full') ?>
+				<?php if (SCF::get( 'content__json' )): ?>
+					<div class="lotti" data-path="<?php echo wp_get_attachment_url(SCF::get( 'content__json' )); ?>" data-anim-loop="false" data-name="content__json"></div>
+				<?php else: ?>
+					<?php echo wp_get_attachment_image(SCF::get( 'content__decor' ), 'full') ?>
+				<?php endif; ?>
 			</div>
 		</div>
-		<div class="projectContent__img">
-			<?php echo wp_get_attachment_image(SCF::get( 'content__img' ), 'full') ?>
-			<?php if (SCF::get( 'content__json' )): ?>
-				<div class="lotti" data-path="<?php echo wp_get_attachment_url(SCF::get( 'content__json' )); ?>" data-anim-loop="false" data-name="content__json"></div>
-			<?php else: ?>
-				<?php echo wp_get_attachment_image(SCF::get( 'content__decor' ), 'full') ?>
-			<?php endif; ?>
-		</div>
-	</div>
-</section>
-<!-- end projectContent -->
+	</section>
+	<!-- end projectContent -->
+<?php endif; ?>
 
-<!-- begin projectVisual -->
-<section id="projectVisual" class="projectVisual">
-	<div class="projectVisual__bg">
-		<?php echo wp_get_attachment_image(SCF::get( 'visual__bg' ), 'full') ?>
-	</div>
-	<div class="container_center">
-		<div class="projectVisual__content">
-			<div class="projectVisual__left">
-				<div class="projectCount"></div>
-				<h2 class="project__title"><?php echo SCF::get( 'visual__title' ); ?></h2>
-				<div class="project__text"><?php echo SCF::get( 'visual__text' ); ?></div>
-			</div>
-			<div class="projectVisual__img">
-				<?php
-				if (SCF::get( 'visual__json' ) !== "") {
-					?>
-					<div class="lotti" data-path="<?php echo wp_get_attachment_url(SCF::get( 'visual__json' )); ?>" data-anim-loop="false" data-name="visual__json"></div>
+<?php if (SCF::get( 'visual_show' )): ?>
+	<!-- begin projectVisual -->
+	<section id="projectVisual" class="projectVisual">
+		<div class="projectVisual__bg">
+			<?php echo wp_get_attachment_image(SCF::get( 'visual__bg' ), 'full') ?>
+		</div>
+		<div class="container_center">
+			<div class="projectVisual__content">
+				<div class="projectVisual__left">
+					<div class="projectCount"></div>
+					<h2 class="project__title"><?php echo SCF::get( 'visual__title' ); ?></h2>
+					<div class="project__text"><?php echo SCF::get( 'visual__text' ); ?></div>
+				</div>
+				<div class="projectVisual__img">
 					<?php
-				} elseif (SCF::get( 'visual__img' )) {
-					echo wp_get_attachment_image(SCF::get( 'visual__img' ), 'full');
-				}
-				?>
+					if (SCF::get( 'visual__json' ) !== "") {
+						?>
+						<div class="lotti" data-path="<?php echo wp_get_attachment_url(SCF::get( 'visual__json' )); ?>" data-anim-loop="false" data-name="visual__json"></div>
+						<?php
+					} elseif (SCF::get( 'visual__img' )) {
+						echo wp_get_attachment_image(SCF::get( 'visual__img' ), 'full');
+					}
+					?>
+				</div>
 			</div>
 		</div>
-	</div>
-</section>
-<!-- end projectVisual -->
+	</section>
+	<!-- end projectVisual -->
+<?php endif; ?>
 
+<?php if (SCF::get( 'moodboard_show' )): ?>
 <!-- begin projectMoodboard -->
 <section id="projectMoodboard" class="projectMoodboard">
 	<div class="container_center">
@@ -204,7 +215,9 @@
 	</div>
 </section>
 <!-- end projectMoodboard -->
+<?php endif; ?>
 
+<?php if (SCF::get( 'concept_show' )): ?>
 <!-- begin projectConcept -->
 <section id="projectConcept" class="projectConcept">
 	<div class="container_center">
@@ -246,7 +259,9 @@
 	</div>
 </section>
 <!-- end projectConcept -->
+<?php endif; ?>
 
+<?php if (SCF::get( 'details_show' )): ?>
 <!-- begin projectDetail -->
 <section id="projectDetail" class="projectDetail">
 	<div class="container_center">
@@ -285,6 +300,7 @@
 	</div>
 </section>
 <!-- end projectDetail -->
+<?php endif; ?>
 
 <!-- begin Modal videoReview -->
 <div class="modal fade videoReview" id="videoReview">
@@ -297,6 +313,7 @@
 </div>
 <!-- end Modal videoReview -->
 
+<?php if (SCF::get( 'frontend_show' )): ?>
 <!-- begin projectFrontend -->
 <section id="projectFrontend" class="projectFrontend">
 	<div class="projectFrontend__bg">
@@ -322,7 +339,9 @@
 	</div>
 </section>
 <!-- end projectFrontend -->
+<?php endif; ?>
 
+<?php if (SCF::get( 'mobile_show' )): ?>
 <!-- begin projectMobile -->
 <section id="projectMobile" class="projectMobile">
 	<div class="container_center">
@@ -366,7 +385,9 @@
 	</div>
 </section>
 <!-- end projectMobile -->
+<?php endif; ?>
 
+<?php if (SCF::get( 'seo_show' )): ?>
 <!-- begin projectSeo -->
 <section id="projectSeo" class="projectSeo">
 	<div class="container_center">
@@ -387,7 +408,9 @@
 	</div>
 </section>
 <!-- end projectSeo -->
+<?php endif; ?>
 
+<?php if (SCF::get( 'qa_show' )): ?>
 <!-- begin projectQa -->
 <section id="projectQa" class="projectQa">
 	<div class="container_center">
@@ -396,29 +419,36 @@
 			<h2 class="project__title"><?php echo SCF::get( 'qa__title' ); ?></h2>
 			<div class="project__text"><?php echo SCF::get( 'qa__text' ); ?></div>
 		</div>
-		<div class="projectQa__img">
-			<?php echo wp_get_attachment_image(SCF::get( 'qa__img' ), 'full') ?>
-		</div>
+		<?php if (SCF::get( 'qa__img' )): ?>
+			<div class="projectQa__img">
+				<?php echo wp_get_attachment_image(SCF::get( 'qa__img' ), 'full') ?>
+			</div>
+		<?php endif; ?>
 	</div>
 </section>
 <!-- end projectQa -->
+<?php endif; ?>
 
+<?php if (SCF::get( 'team_show' )): ?>
 <!-- begin projectMembers -->
 <section id="projectMembers" class="projectMembers section">
     <div class="container_center">
 		<h2 class="section__title"><?php echo SCF::get( 'team__title' ); ?></h2>
+		<?php
+			$projectTeam = SCF::get('top_member');
+			$members = get_posts([
+				'posts_per_page'  =>  -1,
+				'post_type'       => 'teams',
+				'include'         => SCF::get('top_member'),
+				'orderby' 		  => 'post__in',
+				'post__in'        => SCF::get('top_member')
+			]);
+		?>
         <div class="projectMembers__content">
 			<?php
-			$members = get_posts([
-                'posts_per_page'  =>  -1,
-                'post_type'       => 'teams',
-                'include'         => SCF::get('top_member'),
-				'order'			  => 'ASC'
-            ]);
-
             foreach ($members as $member) {
                 setup_postdata( $member );
-                // var_dump($member);
+                // var_dump($member->ID);
 
                 $memberMeta = SCF::gets($member);
                 ?>
@@ -436,7 +466,9 @@
     </div>
 </section>
 <!-- end projectMembers -->
+<?php endif; ?>
 
+<?php if (SCF::get( 'started_show' )): ?>
 <!-- begin getStarted -->
 <section id="getStarted" class="getStarted">
 	<div class="container_center">
@@ -452,6 +484,7 @@
 	</div>
 </section>
 <!-- end getStarted -->
+<?php endif; ?>
 
 <?php
 require get_template_directory() . '/inc/get-touch.php';

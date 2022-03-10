@@ -47,8 +47,7 @@ function seo_first_section_template_fields( $settings, $type, $id, $meta_type, $
 				array(
 					'name'        => 'first__video',
 					'label'       => 'First section video',
-					'type'        => 'text',
-					'notes'      => 'YuoTube video id',
+					'type'        => 'file',
 				),
 			)
 		);
@@ -84,6 +83,14 @@ function seo_problems_section_template_fields( $settings, $type, $id, $meta_type
 			// Массив полей.
 			array(
 				array(
+					'type'        => 'boolean',
+					'name'        => 'problems_show',
+					'label'       => 'Show section',
+					'default'     => true,
+					'true_label'  => 'Yes',
+					'false_label' => 'No',
+				),
+				array(
 					'name'        => 'problems__title',
 					'label'       => 'Problems section title',
 					'type'        => 'wysiwyg',
@@ -115,6 +122,12 @@ function seo_problems_section_template_fields( $settings, $type, $id, $meta_type
 			true,
 			// Массив полей.
 			array(
+				array(
+					'name'        => 'problems__rezult_json',
+					'label'       => 'Problems rezult animation',
+					'type'        => 'file',
+					'notes'       => 'If selected, no text is shown',
+				),
 				array(
 					'name'        => 'problems__rezult_percent',
 					'label'       => 'Problems rezult percent',
@@ -159,6 +172,14 @@ function seo_research_section_template_fields( $settings, $type, $id, $meta_type
 			// Массив полей.
 			array(
 				array(
+					'type'        => 'boolean',
+					'name'        => 'research_show',
+					'label'       => 'Show section',
+					'default'     => true,
+					'true_label'  => 'Yes',
+					'false_label' => 'No',
+				),
+				array(
 					'name'        => 'research__text',
 					'label'       => 'Research section text',
 					'type'        => 'wysiwyg',
@@ -169,6 +190,11 @@ function seo_research_section_template_fields( $settings, $type, $id, $meta_type
 					'label'       => 'Research section image',
 					'type'        => 'image',
                     'size'        => 'medium',
+				),
+				array(
+					'name'        => 'research__video',
+					'label'       => 'Research section video',
+					'type'        => 'file',
 				),
 				array(
 					'name'        => 'research__file',
@@ -209,6 +235,14 @@ function seo_semantic_section_template_fields( $settings, $type, $id, $meta_type
 			// Массив полей.
 			array(
 				array(
+					'type'        => 'boolean',
+					'name'        => 'semantic_show',
+					'label'       => 'Show section',
+					'default'     => true,
+					'true_label'  => 'Yes',
+					'false_label' => 'No',
+				),
+				array(
 					'name'        => 'semantic__text',
 					'label'       => 'Semantic section text',
 					'type'        => 'wysiwyg',
@@ -219,6 +253,11 @@ function seo_semantic_section_template_fields( $settings, $type, $id, $meta_type
 					'label'       => 'Semantic section image',
 					'type'        => 'image',
                     'size'        => 'medium',
+				),
+				array(
+					'name'        => 'semantic__video',
+					'label'       => 'Semantic section video',
+					'type'        => 'file',
 				),
 				array(
 					'name'        => 'semantic__file',
@@ -259,6 +298,14 @@ function seo_optimization_section_template_fields( $settings, $type, $id, $meta_
 			// Массив полей.
 			array(
 				array(
+					'type'        => 'boolean',
+					'name'        => 'optimization_show',
+					'label'       => 'Show section',
+					'default'     => true,
+					'true_label'  => 'Yes',
+					'false_label' => 'No',
+				),
+				array(
 					'name'        => 'optimization__text',
 					'label'       => 'On-site section text',
 					'type'        => 'wysiwyg',
@@ -269,6 +316,11 @@ function seo_optimization_section_template_fields( $settings, $type, $id, $meta_
 					'label'       => 'On-site section image',
 					'type'        => 'image',
                     'size'        => 'medium',
+				),
+				array(
+					'name'        => 'optimization__video',
+					'label'       => 'On-site section video',
+					'type'        => 'file',
 				),
 				array(
 					'name'        => 'optimization__file',
@@ -309,6 +361,14 @@ function seo_indexation_section_template_fields( $settings, $type, $id, $meta_ty
 			// Массив полей.
 			array(
 				array(
+					'type'        => 'boolean',
+					'name'        => 'indexation_show',
+					'label'       => 'Show section',
+					'default'     => true,
+					'true_label'  => 'Yes',
+					'false_label' => 'No',
+				),
+				array(
 					'name'        => 'indexation__text',
 					'label'       => 'Indexation section text',
 					'type'        => 'wysiwyg',
@@ -319,6 +379,11 @@ function seo_indexation_section_template_fields( $settings, $type, $id, $meta_ty
 					'label'       => 'Indexation section image',
 					'type'        => 'image',
                     'size'        => 'medium',
+				),
+				array(
+					'name'        => 'indexation__video',
+					'label'       => 'Indexation section video',
+					'type'        => 'file',
 				),
 				array(
 					'name'        => 'indexation__file',
@@ -359,6 +424,14 @@ function seo_analytics_section_template_fields( $settings, $type, $id, $meta_typ
 			// Массив полей.
 			array(
 				array(
+					'type'        => 'boolean',
+					'name'        => 'analytics_show',
+					'label'       => 'Show section',
+					'default'     => true,
+					'true_label'  => 'Yes',
+					'false_label' => 'No',
+				),
+				array(
 					'name'        => 'analytics__text',
 					'label'       => 'Analytics section text',
 					'type'        => 'wysiwyg',
@@ -369,6 +442,11 @@ function seo_analytics_section_template_fields( $settings, $type, $id, $meta_typ
 					'label'       => 'Analytics section image',
 					'type'        => 'image',
                     'size'        => 'medium',
+				),
+				array(
+					'name'        => 'analytics__video',
+					'label'       => 'Analytics section video',
+					'type'        => 'file',
 				),
 				array(
 					'name'        => 'analytics__file',
@@ -409,6 +487,14 @@ function seo_off_site_section_template_fields( $settings, $type, $id, $meta_type
 			// Массив полей.
 			array(
 				array(
+					'type'        => 'boolean',
+					'name'        => 'off_site_show',
+					'label'       => 'Show section',
+					'default'     => true,
+					'true_label'  => 'Yes',
+					'false_label' => 'No',
+				),
+				array(
 					'name'        => 'off_site__text',
 					'label'       => 'Off-site section text',
 					'type'        => 'wysiwyg',
@@ -419,6 +505,11 @@ function seo_off_site_section_template_fields( $settings, $type, $id, $meta_type
 					'label'       => 'Off-site section image',
 					'type'        => 'image',
                     'size'        => 'medium',
+				),
+				array(
+					'name'        => 'off_site__video',
+					'label'       => 'Off-site section video',
+					'type'        => 'file',
 				),
 				array(
 					'name'        => 'off_site__file',

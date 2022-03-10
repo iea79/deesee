@@ -21,8 +21,8 @@ get_header();
 
 			if (SCF::get( 'first__video' ) !== "") {
 				?>
-				<div class="video__wrapper js-youtube" id="<?php echo SCF::get( 'first__video' ); ?>">
-					<img src="<?php echo get_template_directory_uri() ?>/img/play.svg" alt="Play" class="video__play" />
+				<div class="video__wrapper">
+					<video src="<?php echo wp_get_attachment_url(SCF::get( 'first__video' )) ?>" muted loop preload="auto" playsinline></video>
 				</div>
 				<?php
 			} elseif (SCF::get( 'first__img' )) {
@@ -40,6 +40,8 @@ get_header();
 </section>
 <!-- end projectHome -->
 
+
+<?php if (SCF::get( 'problems_show' )): ?>
 <!-- begin seoProblems -->
 <section id="seoProblems" class="seoProblems section lrBorder bBorder">
     <div class="container_center">
@@ -62,23 +64,33 @@ get_header();
         <div class="seoProblems__donut">
             <?php
                 $problems_rezult = SCF::get('problems_rezult');
+				$i = 0;
 
                 foreach ($problems_rezult as $item) {
-                    ?>
-                    <div class="seoProblems__chart">
-                        <div class="seoProblems__stat">
-                            <div class="seoProblems__percent"><?php echo $item['problems__rezult_percent'] ?>%</div>
-                            <div class="seoProblems__label"><?php echo $item['problems__rezult_label'] ?></div>
-                        </div>
-                    </div>
-                    <?php
+					if ($item['problems__rezult_json']) {
+						?>
+						<div class="lotti" data-path="<?php echo wp_get_attachment_url($item['problems__rezult_json']); ?>" data-anim-loop="false" data-name="problems__json<?php echo $i ?>"></div>
+						<?php
+					} else {
+	                    ?>
+	                    <div class="seoProblems__chart">
+	                        <div class="seoProblems__stat">
+	                            <div class="seoProblems__percent"><?php echo $item['problems__rezult_percent'] ?>%</div>
+	                            <div class="seoProblems__label"><?php echo $item['problems__rezult_label'] ?></div>
+	                        </div>
+	                    </div>
+	                    <?php
+					}
+					$i++;
                 };
             ?>
         </div>
     </div>
 </section>
 <!-- end seoProblems -->
+<?php endif; ?>
 
+<?php if (SCF::get( 'research_show' )): ?>
 <!-- begin seoResearch -->
 <section id="seoResearch" class="seoResearch section lrBorder">
     <div class="container_center">
@@ -89,7 +101,13 @@ get_header();
             </div>
             <div class="seoResearch__right">
                 <?php if ( SCF::get( 'research__file' ) ): ?>
-
+					<div class="lotti" data-path="<?php echo wp_get_attachment_url(SCF::get( 'research__json' )); ?>" data-anim-loop="false" data-name="research__json"></div>
+                <?php elseif ( SCF::get( 'research__video' ) ): ?>
+					<div class="seoResearch__video">
+						<div class="video__wrapper">
+							<video src="<?php echo wp_get_attachment_url(SCF::get( 'research__video' )) ?>" muted loop preload="auto" playsinline></video>
+						</div>
+					</div>
                 <?php else: ?>
                     <?php echo wp_get_attachment_image( SCF::get( 'research__img' ), 'full'); ?>
                 <?php endif; ?>
@@ -98,7 +116,9 @@ get_header();
     </div>
 </section>
 <!-- end seoResearch -->
+<?php endif; ?>
 
+<?php if (SCF::get( 'semantic_show' )): ?>
 <!-- begin seoCore -->
 <section id="seoCore" class="seoCore section lrBorder">
     <div class="container_center">
@@ -109,7 +129,13 @@ get_header();
             </div>
             <div class="seoCore__right">
                 <?php if ( SCF::get( 'semantic__file' ) ): ?>
-
+					<div class="lotti" data-path="<?php echo wp_get_attachment_url(SCF::get( 'semantic__json' )); ?>" data-anim-loop="false" data-name="semantic__json"></div>
+				<?php elseif ( SCF::get( 'semantic__video' ) ): ?>
+					<div class="seoCore__video">
+						<div class="video__wrapper">
+							<video src="<?php echo wp_get_attachment_url(SCF::get( 'semantic__video' )) ?>" muted loop preload="auto" playsinline></video>
+						</div>
+					</div>
                 <?php else: ?>
                     <?php echo wp_get_attachment_image( SCF::get( 'semantic__img' ), 'full'); ?>
                 <?php endif; ?>
@@ -118,7 +144,9 @@ get_header();
     </div>
 </section>
 <!-- end seoCore -->
+<?php endif; ?>
 
+<?php if (SCF::get( 'optimization_show' )): ?>
 <!-- begin seoOptimization -->
 <section id="seoOptimization" class="seoOptimization section lrBorder">
     <div class="container_center">
@@ -129,16 +157,26 @@ get_header();
             </div>
             <div class="seoOptimization__right">
                 <?php if ( SCF::get( 'optimization__file' ) ): ?>
-
+					<div class="lotti" data-path="<?php echo wp_get_attachment_url(SCF::get( 'optimization__json' )); ?>" data-anim-loop="false" data-name="optimization__json"></div>
+				<?php elseif ( SCF::get( 'optimization__video' ) ): ?>
+					<div class="seoOptimization__video">
+						<div class="video__wrapper">
+							<video src="<?php echo wp_get_attachment_url(SCF::get( 'optimization__video' )) ?>" muted loop preload="auto" playsinline></video>
+						</div>
+					</div>
                 <?php else: ?>
-                    <?php echo wp_get_attachment_image( SCF::get( 'optimization__img' ), 'full'); ?>
+					<div class="seoOptimization__img">
+	                    <?php echo wp_get_attachment_image( SCF::get( 'optimization__img' ), 'full'); ?>
+					</div>
                 <?php endif; ?>
             </div>
         </div>
     </div>
 </section>
 <!-- end seoOptimization -->
+<?php endif; ?>
 
+<?php if (SCF::get( 'indexation_show' )): ?>
 <!-- begin seoIndexation -->
 <section id="seoIndexation" class="seoIndexation section lrBorder">
     <div class="container_center">
@@ -149,16 +187,26 @@ get_header();
             </div>
             <div class="seoIndexation__right">
                 <?php if ( SCF::get( 'indexation__file' ) ): ?>
-
+					<div class="lotti" data-path="<?php echo wp_get_attachment_url(SCF::get( 'indexation__json' )); ?>" data-anim-loop="false" data-name="indexation__json"></div>
+				<?php elseif ( SCF::get( 'indexation__video' ) ): ?>
+					<div class="seoIndexation__video">
+						<div class="video__wrapper">
+							<video src="<?php echo wp_get_attachment_url(SCF::get( 'indexation__video' )) ?>" muted loop preload="auto" playsinline></video>
+						</div>
+					</div>
                 <?php else: ?>
-                    <?php echo wp_get_attachment_image( SCF::get( 'indexation__img' ), 'full'); ?>
+					<div class="seoIndexation__img">
+	                    <?php echo wp_get_attachment_image( SCF::get( 'indexation__img' ), 'full'); ?>
+					</div>
                 <?php endif; ?>
             </div>
         </div>
     </div>
 </section>
 <!-- end seoIndexation -->
+<?php endif; ?>
 
+<?php if (SCF::get( 'analytics_show' )): ?>
 <!-- begin seoAnalytics -->
 <section id="seoAnalytics" class="seoAnalytics section lrBorder">
     <div class="container_center">
@@ -169,7 +217,13 @@ get_header();
             </div>
             <div class="seoAnalytics__right">
                 <?php if ( SCF::get( 'analytics__file' ) ): ?>
-
+					<div class="lotti" data-path="<?php echo wp_get_attachment_url(SCF::get( 'analytics__json' )); ?>" data-anim-loop="false" data-name="analytics__json"></div>
+				<?php elseif ( SCF::get( 'analytics__video' ) ): ?>
+					<div class="seoAnalytics__video">
+						<div class="video__wrapper">
+							<video src="<?php echo wp_get_attachment_url(SCF::get( 'analytics__video' )) ?>" muted loop preload="auto" playsinline></video>
+						</div>
+					</div>
                 <?php else: ?>
                     <?php echo wp_get_attachment_image( SCF::get( 'analytics__img' ), 'full'); ?>
                 <?php endif; ?>
@@ -178,7 +232,9 @@ get_header();
     </div>
 </section>
 <!-- end seoAnalytics -->
+<?php endif; ?>
 
+<?php if (SCF::get( 'off_site_show' )): ?>
 <!-- begin seoOffSite -->
 <section id="seoOffSite" class="seoOffSite section lrBorder bBorder">
     <div class="container_center">
@@ -189,7 +245,13 @@ get_header();
             </div>
             <div class="seoOffSite__right">
                 <?php if ( SCF::get( 'off_site__file' ) ): ?>
-
+					<div class="lotti" data-path="<?php echo wp_get_attachment_url(SCF::get( 'off_site__json' )); ?>" data-anim-loop="false" data-name="off_site__json"></div>
+				<?php elseif ( SCF::get( 'off_site__video' ) ): ?>
+					<div class="seoOffSite__video">
+						<div class="video__wrapper">
+							<video src="<?php echo wp_get_attachment_url(SCF::get( 'off_site__video' )) ?>" muted loop preload="auto" playsinline></video>
+						</div>
+					</div>
                 <?php else: ?>
                     <?php echo wp_get_attachment_image( SCF::get( 'off_site__img' ), 'full'); ?>
                 <?php endif; ?>
@@ -198,6 +260,7 @@ get_header();
     </div>
 </section>
 <!-- end seoOffSite -->
+<?php endif; ?>
 
 <?php
 $works = get_posts( array(
@@ -234,13 +297,9 @@ $works = get_posts( array(
 
 
 					if ($video && $video !== "") {
-						// print_r($video);
 						?>
 						<div class="ideas__item">
 							<div class="ideas__video">
-                                <!-- <div class="video__wrapper js-youtube" id="<?php // echo $video ?>"> -->
-                                    <!-- <img src="<?php // echo get_template_directory_uri() ?>/img/play.svg" alt="Play" class="video__play" /> -->
-                                <!-- </div> -->
 								<div class="video__wrapper">
 	                                <video src="<?php echo wp_get_attachment_url( $video ); ?>" autoplay muted loop preload=""></video>
 	                            </div>
@@ -255,9 +314,10 @@ $works = get_posts( array(
 					} else {
 						?>
 						<a href="<?php echo get_the_permalink($id); ?>" class="ideas__item">
-                            <!-- <?php print_r($workMeta); ?> -->
-							<div class="ideas__img">
-								<?php echo get_the_post_thumbnail($id, 'full') ?>
+							<div class="ideas__video">
+								<div class="video__wrapper">
+									<?php echo get_the_post_thumbnail($id, 'full') ?>
+								</div>
 							</div>
 							<div class="ideas__text">
 								<h3><?php echo get_the_title($id); ?></h3>

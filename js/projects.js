@@ -28,7 +28,9 @@
     onVisible( '.video__wrapper', function(elem) {
         let frame = elem.querySelector('iframe');
         if (!frame) {
-            elem.querySelector('.video__play:not([data-video-id])').click();
+            try {
+                elem.querySelector('.video__play:not([data-video-id])').click();
+            } catch (e) {}
         }
     }, function(elem) {
         let frame = elem.querySelector('iframe');
