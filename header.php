@@ -9,6 +9,11 @@
  * @package frondendie
  */
 
+$bgColor = SCF::get( 'project_bg_color' );
+$bodyColor = '';
+if ( $bgColor && !is_archive() ) {
+	$bodyColor = 'style="background: '.$bgColor.'"';
+}
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -20,7 +25,7 @@
 	<?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class(); ?> <?php echo $bodyColor ?>>
 <?php wp_body_open(); ?>
 <!-- <div id="page" class="site"> -->
 	<!-- <a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'frondendie' ); ?></a> -->
@@ -72,5 +77,4 @@
 		</div>
 
 	</header><!-- #masthead -->
-
 	<main class="main">

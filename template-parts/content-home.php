@@ -16,7 +16,7 @@
 		<div class="firstScreen__text"><?php echo SCF::get( 'firstScreen__text' ); ?></div>
 		<div class="firstScreen__go"><?php echo SCF::get( 'firstScreen__go' ); ?></div>
 		<div class="firstScreen__action">
-			<button class="btn"><?php echo SCF::get( 'firstScreen__action' ); ?></button>
+			<a href="<?php echo SCF::get( 'first_screen_button_link' ); ?>" class="btn"><?php echo SCF::get( 'firstScreen__action' ); ?></a>
 		</div>
 	</div>
 	<div class="facts">

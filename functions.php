@@ -9,7 +9,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.0.1' );
+	define( '_S_VERSION', '1.0.2' );
 }
 
 if ( ! function_exists( 'frondendie_setup' ) ) :
@@ -179,8 +179,19 @@ function frondendie_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 
+	if (is_page_template('page-development-template.php')) {
+		wp_enqueue_style( 'development-style', get_template_directory_uri() . '/css/development.css', array(), _S_VERSION );
+		wp_enqueue_script( 'development-scripts', get_template_directory_uri() . '/js/development.js', '', _S_VERSION, true );
+	}
+
 }
 add_action( 'wp_enqueue_scripts', 'frondendie_scripts' );
+
+function frondendie_admin_scripts() {
+	wp_enqueue_style( 'frondendie-admin', get_template_directory_uri() . '/css/admin.css', array(), _S_VERSION );
+}
+
+add_action( 'admin_enqueue_scripts', 'frondendie_admin_scripts' );
 
 /**
  * Implement the Custom Header feature.
@@ -220,14 +231,29 @@ require get_template_directory() . '/scf/case-template.php';
 require get_template_directory() . '/scf/seo-template.php';
 
 /**
+ * Template Development page
+ */
+require get_template_directory() . '/scf/dev-template.php';
+
+/**
  * Template projects
  */
 require get_template_directory() . '/scf/projects.php';
 
 /**
+ * Review fields
+ */
+require get_template_directory() . '/scf/review.php';
+
+/**
  * Scf blog page
  */
 require get_template_directory() . '/scf/blog.php';
+
+/**
+ * Scf posts fields
+ */
+require get_template_directory() . '/scf/post.php';
 
 /**
  * Scf team members
@@ -342,7 +368,7 @@ function cases_register_post_type_init() {
 		'has_archive'        => 'portfolio',
 		'menu_icon'			 => 'dashicons-layout', // иконка в меню
 		'menu_position' 	 => 21, // порядок в меню
-		'supports' 			 => array( 'title', 'thumbnail', 'page-attributes'),
+		'supports' 			 => array( 'title', 'editor', 'thumbnail', 'page-attributes', 'custom-fields'),
 		'taxonomies' 		 => array( 'category' )
 	);
 	register_post_type('projects', $args);

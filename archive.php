@@ -19,7 +19,7 @@ get_header();
 				if ( is_post_type_archive( 'reviews' ) ) {
 					echo '<h1 class="section__title">Testimotionals</h1>';
 				} elseif ( is_post_type_archive( 'projects' ) ) {
-					echo '<h1 class="section__title">Our <span style="color: red;">works</span></h1>';
+					echo '<h1 class="section__title">Our <span style="color: #DDC181;">works</span></h1>';
 				} else {
 					the_archive_title( '<h1 class="section__title">', '</h1>' );
 				}

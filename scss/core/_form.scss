@@ -276,7 +276,7 @@ input[type=text],
 input[type=url],
 select,
 textarea {
-	background-color: #202020;
+	background-color: transparent;
 	border: 1px solid $input_border_color;
 	padding: 1.5em;
 	outline: none;
@@ -294,18 +294,19 @@ textarea {
 
 	&:hover {
 		border: 1px solid $input_hover_border_color;
-		background-color: #202020;
+		background-color: transparent;
 		z-index: 1;
 	}
 
 	&:focus {
 		border: 1px solid $input_focus_border_color;
-		background-color: #202020;
+		background-color: transparent;
 	}
 
-	&.invalid {
-		background-color: #202020;
-		border: 1px solid red;
+	&.invalid,
+	&[aria-invalid="true"] {
+		background-color: transparent;
+		border: 1px solid #DDC181;
 	}
 	// Placeholder for input +++++++++++++++
 	@include placeholder {
@@ -390,8 +391,8 @@ input[type=radio] {
 	border-radius: 50%;
 
 	&:checked {
-		background: #FF3E00;
-		border-color: #FF3E00;
+		background: #DDC181;
+		border-color: #DDC181;
 
 		&:before {
 			content: '';
@@ -413,8 +414,8 @@ input[type=radio] {
 input[type=checkbox] {
 	&:checked,
 	&:indeterminate {
-		background: #FF3E00;
-		border-color: #FF3E00;
+		background: #DDC181;
+		border-color: #DDC181;
 		color: $color_withe;
 
 		&:before {

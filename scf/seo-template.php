@@ -23,6 +23,12 @@ function seo_first_section_template_fields( $settings, $type, $id, $meta_type, $
 			// Массив полей.
 			array(
 				array(
+					'type'        => 'colorpicker',
+					'name'        => 'project_bg_color',
+					'label'       => 'Project background color',
+					'default'     => '#202020',
+				),
+				array(
 					'name'        => 'first__title',
 					'label'       => 'First section title',
 					'type'        => 'wysiwyg',

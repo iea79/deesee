@@ -16,9 +16,6 @@ ScrollTrigger.defaults({
 });
 
 gsap.timeline()
-    // .to('body', {
-    //     overflow: 'hidden',
-    // })
     .from('.header__center', {
         y: '-100%',
         opacity: 0
@@ -31,10 +28,12 @@ gsap.timeline()
     .from('.header__border', {
         duration: 0.1,
         xPercent: -100
-    })
+    });
+
+gsap.timeline()
     .from('.firstScreen__left', {
+        delay: 0.5,
         y: '50%',
-        // delay: -0.1,
         opacity: 0
     })
     .from('.firstScreen__right', {
@@ -45,9 +44,6 @@ gsap.timeline()
         duration: 0.5,
         opacity: 0
     })
-    // .to('body', {
-    //     overflow: 'inherit',
-    // })
     .from('.firstScreen__bottom', {
         y: '100%',
         opacity: 0
@@ -89,7 +85,7 @@ gsap.utils.toArray('.facts__item').forEach(item => {
     gsap.from(text, {
         scrollTrigger: {
             trigger: item,
-            start: "top 50%",
+            start: "top 70%",
             end: 'bottom bottom',
             // scrub: true,
         },
@@ -105,7 +101,7 @@ gsap.utils.toArray('.facts__item').forEach(item => {
     gsap.from(num, {
         scrollTrigger: {
             trigger: item,
-            start: "top 50%",
+            start: "top 70%",
             end: 'bottom bottom',
             // scrub: true,
         },
@@ -128,7 +124,7 @@ gsap.utils.toArray('.canHelp__item').forEach(item => {
     const options = {
         scrollTrigger: {
             trigger: item,
-            start: "top 50%",
+            start: "top 70%",
             end: 'bottom bottom',
         },
         y: '50%',
@@ -179,14 +175,14 @@ gsap.utils.toArray('.canHelp__item').forEach(item => {
 gsap.from('.speaks__item:not(:first-child)', {
     scrollTrigger: {
         trigger: '.speaks',
-        start: "top 30%",
+        start: "top 70%",
         end: 'bottom bottom',
     },
     y: '50%',
     x: 0,
     duration: 0.5,
     opacity: 0,
-    stagger: 0.4
+    stagger: 0.3
 });
 
 // gsap.from('.speaks__item:not(:first-child)', {
@@ -218,12 +214,12 @@ gsap.utils.toArray('.fadeRight').forEach(item => {
     });
 });
 
-gsap.utils.toArray('.review__box').forEach(item => {
+gsap.utils.toArray('.review__item').forEach(item => {
     gsap.from(item, {
         scrollTrigger: {
             trigger: item,
-            start: "top 90%",
-            end: 'bottom 40%',
+            start: "top 70%",
+            // end: 'bottom 40%',
             // scrub: true,
             // pin: true,
         },
@@ -236,8 +232,8 @@ gsap.utils.toArray('.review__box').forEach(item => {
 gsap.from('.review__video', {
     scrollTrigger: {
         trigger: '.review__video',
-        start: "top 90%",
-        end: 'bottom 40%',
+        start: "top 70%",
+        // end: 'bottom 40%',
         // scrub: true,
         // pin: true,
     },

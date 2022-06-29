@@ -12,7 +12,7 @@ get_header();
 	<div class="container_center">
 		<div class="pageHead__content">
 			<div class="pageHead__left">
-				<h1 class="section__title"><?php echo SCF::get( 'first__title' ); ?></h1>
+				<h1 class="section__title"><?php echo strip_tags(SCF::get( 'first__title' ), ['<span>','<br>']); ?></h1>
 				<div class="section__sub"><?php echo SCF::get( 'first__text' ); ?></div>
 				<div class="pageHead__action">
 					<a href="<?php echo SCF::get( 'first__btn_link' ); ?>" class="btn btn_round"><?php echo SCF::get( 'first__btn' ); ?></a>
@@ -144,6 +144,8 @@ get_header();
 </section>
 <!-- end claimOffer -->
 
+<?php // require get_template_directory() . '/inc/speaks.php'; ?>
+
 <!-- begin casePrice -->
 <section id="casePrice" class="casePrice">
 	<div class="container_center">
@@ -157,6 +159,9 @@ get_header();
 					foreach ($case__price__list as $item) {
 						?>
 						<div class="casePrice__item">
+							<?php if ($item['price__letter']): ?>
+								<div class="casePrice__letter"><?php echo $item['price__letter'] ?></div>
+							<?php endif; ?>
 							<?php if ($item['price__city']): ?>
 								<div class="casePrice__city"><?php echo $item['price__city'] ?></div>
 							<?php endif; ?>
@@ -169,6 +174,7 @@ get_header();
 							<?php if ($item['price__descr']): ?>
 								<div class="casePrice__descr"><?php echo $item['price__descr'] ?></div>
 							<?php endif; ?>
+							<a href="/get-in-touch/" class="casePrice__link">gET STARTED</a>
 						</div>
 						<?php
 					};

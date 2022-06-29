@@ -289,7 +289,7 @@ openMobileNav();
 
 // Scroll to ID // Плавный скролл к элементу при нажатии на ссылку. В ссылке указываем ID элемента
 function srollToId() {
-    $('[data-scroll-to]').click( function(){
+    $('body').on('click', '[data-scroll-to]', function() {
         var scroll_el = $(this).attr('href');
         if ($(scroll_el).length != 0) {
             $('html, body').animate({ scrollTop: $(scroll_el).offset().top }, 500);
@@ -358,7 +358,7 @@ function uploadYoutubeVideo() {
 
 uploadYoutubeVideo();
 
-function openVideoModal() {
+function openYoutubeModal() {
     let modal = $('.videoReview'),
         modalBody = $('.videoReview .video__wrapper'),
         play = $('[data-video-id]');
@@ -372,6 +372,29 @@ function openVideoModal() {
             });
 
         modalBody.append(iframe);
+        modal.modal('show');
+    });
+
+    modal.on('hide.bs.modal', () => {
+        modalBody.html('');
+    });
+}
+openYoutubeModal();
+
+function openVideoModal() {
+    let modal = $('.videoReview'),
+        modalBody = $('.videoReview .video__wrapper'),
+        play = $('[data-video]');
+
+    play.on('click', function() {
+        let url = $(this).data('video'),
+            video = $('<video/>', {
+                'autoplay': true,
+                'src': url,
+                'controls': true,
+            });
+
+        modalBody.append(video);
         modal.modal('show');
     });
 

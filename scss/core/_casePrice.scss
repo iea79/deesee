@@ -59,7 +59,7 @@
 
     }
 
-    &__city {
+    &__letter {
         font-size: 2.2em;
         font-weight: 100;
         margin-bottom: 0.2em;
@@ -69,19 +69,29 @@
         }
     }
 
-    &__price {
+    &__city {
         font-size: 1.7em;
         color: $color_withe;
         margin-bottom: 0.5em;
 
         @media (min-width: 768px) {
             font-size: 2.5em;
+            margin-bottom: 0.3em;
+        }
+    }
+
+    &__price {
+        font-size: 1.125em;
+        color: $color_withe;
+        margin-bottom: 0.5em;
+
+        @media (min-width: 768px) {
             margin-bottom: 0.6em;
         }
     }
 
-    &__lists {
-        color: $color_withe;
+    &__lists:not(:empty) {
+        color: #B3B3B3;
         font-size: 1.125em;
         margin: 1em 0;
 
@@ -90,8 +100,33 @@
         }
     }
 
-    &__descr {
+    &__descr:not(:empty) {
         font-size: 1.125em;
+    }
+
+    &__link {
+        display: inline-block;
+        color: #DDC181;
+        margin-top: 0.8em;
+        font-size: 1.5em;
+        line-height: 1.2;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        text-decoration: none;
+
+        &:after {
+            content: '';
+            display: block;
+            width: 0;
+            border-top: 1px solid;
+            transition: width 0.4s;
+        }
+
+        &:hover {
+            &:after {
+                width: 100%;
+            }
+        }
     }
 
 }

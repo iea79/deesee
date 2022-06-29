@@ -15,23 +15,46 @@
                 'post_type' => 'reviews',
                 'posts_per_page' => 1,
                 'meta_query' => [
+                    'relation' => 'OR',
                     [
                         'key' => 'review__video',
                         'value' => '',
                         'compare' => '!='
+                    ],
+                    [
+                        'key' => 'review__video_file',
+                        'compare' => 'EXISTS'
                     ]
                 ]
             );
             $videoQuery = new WP_Query( $videoReviewArgs );
+            // print_r($videoQuery);
             if( $videoQuery->have_posts() ){
                 while( $videoQuery->have_posts() ){
                     $videoQuery->the_post();
-                    $video = SCF::get('review__video');
-                    if ($video) {
+                    $youtubeVideo = SCF::get('review__video');
+                    $video = SCF::get('review__video_file');
+                    $prev = SCF::get( 'review__video_prev_vertical' );
+                    if ($youtubeVideo) {
                         ?>
                         <div class="review__videoWrap">
-                            <div class="review__video js-youtube" id="<?php echo $video ?>">
-                                <img src="<?php echo get_template_directory_uri() ?>/img/play.svg" alt="Play" class="video__play" data-video-id="<?php echo $video ?>">
+                            <div class="review__video js-youtube" id="<?php echo $youtubeVideo ?>">
+                                <img src="" alt="" class="video__prev">
+                                <?php if ($prev): ?>
+                                    <?php echo wp_get_attachment_image($prev,'full') ?>
+                                <?php endif; ?>
+                                <img src="<?php echo get_template_directory_uri() ?>/img/play.svg" alt="Play" class="video__play" data-video-id="<?php echo $youtubeVideo ?>">
+                            </div>
+                            <div class="review__name"><?php the_title(); ?></div>
+                        </div>
+                        <?php
+                    }
+                    if ($video) {
+                        ?>
+                        <div class="review__videoWrap review__videoFile">
+                            <div class="review__video review__video_file">
+                                <video src="<?php //echo wp_get_attachment_url($video); ?>" poster="<?php echo wp_get_attachment_url($prev); ?>"></video>
+                                <img src="<?php echo get_template_directory_uri() ?>/img/play.svg" alt="Play" class="video__play" data-video="<?php echo wp_get_attachment_url($video); ?>">
                             </div>
                             <div class="review__name"><?php the_title(); ?></div>
                         </div>
@@ -47,28 +70,32 @@
 
                 $reviewArgs = array(
                     'post_type' => 'reviews',
-                    'posts_per_page' => 3,
-                    'meta_query' => [ [
-                        'key' => 'review__video',
-                        'value' => '',
-                        'compare' => '='
-                    ] ],
+                    'posts_per_page' => -1,
+                    'meta_query' => [
+                        [
+                            'key' => 'review__video',
+                            'value' => '',
+                            'compare' => '='
+                        ]
+                    ],
                 );
                 $reviewQuery = new WP_Query( $reviewArgs );
                 if( $reviewQuery->have_posts() ){
                     while( $reviewQuery->have_posts() ){
                         $reviewQuery->the_post();
-                        ?>
-                        <div class="review__item">
-                            <div class="review__box">
-                                <div class="review__user">
-                                    <div class="review__photo"><?php echo wp_get_attachment_image( get_post_thumbnail_id()  , 'full' ) ?></div>
-                                    <div class="review__name"><?php the_title(); ?></div>
+                        if (get_the_content() !== '') {
+                            ?>
+                            <div class="review__item">
+                                <div class="review__box">
+                                    <div class="review__user">
+                                        <div class="review__photo"><?php echo wp_get_attachment_image( get_post_thumbnail_id()  , 'full' ) ?></div>
+                                        <div class="review__name"><?php the_title(); ?></div>
+                                    </div>
+                                    <div class="review__text"><?php the_content(); ?></div>
                                 </div>
-                                <div class="review__text"><?php the_content(); ?></div>
                             </div>
-                        </div>
-                        <?php
+                            <?php
+                        }
                     }
                     wp_reset_postdata(); // сбрасываем переменную $post
                 };

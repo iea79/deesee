@@ -50,6 +50,25 @@
         }
     }
 
+    &__video {
+        width: 100%;
+        height: 13.75em;
+        margin-bottom: 1.57em;
+        overflow: hidden;
+
+        @media (min-width: 768px) {
+            width: 32.75em;
+        }
+
+        video {
+            display: block;
+            object-fit: cover;
+            object-position: top center;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
     &__name {
         font-size: 1.5em;
         color: $color_withe;
@@ -66,7 +85,7 @@
             line-height: 150.4%;
             letter-spacing: 0.05em;
             text-transform: uppercase;
-            color: #FF3E00;
+            color: #DDC181;
             text-decoration: none;
 
             @media (min-width: 768px) {

@@ -26,6 +26,10 @@
 	overflow: hidden;
 	transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
 
+	.single-projects:not(.projects-template-page-seo-template) .getTouch & {
+		background-color: #DDC181;
+	}
+
 	&:before {
 		content: '';
 		display: block;
@@ -43,6 +47,10 @@
 		// background-color: darken($btn_default_bg_color, 7%);
 		color: $btn_default_bg_color;
 		text-decoration: none;
+
+		.single-projects .getTouch & {
+			color: #dddd11;
+		}
 
 		&:before {
 			right: auto;
@@ -85,6 +93,26 @@
 	}
 
 	@media (min-width: 768px) {
+		&_border {
+			border: 1px solid $btn_default_bg_color;
+			background-color: transparent;
+			color: $btn_default_bg_color;
+			font-weight: 400;
+			font-family: $main_font_family;
+			font-size: 1.5em;
+			letter-spacing: 0.05em;
+			transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+
+			// .btn__overlay {
+			// 	background-color: $btn_default_bg_color;
+			// }
+
+			&:hover {
+				// color: $color_withe;
+
+			}
+		}
+
 		&_round {
 			border-radius: 50%;
 
@@ -110,8 +138,51 @@
 			}
 
 			.btn__overlay {}
-		}
 
+			&_contrast {
+				border: 1px solid #202020;
+				color: #202020;
+
+				&:hover {
+					color: $color_withe;
+
+					&:before {
+						background: #202020;
+					}
+				}
+			}
+
+			&_md {
+				font-weight: 500;
+				font-size: 1em;
+				text-decoration: underline;
+				width: 11.5em;
+				height: 11.5em;
+				padding: 2em;
+
+				&:hover {
+					text-decoration-color: transparent;
+				}
+			}
+		}
+	}
+
+	&__overlay {
+		display: block;
+		position: absolute;
+		// background-color: rgba(lighten($btn_default_bg_color, 14%), 0.7);
+		animation: btnNover 0.5s forwards linear;
+		z-index: -1;
+		width: 0;
+		padding-bottom: 0;
+		border-radius: 0;
+		transform: translate3d(-50%, -50%, 0) scale(0);
+	}
+
+}
+
+.page-template-page-development-template {
+	.btn {
 		&_border {
 			border: 1px solid $btn_default_bg_color;
 			background-color: transparent;
@@ -131,20 +202,60 @@
 
 			}
 		}
-	}
 
-	&__overlay {
-		display: block;
-		position: absolute;
-		// background-color: rgba(lighten($btn_default_bg_color, 14%), 0.7);
-		animation: btnNover 0.5s forwards linear;
-		z-index: -1;
-		width: 0;
-		padding-bottom: 0;
-		border-radius: 0;
-		transform: translate3d(-50%, -50%, 0) scale(0);
-	}
+		&_round {
+			border-radius: 50%;
 
+			&:before {
+				top: 50%;
+				right: 50%;
+				height: 0;
+				width: 0;
+				transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+				border-radius: 50%;
+			}
+
+			&:hover {
+				// right: 0;
+				// left: auto;
+				&:before {
+					left: auto;
+					top: 0;
+					right: 0;
+					height: 100%;
+					width: 100%;
+				}
+			}
+
+			.btn__overlay {}
+
+			&_contrast {
+				border: 1px solid #202020;
+				color: #202020;
+
+				&:hover {
+					color: $color_withe;
+
+					&:before {
+						background: #202020;
+					}
+				}
+			}
+
+			&_md {
+				font-weight: 500;
+				font-size: 1em;
+				text-decoration: underline;
+				width: 11.5em;
+				height: 11.5em;
+				padding: 2em;
+
+				&:hover {
+					text-decoration-color: transparent;
+				}
+			}
+		}
+	}
 }
 
 @keyframes btnNover {

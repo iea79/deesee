@@ -29,6 +29,10 @@ $textReviewQuery = new WP_Query( [
             'key' => 'review__video',
             'value' => '',
             'compare' => '='
+        ],
+        [
+            'key' => 'review__video_file',
+            'compare' => 'NOT EXISTS'
         ]
     ]
 ] );
@@ -42,11 +46,12 @@ if ( $videoReviewQuery->have_posts() ) {
                 $videoReviewQuery->the_post();
                 $youtubeVideo = get_post_meta($post->ID, 'review__video')[0];
                 $video = get_post_meta($post->ID, 'review__video_file')[0];
+                $poster = get_post_meta($post->ID, 'review__video_prev')[0];
                 ?>
                 <div class="archiveReviewSlider__item">
                     <?php if ($video): ?>
                         <div class="video__wrapper">
-                            <video src="<?php echo wp_get_attachment_url($video); ?>" controls></video>
+                            <video src="<?php echo wp_get_attachment_url($video); ?>" controls poster="<?php echo wp_get_attachment_url($poster); ?>" preload="auto"></video>
                         </div>
                     <?php elseif ( $youtubeVideo ): ?>
                         <div class="video__wrapper js-youtube" id="<?php echo $youtubeVideo ?>">
@@ -82,17 +87,19 @@ if ( $textReviewQuery->have_posts() ) {
         while ( $textReviewQuery->have_posts() ) {
             $textReviewQuery->the_post();
 
-            ?>
-            <div class="archiveReview__item">
-                <div class="archiveReview__head">
-                    <div class="archiveReview__photo">
-                        <?php echo the_post_thumbnail(); ?>
+            if (get_the_content() !== '') {
+                ?>
+                <div class="archiveReview__item">
+                    <div class="archiveReview__head">
+                        <div class="archiveReview__photo">
+                            <?php echo the_post_thumbnail(); ?>
+                        </div>
+                        <div class="archiveReview__name"><?php the_title(); ?></div>
                     </div>
-                    <div class="archiveReview__name"><?php the_title(); ?></div>
+                    <div class="archiveReview__text"><?php the_content(); ?></div>
                 </div>
-                <div class="archiveReview__text"><?php the_content(); ?></div>
-            </div>
-            <?php
+                <?php
+            }
         }
     echo '</div>';
 } else {

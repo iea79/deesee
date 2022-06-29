@@ -153,9 +153,9 @@
 <?php if (SCF::get( 'visual_show' )): ?>
 	<!-- begin projectVisual -->
 	<section id="projectVisual" class="projectVisual">
-		<div class="projectVisual__bg">
-			<?php echo wp_get_attachment_image(SCF::get( 'visual__bg' ), 'full') ?>
-		</div>
+		<!-- <div class="projectVisual__bg"> -->
+			<?php // echo wp_get_attachment_image(SCF::get( 'visual__bg' ), 'full') ?>
+		<!-- </div> -->
 		<div class="container_center">
 			<div class="projectVisual__content">
 				<div class="projectVisual__left">
@@ -175,6 +175,31 @@
 					?>
 				</div>
 			</div>
+			<?php
+				$visual_options = SCF::get('visual_options');
+
+				if ($visual_options) {
+					?>
+					<div class="projectVisual__bottom">
+						<div class="projectVisual__list">
+							<?php
+							foreach ($visual_options as $item) {
+								?>
+									<div class="projectVisual__listItem">
+										<div class="projectVisual__name"><?php echo $item['visual__name']; ?></div>
+										<div class="projectVisual__thumb">
+											<?php echo wp_get_attachment_image($item['visual__opt_img'], 'full') ?>
+										</div>
+										<div class="projectVisual__sub"><?php echo $item['visual__sub']; ?></div>
+									</div>
+								<?php
+							};
+							?>
+						</div>
+					</div>
+					<?php
+				}
+			?>
 		</div>
 	</section>
 	<!-- end projectVisual -->
@@ -348,39 +373,30 @@
 		<div class="projectCount"></div>
 		<div class="projectMobile__head">
 			<h2 class="project__title"><?php echo SCF::get( 'mobile__title' ); ?></h2>
-			<div class="project__text"><?php echo SCF::get( 'mobile__text' ); ?></div>
+			<?php if (SCF::get( 'mobile__text' )): ?>
+				<div class="project__text"><?php echo SCF::get( 'mobile__text' ); ?></div>
+			<?php endif; ?>
 		</div>
 		<div class="projectMobile__content">
-			<div class="projectMobile__decktop">
-				<div class="projectMobile__media">
-					<?php
-					if (SCF::get( 'desktop__video' ) !== "") {
-						?>
-						<div class="video__wrapper">
-							<video src="<?php echo wp_get_attachment_url(SCF::get( 'desktop__video' )) ?>" muted loop preload="auto" playsinline></video>
-						</div>
-						<?php
-					} elseif (SCF::get( 'desktop__img' )) {
-						echo wp_get_attachment_image(SCF::get( 'desktop__img' ), 'full');
-					}
+			<?php
+				$mobile_list = SCF::get('mobile_list');
+
+				foreach ($mobile_list as $item) {
 					?>
-				</div>
-			</div>
-			<div class="projectMobile__mobile">
-				<div class="projectMobile__media">
-					<?php
-					if (SCF::get( 'mobile__video' ) !== "") {
-						?>
-						<div class="video__wrapper">
-							<video src="<?php echo wp_get_attachment_url(SCF::get( 'mobile__video' )) ?>" muted loop preload="auto" playsinline></video>
+						<div class="projectMobile__item">
+							<?php
+							if ($item[ 'mobile__video' ]) {
+								?>
+								<video src="<?php echo wp_get_attachment_url($item[ 'mobile__video' ]) ?>" muted loop preload="auto" playsinline></video>
+								<?php
+							} elseif ($item[ 'mobile__img' ]) {
+								echo wp_get_attachment_image($item[ 'mobile__img' ], 'full');
+							}
+							?>
 						</div>
-						<?php
-					} elseif (SCF::get( 'mobile__img' )) {
-						echo wp_get_attachment_image(SCF::get( 'mobile__img' ), 'full');
-					}
-					?>
-				</div>
-			</div>
+					<?php
+				};
+			?>
 		</div>
 	</div>
 </section>
@@ -444,7 +460,7 @@
 				'post__in'        => SCF::get('top_member')
 			]);
 		?>
-        <div class="projectMembers__content">
+        <div class="teamList">
 			<?php
             foreach ($members as $member) {
                 setup_postdata( $member );
@@ -452,12 +468,12 @@
 
                 $memberMeta = SCF::gets($member);
                 ?>
-				<div class="projectMembers__item">
-					<div class="projectMembers__photo">
+				<div class="teamList__item">
+					<div class="teamList__photo" style="background: <?php echo SCF::get( 'team_color' ); ?>">
 						<?php echo get_the_post_thumbnail($member, 'full') ?>
 					</div>
-					<div class="projectMembers__name"><?php echo get_the_title($member); ?></div>
-					<div class="projectMembers__prof"><?php echo $memberMeta['team__prof']; ?></div>
+					<div class="teamList__name"><?php echo get_the_title($member); ?></div>
+					<div class="teamList__prof"><?php echo $memberMeta['team__prof']; ?></div>
 				</div>
                 <?php
             }

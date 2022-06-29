@@ -70,6 +70,13 @@
                 transform: scale(1.1);
             }
         }
+
+        video {
+            display: block;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
     }
 
     &__name {
@@ -89,7 +96,7 @@
             font-size: 1.2em;
             letter-spacing: 0.05em;
             text-transform: uppercase;
-            color: #FF3E00;
+            color: #DDC181;
             text-decoration: none;
 
             @media (min-width: 768px) {

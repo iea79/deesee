@@ -10,7 +10,7 @@ breadcrumbs();
 <div class="pageGetTouch">
     <div class="container_center">
         <div class="pageGetTouch__header">
-            <h1 class="page__title">Get <br><span style="color: red">in touch</span></h1>
+            <h1 class="page__title">Get <br><span style="color: #DDC181">in touch</span></h1>
             <div class="section__sub"><?php the_content(); ?></div>
         </div>
         <div class="pageGetTouch__form">

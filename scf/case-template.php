@@ -316,7 +316,7 @@ function case_price_section_template_fields( $settings, $type, $id, $meta_type, 
 						'name'        => 'price__title',
 						'label'       => 'Price section title',
 						'type'        => 'wysiwyg',
-                        'default'     => 'Our <span style="color: red;">Price</span>',
+                        'default'     => 'Our <span style="color: #DDC181;">Price</span>',
 					),
 				)
 			);
@@ -329,8 +329,13 @@ function case_price_section_template_fields( $settings, $type, $id, $meta_type, 
 				// Массив полей.
 				array(
 					array(
+						'name'        => 'price__letter',
+						'label'       => 'Price section abbreviation',
+						'type'        => 'text',
+					),
+					array(
 						'name'        => 'price__city',
-						'label'       => 'Price section item city',
+						'label'       => 'Price section name',
 						'type'        => 'text',
 					),
 					array(
@@ -360,3 +365,82 @@ function case_price_section_template_fields( $settings, $type, $id, $meta_type, 
 	return $settings;
 }
 add_filter( 'smart-cf-register-fields', 'case_price_section_template_fields', 10, 5 );
+
+
+function case_ideas_section_template_fields( $settings, $type, $id, $meta_type, $types ) {
+
+	// Отображаем поля только на странице редактирования Записи
+	if ( $type === POST_TYPE_NAME ) {
+
+		if ( get_page_template_slug( $id ) == POST_TEMPL_NAME ) {
+
+			// Создаем блок настроек (метабокс).
+			$Section = SCF::add_setting( 'case-dev-7', 'Ideas section' );
+
+            // Добавляем в метабокс произвольные поля.
+            $Section->add_group(
+				// ID группы полей.
+				'ideas_section',
+				// Повторяемая группа полей? Да - true, Нет - false.
+				false,
+				// Массив полей.
+				array(
+					array(
+						'type'        => 'relation',
+						'name'        => 'ideas_post',
+						'label'       => 'Ideas & advice',
+						'post-type'   => array('post'),
+						'limit'       => 10,
+					),
+				)
+			);
+
+			// Добавляем информацию о наших полях в общий массив.
+			$settings[] = $Section;
+		}
+	}
+
+	// Обязательно возвращаем данные.
+	return $settings;
+}
+add_filter( 'smart-cf-register-fields', 'case_ideas_section_template_fields', 10, 5 );
+
+
+
+function case_projects_section_template_fields( $settings, $type, $id, $meta_type, $types ) {
+
+	// Отображаем поля только на странице редактирования Записи
+	if ( $type === POST_TYPE_NAME ) {
+
+		if ( get_page_template_slug( $id ) == POST_TEMPL_NAME ) {
+
+			// Создаем блок настроек (метабокс).
+			$Section = SCF::add_setting( 'case-dev-8', 'Projects' );
+
+            // Добавляем в метабокс произвольные поля.
+            $Section->add_group(
+				// ID группы полей.
+				'projects_section',
+				// Повторяемая группа полей? Да - true, Нет - false.
+				false,
+				// Массив полей.
+				array(
+					array(
+						'type'        => 'relation',
+						'name'        => 'speaks',
+						'label'       => 'Select project',
+						'post-type'   => array('projects'),
+						'limit'       => 10,
+					),
+				)
+			);
+
+			// Добавляем информацию о наших полях в общий массив.
+			$settings[] = $Section;
+		}
+	}
+
+	// Обязательно возвращаем данные.
+	return $settings;
+}
+add_filter( 'smart-cf-register-fields', 'case_projects_section_template_fields', 10, 5 );

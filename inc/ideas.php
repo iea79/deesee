@@ -1,21 +1,27 @@
 <?php
-$posts = get_posts( array(
+global $post;
+$ideas = get_posts( array(
 	'numberposts' => 6,
-	'category'    => 0,
-	// 'include'     => array(),
-	// 'exclude'     => array(),
-	// 'meta_key'    => '',
-	// 'meta_value'  =>'',
 	'post_type'   => 'post',
-	// 'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
-) );
+));
+if (SCF::get('ideas_post')) {
+	$ideas = get_posts( array(
+		'numberposts' => 6,
+		'post_type'   => 'post',
+		'include'     => SCF::get('ideas_post'),
+		'orderby' 	  => 'post__in',
+		'post__in'    => SCF::get('ideas_post')
+	));
+}
+
+if ($ideas) {
 ?>
 <!-- begin ideas -->
 <section id="ideas" class="ideas section">
 	<div class="container_center">
 		<div class="ideas__content">
 			<div class="slider__head">
-				<h2 class="section__title"><span style="color: red">Ideas</span> & Advice</h2>
+				<h2 class="section__title"><span style="color: #DDC181">Ideas</span> & Advice</h2>
 				<div class="slider__arrow">
 					<div class="slick-arrow slick-prev ideas__prev"></div>
 					<div class="slick-arrow slick-next ideas__next"></div>
@@ -23,23 +29,25 @@ $posts = get_posts( array(
 			</div>
 			<div class="ideas__slider">
 				<?php
-				foreach( $posts as $post ){
+				foreach( $ideas as $post ){
 			        setup_postdata( $post );
 			        $post_id = $post->ID;
-			        $category = get_the_category($post_id);
-					$video = get_attached_media( 'video', $post_id );
-					$video = array_shift( $video );
+					$video = SCF::get( 'post__video_file', $post_id );
+					// $video = get_attached_media( 'video', $post_id );
+					// $video = get_children( array( 'post_type'=>'attachment', 'post_parent'=>$post_id ) );
+					// $video = array_shift( $video );
 
 					if ($video) {
 						// print_r($video->guid);
 						?>
 						<div class="ideas__item">
 							<div class="ideas__video">
-								<video src="<?php echo $video->guid; ?>" loop muted preload="auto" playsinline>
-								</video>
+								<div class="video__wrapper">
+									<video src="<?php echo wp_get_attachment_url($video); ?>" loop muted preload="auto" playsinline></video>
+								</div>
 							</div>
 							<a href="<?php echo get_the_permalink($post_id); ?>" class="ideas__text">
-								<h3><?php echo get_the_title($post_id); ?></h3>
+								<h3><?php echo get_the_title(); ?></h3>
 								<p><?php echo the_excerpt_max_charlength($post_id, 260); ?></p>
 							</a>
 						</div>
@@ -58,7 +66,7 @@ $posts = get_posts( array(
 						<?php
 					}
 			    }
-			    wp_reset_postdata();
+				wp_reset_postdata();
 				 ?>
 			</div>
 
@@ -85,3 +93,5 @@ $posts = get_posts( array(
 	// 	});
 	// });
 </script>
+<?php
+}

@@ -15,4 +15,29 @@ $(document).ready(function() {
         $('.archiveReviewSlider__count').html(slideCount);
     });
 
+    sortingProject();
+
 });
+
+function sortingProject() {
+    const tab = $('.archiveList__cat');
+    replaceItem('webdev');
+
+    tab.on('click', function() {
+        const cat = $(this).data('cat');
+        tab.removeClass('active');
+        $(this).addClass('active');
+        replaceItem(cat);
+    });
+
+    function replaceItem(cat) {
+        $('.projectsList__item').each(function(index, el) {
+            if ($(el).hasClass(cat)) {
+                $(el).addClass('active');
+                $(el).prependTo('.projectsList');
+            } else {
+                $(el).removeClass('active');
+            }
+        });
+    }
+}

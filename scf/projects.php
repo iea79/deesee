@@ -25,6 +25,12 @@ function project_first_section_fields( $settings, $type, $id, $meta_type, $types
 			// Массив полей.
 			array(
 				array(
+					'type'        => 'colorpicker',
+					'name'        => 'project_bg_color',
+					'label'       => 'Project background color',
+					'default'     => '#202020',
+				),
+				array(
 					'name'        => 'first__title',
 					'label'       => 'First section title',
 					'type'        => 'wysiwyg',
@@ -360,9 +366,36 @@ function project_visual_section_fields( $settings, $type, $id, $meta_type, $type
 					'label'       => 'Visuals json animation',
 					'type'        => 'file',
 				),
+				// array(
+				// 	'name'        => 'visual__bg',
+				// 	'label'       => 'Visuals decor image',
+				// 	'type'        => 'image',
+				// 	'size'        => 'small',
+				// ),
+			)
+		);
+
+		// Добавляем в метабокс произвольные поля.
+		$Section->add_group(
+			// ID группы полей.
+			'visual_options',
+			// Повторяемая группа полей? Да - true, Нет - false.
+			true,
+			// Массив полей.
+			array(
 				array(
-					'name'        => 'visual__bg',
-					'label'       => 'Visuals decor image',
+					'name'        => 'visual__name',
+					'label'       => 'Visuals option name',
+					'type'        => 'text',
+				),
+				array(
+					'name'        => 'visual__sub',
+					'label'       => 'Visuals option subtitle',
+					'type'        => 'text',
+				),
+				array(
+					'name'        => 'visual__opt_img',
+					'label'       => 'Visuals option image',
 					'type'        => 'image',
 					'size'        => 'small',
 				),
@@ -671,7 +704,6 @@ function project_mobile_section_fields( $settings, $type, $id, $meta_type, $type
 		// Создаем блок настроек (метабокс).
 		$Section = SCF::add_setting( 'project-11', 'Adaptation section' );
 
-
 		// Добавляем в метабокс произвольные поля.
 		$Section->add_group(
 			// ID группы полей.
@@ -698,19 +730,17 @@ function project_mobile_section_fields( $settings, $type, $id, $meta_type, $type
 					'label'       => 'Adaptation text',
 					'type'        => 'wysiwyg',
 				),
-				array(
-					'name'        => 'desktop__img',
-					'label'       => 'Descktop image',
-					'type'        => 'image',
-					'size'        => 'small',
-					'notes'       => 'either video or image'
-				),
-				array(
-					'name'        => 'desktop__video',
-					'label'       => 'Descktop video',
-					'type'        => 'file',
-					'notes'       => 'video id from YouTube'
-				),
+			)
+		);
+
+		// Добавляем в метабокс произвольные поля.
+		$Section->add_group(
+			// ID группы полей.
+			'mobile_list',
+			// Повторяемая группа полей? Да - true, Нет - false.
+			true,
+			// Массив полей.
+			array(
 				array(
 					'name'        => 'mobile__img',
 					'label'       => 'Mobile image',
@@ -884,7 +914,7 @@ function project_team_template_fields( $settings, $type, $id, $meta_type, $types
 					'name'        => 'team__title',
 					'label'       => 'Team title',
 					'type'        => 'wysiwyg',
-					'default'     => '<p>Worked on the <span style="color: red">project</span></p>',
+					'default'     => '<p>Worked on the <span style="color: #DDC181">project</span></p>',
 				),
 				array(
 					'name'        => 'top_member',
@@ -893,6 +923,12 @@ function project_team_template_fields( $settings, $type, $id, $meta_type, $types
 					'post-type'   => array('teams'),
 					'limit'       => -1,
 					'notes'       => 'no limits',
+				),
+				array(
+					'type'        => 'colorpicker',
+					'name'        => 'team_color',
+					'label'       => 'Photo background color',
+					'default'     => '#262626',
 				),
 			)
 		);
@@ -964,3 +1000,38 @@ function project_started_section_fields( $settings, $type, $id, $meta_type, $typ
 	return $settings;
 }
 add_filter( 'smart-cf-register-fields', 'project_started_section_fields', 10, 5 );
+
+// Регистрация метабоксов и произвольных полей.
+function project_map_section_fields( $settings, $type, $id, $meta_type, $types ) {
+	// Отображаем поля только на странице редактирования Записи
+	// var_dump($type);
+	if ( $type === PROJ_TYPE_NAME && get_page_template_slug( $id ) == '' ) {
+
+		// Создаем блок настроек (метабокс).
+		$Section = SCF::add_setting( 'project-14', 'Map image' );
+
+
+		// Добавляем в метабокс произвольные поля.
+		$Section->add_group(
+			// ID группы полей.
+			'map-section',
+			// Повторяемая группа полей? Да - true, Нет - false.
+			false,
+			// Массив полей.
+			array(
+				array(
+					'name'        => 'map_image',
+					'label'       => 'Map image if needed',
+					'type'        => 'image',
+					'size'        => 'medium',
+				),
+			)
+		);
+
+		// Добавляем информацию о наших полях в общий массив.
+		$settings[] = $Section;
+	}
+
+	return $settings;
+}
+add_filter( 'smart-cf-register-fields', 'project_map_section_fields', 10, 5 );

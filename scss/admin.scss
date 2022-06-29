@@ -1,0 +1,8 @@
+.wp-admin {
+    &.post-type-projects {
+        // Hide content editor/ Fix color picker from wysiwyg editor
+        .postarea {
+            display: none;
+        }
+    }
+}

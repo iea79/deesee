@@ -61,9 +61,20 @@
                     while ( $queryPosts->have_posts() ) {
                         $queryPosts->the_post();
                         // the_title();
+                        $video = SCF::get( 'post__video_file' );
                         ?>
                         <div class="postsRealted__item">
-                            <a href="<?php the_permalink(); ?>" class="postsRealted__img"><?php the_post_thumbnail(); ?></a>
+                            <?php if ($video): ?>
+                                <div class="postsRealted__video">
+                                    <video src="<?php echo wp_get_attachment_url($video) ?>" autoplay loop controls></video>
+                                </div>
+                            <?php else: ?>
+                                <a href="<?php the_permalink(); ?>" class="postsRealted__img">
+                                    <?php
+                                    the_post_thumbnail();
+                                    ?>
+                                </a>
+                            <?php endif; ?>
                             <div class="postsRealted__name"><?php the_title(); ?></div>
                             <div class="postsRealted__text"><?php the_excerpt_max_charlength($post->ID, 100); ?></div>
                             <div class="postsRealted__more">

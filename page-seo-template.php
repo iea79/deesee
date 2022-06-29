@@ -263,23 +263,23 @@ get_header();
 <?php endif; ?>
 
 <?php
-$works = get_posts( array(
-	'numberposts' => 6,
-	'category'    => 0,
-	// 'include'     => array(),
-	'exclude'     => array($post->ID),
-	// 'meta_key'    => '',
-	// 'meta_value'  =>'',
-	'post_type'   => 'projects',
-	// 'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
-) );
+// $works = get_posts( array(
+// 	'numberposts' => 6,
+// 	'category'    => 0,
+// 	// 'include'     => array(),
+// 	'exclude'     => array($post->ID),
+// 	// 'meta_key'    => '',
+// 	// 'meta_value'  =>'',
+// 	'post_type'   => 'projects',
+// 	// 'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+// ) );
 ?>
 <!-- begin ideas -->
-<section id="ideas" class="ideas section">
+<!-- <section id="ideas" class="ideas section">
 	<div class="container_center">
 		<div class="ideas__content">
 			<div class="slider__head">
-				<h2 class="section__title">Our <span style="color: red">works</span></h2>
+				<h2 class="section__title">Our <span style="color: #DDC181">works</span></h2>
 				<div class="slider__arrow">
 					<div class="slick-arrow slick-prev ideas__prev"></div>
 					<div class="slick-arrow slick-next ideas__next"></div>
@@ -337,7 +337,7 @@ $works = get_posts( array(
 			</div>
 		</div>
 	</div>
-</section>
+</section> -->
 <!-- end ideas -->
 
 <script>

@@ -16,7 +16,7 @@ get_header();
 		<!-- Begin container_center -->
 		<div class="container_center">
 			<header class="page-header">
-				<div class="section__title" style="color: red;">404</div>
+				<div class="section__title" style="color: #DDC181;">404</div>
 				<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'frondendie' ); ?></h1>
 			</header><!-- .page-header -->
 
