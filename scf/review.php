@@ -33,12 +33,12 @@ function reviews_fields( $settings, $type, $id, $meta_type, $types ) {
 					'type'        => 'image',
 					'size'        => 'medium',
 				),
-				array(
-					'name'        => 'review__video_prev_vertical',
-					'label'       => 'Video review thumbnails vertical',
-					'type'        => 'image',
-					'size'        => 'medium',
-				),
+				// array(
+				// 	'name'        => 'review__video_prev_vertical',
+				// 	'label'       => 'Video review thumbnails vertical',
+				// 	'type'        => 'image',
+				// 	'size'        => 'medium',
+				// ),
 			)
 		);
 

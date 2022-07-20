@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Development page template NEW
+Template Name: SEO page template NEW
 Template Post Type: page
 */
 // strip_tags($input, '<br>');
@@ -12,14 +12,16 @@ get_header();
 	    <div class="container_center">
 	        <div class="devFirst__content">
 	            <div class="devFirst__left">
-	                <h1 class="section__title"><?php echo strip_tags(SCF::get( 'first__title' ), '<span>') ?></h1>
-	                <div class="devFirst__anchor"></div>
+	                <h1 class="section__title"><?php echo strip_tags(SCF::get( 'first__title' ), '<span>, <br>') ?></h1>
+	                <div class="devFirst__text">
+	                	<?php echo SCF::get( 'first__text' ) ?>
+	                </div>
 	            </div>
 	            <div class="devFirst__right">
 					<div class="devFirst__link">
 						<a href="<?php echo SCF::get( 'first__btn_link' ); ?>" class="btn btn_border btn_round btn_round_md"><?php echo SCF::get( 'first__btn' ); ?></a>
 					</div>
-					<h2 class="section__title"><?php echo strip_tags(SCF::get( 'first__text' ), '<span>') ?></h2>
+					<h2 class="section__title"><?php echo strip_tags(SCF::get( 'first__sub' ), '<span>, <br>') ?></h2>
 	            </div>
 				<div class="devFirst__img">
 					<?php echo wp_get_attachment_image(SCF::get( 'first__img' ),'full') ?>
@@ -37,9 +39,15 @@ get_header();
 			</div>
 			<div class="devPortfolio__head">
 				<h2 class="section__title"><?php echo strip_tags(SCF::get( 'portfolio__title' ), '<span>'); ?></h2>
-				<div class="devPortfolio__action">
-					<a href="<?php echo SCF::get( 'portfolio__btn_link' ); ?>" class="btn btn_border btn_round btn_round_md" target="_blank"><?php echo SCF::get( 'portfolio__btn' ); ?></a>
-				</div>
+					<?php if (SCF::get( 'portfolio__text' )): ?>
+						<div class="devPortfolio__text">
+							<?php echo SCF::get( 'portfolio__text' ); ?>
+						</div>
+					<?php else: ?>
+						<div class="devPortfolio__action">
+							<a href="<?php echo SCF::get( 'portfolio__btn_link' ); ?>" class="btn btn_border btn_round btn_round_md" target="_blank"><?php echo SCF::get( 'portfolio__btn' ); ?></a>
+						</div>
+					<?php endif; ?>
 			</div>
 	        <div class="devPortfolio__list">
 				<?php
@@ -65,63 +73,59 @@ get_header();
 	</section>
 	<!-- end devPortfolio -->
 
-	<!-- begin devWhy -->
-	<section id="devWhy" class="devWhy section section_light">
+	<!-- begin seoWhy -->
+	<section id="seoWhy" class="seoWhy section section_light">
 	    <div class="container_center">
 			<div class="devAnchore" id="<?php echo SCF::get( 'why__anchor' ); ?>">
 				<span><?php echo SCF::get( 'why__anchor_name' ); ?></span>
 			</div>
 			<h2 class="section__title"><?php echo strip_tags(SCF::get( 'why__title' ), '<span>'); ?></h2>
-	        <div class="devWhy__content">
-	            <div class="devWhy__left">
-	                <div class="devWhy__text"><?php echo SCF::get( 'why__text' ); ?></div>
-	            </div>
-	            <div class="devWhy__right">
-					<div class="devWhy__points">
-						<?php
-							$why_points = SCF::get('why_points');
+			<div class="seoWhy__text"><?php echo SCF::get( 'why__text' ); ?></div>
+			<div class="seoWhy__points">
+				<?php
+				$why_points = SCF::get('why_points');
 
-							foreach ($why_points as $item) {
-								?>
-									<div class="devWhy__row">
-										<div class="devWhy__percent"><?php echo $item['why__percent'] ?></div>
-										<div class="devWhy__row_text"><?php echo $item['why__row_text'] ?></div>
-									</div>
-								<?php
-							};
-						?>
+				foreach ($why_points as $item) {
+					?>
+					<div class="seoWhy__row">
+						<div class="seoWhy__row_text"><?php echo $item['why__row_text'] ?></div>
 					</div>
-	            </div>
-	        </div>
-			<div class="devWhy__action">
-				<a href="<?php echo SCF::get( 'why__btn_link' ); ?>" class="btn btn_border btn_round btn_round_contrast btn_round_md"><?php echo SCF::get( 'why__btn' ); ?></a>
+					<?php
+				};
+				?>
 			</div>
 	    </div>
-		<div class="devWhy__img">
-			<?php echo wp_get_attachment_image(SCF::get( 'why__img' ),'full') ?>
+		<div class="seoWhy__video">
+			<?php if (SCF::get( 'why__video' )): ?>
+				<video src="<?php echo wp_get_attachment_url(SCF::get( 'why__video' )) ?>" autoplay muted loop></video>
+			<?php else: ?>
+				<?php echo wp_get_attachment_image(SCF::get( 'why__img' ),'full') ?>
+			<?php endif; ?>
 		</div>
 	</section>
-	<!-- end devWhy -->
+	<!-- end seoWhy -->
 
-	<!-- begin devNoticed -->
-	<section id="devNoticed" class="devNoticed section">
+	<!-- begin devMarketing -->
+	<section id="devMarketing" class="devMarketing section">
 	    <div class="container_center">
-			<div class="devAnchore" id="<?php echo SCF::get( 'noticed__anchor' ); ?>">
-				<span><?php echo SCF::get( 'noticed__anchor_name' ); ?></span>
+			<div class="devAnchore" id="<?php echo SCF::get( 'marketing__anchor' ); ?>">
+				<span><?php echo SCF::get( 'marketing__anchor_name' ); ?></span>
 			</div>
-	        <div class="devNoticed__content">
-                <h2 class="section__title"><?php echo strip_tags(SCF::get( 'noticed__title' ), '<span>'); ?></h2>
-                <div class="section__sub"><?php echo SCF::get( 'noticed__text' ); ?></div>
+	        <div class="devMarketing__content">
+                <h2 class="section__title"><?php echo strip_tags(SCF::get( 'marketing__title' ), '<span>'); ?></h2>
+                <div class="section__sub"><?php echo SCF::get( 'marketing__text' ); ?></div>
 			</div>
-            <div class="devNoticed__list">
+            <div class="devMarketing__list">
 				<?php
-					$noticed_list = SCF::get('noticed_list');
+					$marketing_list = SCF::get('marketing_list');
 
-					foreach ($noticed_list as $item) {
+					foreach ($marketing_list as $item) {
 						?>
-							<div class="devNoticed__item">
-								<?php echo wp_get_attachment_image($item['noticed__img'],'full') ?>
-								<div class="devNoticed__name"><?php echo $item['noticed__name'] ?></div>
+							<div class="devMarketing__item">
+								<div class="devMarketing__abbr"><?php echo $item['marketing__abbr'] ?></div>
+								<div class="devMarketing__name"><?php echo $item['marketing__name'] ?></div>
+								<div class="devMarketing__text"><?php echo $item['marketing__sub'] ?></div>
+								<a href="<?php echo $item['marketing__link'] ?>" class="devMarketing__more">MORE</a>
 							</div>
 						<?php
 					};
@@ -129,103 +133,92 @@ get_header();
             </div>
 	    </div>
 	</section>
-	<!-- end devNoticed -->
+	<!-- end devMarketing -->
 
-	<!-- begin devProsCons -->
-	<section id="devProsCons" class="devProsCons section">
+	<!-- begin devFaq -->
+	<section id="devFaq" class="devFaq section">
 	    <div class="container_center">
-			<div class="devAnchore" id="<?php echo SCF::get( 'cons__anchor' ); ?>">
-				<span><?php echo SCF::get( 'cons__anchor_name' ); ?></span>
+			<div class="devAnchore" id="<?php echo SCF::get( 'faq__anchor' ); ?>">
+				<span><?php echo SCF::get( 'faq__anchor_name' ); ?></span>
 			</div>
-			<div class="devProsCons__head">
-				<h2 class="section__title"><?php echo strip_tags(SCF::get( 'cons__title' ), '<span>'); ?></h2>
-				<div class="section__sub"><?php echo SCF::get( 'cons__text' ); ?></div>
+	        <div class="devFaq__content">
+                <h2 class="section__title"><?php echo strip_tags(SCF::get( 'faq__title' ), '<span>'); ?></h2>
 			</div>
-	        <div class="devProsCons__content">
-				<div class="devProsCons__col">
-					<div class="devProsCons__title"><?php echo SCF::get( 'cons__builder_title' ); ?></div>
-					<ul class="devProsCons__list">
-						<?php
-							$cons_builder_plus_list = SCF::get('cons_builder_plus_list');
+            <div class="devFaq__list">
+				<?php
+					$faq_list = SCF::get('faq_list');
 
-							foreach ($cons_builder_plus_list as $item) {
-								?>
-									<li class="devProsCons__plus"><span><?php echo $item['cons__builder_plus'] ?></span></li>
-								<?php
-							};
+					foreach ($faq_list as $item) {
 						?>
-					</ul>
-					<ul class="devProsCons__list">
+							<div class="devFaq__item">
+								<div class="devFaq__text"><?php echo $item['faq__text'] ?></div>
+							</div>
 						<?php
-							$cons_builder_minus_list = SCF::get('cons_builder_minus_list');
-
-							foreach ($cons_builder_minus_list as $item) {
-								?>
-									<li class="devProsCons__minus"><span><?php echo $item['cons__builder_minus'] ?></span></li>
-								<?php
-							};
-						?>
-					</ul>
-		        </div>
-		        <div class="devProsCons__col">
-					<div class="devProsCons__title"><?php echo SCF::get( 'cons__custom_title' ); ?></div>
-					<ul class="devProsCons__list">
-						<?php
-							$cons_custom_plus_list = SCF::get('cons_custom_plus_list');
-
-							foreach ($cons_custom_plus_list as $item) {
-								?>
-									<li class="devProsCons__plus"><span><?php echo $item['cons__custom_plus'] ?></span></li>
-								<?php
-							};
-						?>
-					</ul>
-					<ul class="devProsCons__list">
-						<?php
-							$cons_custom_minus_list = SCF::get('cons_custom_minus_list');
-
-							foreach ($cons_custom_minus_list as $item) {
-								?>
-									<li class="devProsCons__minus"><span><?php echo $item['cons__custom_minus'] ?></span></li>
-								<?php
-							};
-						?>
-					</ul>
-		        </div>
-			</div>
+					};
+				?>
+            </div>
+			<?php if (SCF::get('counter__toggle')): ?>
+				<!-- semrush siteaudit widget -->
+				<div class="devFaq__form dayCounter">
+					<div class="dayCounter__title"><?php echo SCF::get( 'counter__title' ); ?></div>
+					<div class="dayCounter__content">
+						<div class="dayCounter__col">
+							<div class="dayCounter__label">Hours</div>
+							<div class="dayCounter__count hours">00</div>
+						</div>
+						<div class="dayCounter__sep">:</div>
+						<div class="dayCounter__col">
+							<div class="dayCounter__label">Minutes</div>
+							<div class="dayCounter__count minutes">12</div>
+						</div>
+						<div class="dayCounter__sep">:</div>
+						<div class="dayCounter__col">
+							<div class="dayCounter__label">Seconds</div>
+							<div class="dayCounter__count seconds">34</div>
+						</div>
+					</div>
+					<div class="dayCounter__sub"><?php echo strip_tags(SCF::get( 'counter__sub' ), '<b>, <strong>'); ?></div>
+					<div id="ssa-widget"></div>
+				</div>
+				<?php echo SCF::get( 'faq__counter' ); ?>
+				<!-- /semrush siteaudit widget -->
+			<?php endif; ?>
 	    </div>
 	</section>
-	<!-- end devProsCons -->
+	<!-- end devFaq -->
 
-	<!-- begin devServices -->
-	<section id="devServices" class="devServices section">
+	<!-- begin seoServices -->
+	<section id="seoServices" class="seoServices section">
 	    <div class="container_center">
-	        <div class="devServices__content">
-	            <div class="devServices__haed">
-					<div class="devAnchore" id="<?php echo SCF::get( 'services__anchor' ); ?>">
-						<span><?php echo SCF::get( 'services__anchor_name' ); ?></span>
-					</div>
-	                <h2 class="section__title"><?php echo strip_tags(SCF::get( 'services__title' ), '<span>, <br>'); ?></h2>
-	            </div>
+			<div class="seoServices__haed">
+				<div class="devAnchore" id="<?php echo SCF::get( 'services__anchor' ); ?>">
+					<span><?php echo SCF::get( 'services__anchor_name' ); ?></span>
+				</div>
+				<h2 class="section__title"><?php echo strip_tags(SCF::get( 'services__title' ), '<span>, <br>'); ?></h2>
+			</div>
+	        <div class="seoServices__content">
 				<?php
 					$services_list = SCF::get('services_list');
 
 					foreach ($services_list as $item) {
 						?>
-							<div class="devServices__item">
-								<div class="devServices__title"><?php echo $item['services__item_title'] ?></div>
-								<div class="devServices__text"><?php echo $item['services__item_text'] ?></div>
-								<div class="devServices__action">
-									<button data-form="<?php echo $item['services__item_title'] ?>" class="btn btn_round btn_border btn_round_md" data-toggle="modal" data-target="#orderModal">Order</button>
-									<a href="<?php echo $item['services__item_link'] ?>">See example</a>
+							<div class="seoServices__item">
+								<div class="seoServices__img">
+									<?php echo wp_get_attachment_image($item[ 'services__img' ],'full') ?>
+								</div>
+								<div class="seoServices__body">
+									<div class="devServices__title"><?php echo $item['services__item_title'] ?></div>
+									<div class="devServices__text"><?php echo $item['services__item_text'] ?></div>
+									<div class="devServices__action">
+										<button data-form="<?php echo $item['services__item_title'] ?>" class="btn btn_round btn_border btn_round_md" data-toggle="modal" data-target="#orderModal">Order</button>
+										<span><?php echo $item['services__item_price_link'] ?></span>
+										<a href="#" data-form="<?php echo $item['services__item_title'] ?>" data-toggle="modal" data-target="#sampleModal">Sample</a>
+									</div>
 								</div>
 							</div>
 						<?php
 					};
 				?>
-				<div class="devServices__img">
-					<?php echo wp_get_attachment_image(SCF::get( 'services__img' ),'full') ?>
-				</div>
 	        </div>
 	    </div>
 
@@ -239,14 +232,35 @@ get_header();
 					</div>
 					<div class="modal-body">
 						<div class="modal-title">Do you want to order a UI/UX design service?</div>
-						<?php echo do_shortcode( '[contact-form-7 id="984" title="Oreder modal form from development templdate"]' ); ?>
+						<div class="orderModal__form">
+							<?php echo do_shortcode( '[contact-form-7 id="984" title="Oreder modal form from development templdate"]' ); ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end Modal orderModal -->
+
+		<!-- begin Modal orderModal -->
+		<div class="modal fade orderModal orderModal_sample" id="sampleModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<a href="#" class="modal-close" data-dismiss="modal"></a>
+					<div class="orderModal__header">
+						<img src="<?php echo get_template_directory_uri() . '/img/order-head.jpg' ?>" alt="">
+					</div>
+					<div class="modal-body">
+						<div class="modal-title">Email you`d like us to send your sample to</div>
+						<div class="orderModal__form orderModal__form_single">
+							<?php echo do_shortcode( '[contact-form-7 id="1096" title="Oreder modal form from seo sample template"]' ); ?>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- end Modal orderModal -->
 	</section>
-	<!-- end devServices -->
+	<!-- end seoServices -->
 
 	<!-- begin devChoose -->
 	<section id="devChoose" class="devChoose section section_light">
@@ -257,7 +271,7 @@ get_header();
 	        <div class="devChoose__content">
 	            <div class="devChoose__left">
 	                <h2 class="section__title"><?php echo strip_tags(SCF::get( 'choose__title' ), '<span>, <br>'); ?></h2>
-	                <a href="" class="devChoose__action desktop">
+	                <a href="<?php echo SCF::get( 'choose__link' ); ?>" class="devChoose__action desktop">
 	                	<?php echo wp_get_attachment_image(SCF::get( 'choose__img' ),'full') ?>
 						<span><?php echo SCF::get( 'choose__text' ); ?></span>
 	                </a>
@@ -368,7 +382,8 @@ get_header();
 
 					// var_dump($process_list);
 					$i = 0;
-					$semi = count($process_list)/2;
+					$list_lenght = count($process_list);
+					$semi = round($list_lenght/2);
 
 					// var_dump($semi);
 
@@ -390,10 +405,18 @@ get_header();
 							</div>
 						<?php
 						$i++;
-						if ($i == $semi) {
-							?>
-							<div class="devProcess__visibled"></div>
-							<?php
+						if ($list_lenght > 5) {
+							if ($i == $semi) {
+								?>
+								<div class="devProcess__visibled"></div>
+								<?php
+							}
+						} else {
+							if ($i == $list_lenght) {
+								?>
+								<div class="devProcess__visibled"></div>
+								<?php
+							}
 						}
 					};
 				?>

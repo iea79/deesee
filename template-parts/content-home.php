@@ -77,7 +77,61 @@
 </section>
 <!-- end canHelp -->
 
-<!-- begin design -->
+<!-- begin devProcess -->
+<section id="devProcess" class="devProcess section">
+	<div class="container_center">
+		<h2 class="section__title"><?php echo strip_tags(SCF::get( 'design__title' ), '<span>, <br>'); ?></h2>
+		<div class="devProcess__list">
+			<?php
+				$process_list = SCF::get('design__tabs');
+
+				// var_dump($process_list);
+				$i = 0;
+				$list_lenght = count($process_list);
+				$semi = round($list_lenght/2);
+
+				// var_dump($semi);
+
+				foreach ($process_list as $item) {
+					?>
+						<div class="devProcess__item">
+							<div class="devProcess__toggle">
+								<div class="devProcess__name"><?php echo $item['design__tab'] ?></div>
+							</div>
+							<div class="devProcess__content">
+								<div class="devProcess__descr">
+									<div class="devProcess__title"><?php echo $item['design__tab'] ?></div>
+									<div class="devProcess__text"><?php echo $item['design__text'] ?></div>
+								</div>
+								<div class="devProcess__img">
+									<?php echo wp_get_attachment_image($item['design__img'],'full') ?>
+								</div>
+							</div>
+						</div>
+					<?php
+					$i++;
+					if ($list_lenght > 5) {
+						if ($i == $semi) {
+							?>
+							<div class="devProcess__visibled"></div>
+							<?php
+						}
+					} else {
+						if ($i == $list_lenght) {
+							?>
+							<div class="devProcess__visibled"></div>
+							<?php
+						}
+					}
+				};
+			?>
+		</div>
+	</div>
+</section>
+<!-- end devProcess -->
+
+
+<!-- begin design
 <section id="design" class="design section">
 	<div class="container_center">
 		<div class="design__head">
@@ -124,7 +178,7 @@
 		</div>
 	</div>
 </section>
-<!-- end design -->
+end design -->
 
 <!-- begin claimOffer -->
 <section id="claimOffer" class="claimOffer section">
@@ -153,9 +207,75 @@ require get_template_directory() . '/inc/ideas.php';
 
 <div class="bottomBox">
 
+<!-- begin devReviews -->
+<section id="devReviews" class="devReviews section">
+	<div class="container_center">
+		<h2 class="section__title">Testimonials</h2>
+		<div class="devReviews__slider">
+			<?php
+				$reiew_list = SCF::get('reiew__name');
+				// var_dump($reiew_list);
+
+				$reviews = new WP_Query([
+					'post_type'   => 'reviews',
+					'orderby' => 'post__in',
+					'post__in'	  => $reiew_list
+				]);
+
+				while ( $reviews->have_posts() ) {
+					$reviews->the_post();
+					$title = get_the_title();
+					$head = explode(',', $title);
+					$headCount = count($head);
+					$scf = SCF::gets();
+					// var_dump($scf);
+					// var_dump(count($head));
+					$ytlink = $scf['review__video'];
+					$video = $scf['review__video_file'];
+					$preview = $scf['review__video_prev'];
+					?>
+						<div class="devReviews__item">
+							<div class="devReviews__video desktop">
+								<?php if ($video): ?>
+									<div class="devReviews__video_file">
+										<video src="<?php echo wp_get_attachment_url($video) ?>" poster="<?php echo wp_get_attachment_url($preview) ?>" data-play-btn></video>
+										<div class="devReviews__video_prev">
+											<?php echo wp_get_attachment_image($preview,'full') ?>
+										</div>
+										<div class="devReviews__play"></div>
+									</div>
+								<?php else: ?>
+									<?php the_post_thumbnail(); ?>
+								<?php endif; ?>
+							</div>
+							<div class="devReviews__content">
+								<div class="devReviews__head">
+									<div class="devReviews__video mobile">
+										<?php the_post_thumbnail(); ?>
+									</div>
+									<div class="devReviews__col">
+										<div class="devReviews__name"><?php echo $head[0]; ?></div>
+										<?php if ($headCount > 1): ?>
+											<div class="devReviews__comp"><?php echo $head[1]; ?></div>
+										<?php endif; ?>
+									</div>
+								</div>
+								<div class="devReviews__text"><?php the_content(); ?></div>
+							</div>
+						</div>
+					<?php
+				};
+				wp_reset_postdata();
+			?>
+		</div>
+	</div>
+</section>
+<!-- end devReviews -->
+
+
 <?php
 
-require get_template_directory() . '/inc/review-section.php';
+// require get_template_directory() . '/inc/review-section.php';
 
 require get_template_directory() . '/inc/get-touch.php';
 

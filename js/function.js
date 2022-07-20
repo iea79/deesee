@@ -149,8 +149,34 @@ $(document).ready(function() {
         $('[project-type]').val($(this).val());
     });
 
+    $('.devReviews__slider').slick({
+        dots: true,
+        infinite: true,
+        arrows: true,
+        nextArrow: '<button class="slick-next"></button>',
+        prevArrow: '<button class="slick-prev"></button>',
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    arrows: false,
+                    dots: true,
+                    adaptiveHeight: true
+                }
+            }
+        ]
+    });
+
+
+
     showPlaceholderInDateField();
+
+    toggleDevList();
     // toggleRequiredEmail();
+
+    playStopReviewVideo();
 
 });
 
@@ -432,6 +458,55 @@ function onVisible( selector, callback, playback, threshold=[0.5] ) {
     }
 }
 
+function toggleDevList() {
+    const item = $('.devProcess__item');
+    const visibled = $('.devProcess__visibled');
+    const itemInit = $('.devProcess__item:first-child');
+
+    itemInit.addClass('active');
+    renderActive();
+
+    item.on('click', function() {
+        item.removeClass('active');
+        $(this).addClass('active');
+        renderActive();
+    });
+
+    function renderActive() {
+        item.each((i, item) => {
+            if ($(item).hasClass('active')) {
+                const content = $(item).find('.devProcess__content');
+                visibled.html('');
+                content.clone().appendTo(visibled);
+            }
+        });
+    }
+}
+
+function playStopReviewVideo() {
+    let isPlayed = false;
+
+    $('.devReviews__play').on('click', function(e) {
+        const btn = $(this);
+        const wrap = btn.closest('.devReviews__video');
+        const prev = wrap.find('.devReviews__video_prev');
+        const video = wrap.find('video');
+
+        isPlayed = true;
+        btn.hide();
+        prev.hide();
+        video.trigger('play');
+
+
+        video.on('click', () => {
+            btn.show();
+            prev.show();
+            video.trigger('pause');
+        })
+    })
+}
+
+
 function selectStyler() {
     $('select').each(function () {
         var $this = $(this),
@@ -480,7 +555,7 @@ function selectStyler() {
 }
 
 
-onVisible( 'video', function(video) {
+onVisible( 'video:not([data-play-btn])', function(video) {
     // console.log('visible');
     video.play();
     // if (!video.onplaying) {
