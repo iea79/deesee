@@ -32,6 +32,7 @@ function reviews_fields( $settings, $type, $id, $meta_type, $types ) {
 					'label'       => 'Video review thumbnails',
 					'type'        => 'image',
 					'size'        => 'medium',
+					'notes'       => 'Can be used instead of a featured image without video'
 				),
 				// array(
 				// 	'name'        => 'review__video_prev_vertical',

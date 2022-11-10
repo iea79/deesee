@@ -1,8 +1,11 @@
 (function () {
     let players = document.querySelectorAll('.video__wrapper');
 
-    players.forEach((player, i) => {
-    });
+    if ($(window).width() > 767) {
+        $('.sub-menu').css('background', document.body.style.background);
+    } else {
+        $('.sub-menu').css('background', '');
+    }
 
     document.querySelectorAll('.lotti').forEach((el, i) => {
         lottie.loadAnimation({

@@ -52,19 +52,42 @@
 	&__copy {
 		font-size: 1.125em;
 		margin-bottom: 2em;
+		display: flex;
+		flex-direction: column;
 
 		@media (min-width: 768px) {
 			margin-bottom: 0;
+			align-items: center;
+		}
+
+		a {
+			color: #B3B3B3;
+			text-decoration-color: transparent;
+
+			&:nth-child(n+2) {
+				margin-top: 0.5em;
+			}
+
+			&:hover {
+				text-decoration-color: inherit;
+			}
 		}
 	}
 
 	&__terms {
 		font-size: 1.125em;
+		display: flex;
+		flex-direction: column;
+
+		@media (min-width: 768px) {
+			align-items: flex-end;
+		}
 
 		a {
 			color: #B3B3B3;
 			text-decoration-color: transparent;
 			margin-right: 3em;
+			margin-top: 0.6em;
 
 			@media (min-width: 768px) {
 				margin-left: 3em;

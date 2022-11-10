@@ -302,6 +302,16 @@ function toggleTabs() {
 }
 toggleTabs();
 
+function collapseElem() {
+    const toggle = $('[data-collapse]');
+
+    toggle.on('click', function() {
+        const wrapper = $(this).parent();
+        wrapper.toggleClass('open');
+    });
+}
+collapseElem()
+
 function openMobileNav() {
     $('.menu__toggle').on('click', function() {
         var wrapp = $('.nav');
@@ -459,9 +469,16 @@ function onVisible( selector, callback, playback, threshold=[0.5] ) {
 }
 
 function toggleDevList() {
+    let visibled = $('.devProcess__visibled');
     const item = $('.devProcess__item');
-    const visibled = $('.devProcess__visibled');
     const itemInit = $('.devProcess__item:first-child');
+
+    if (item.length <= 5 && !visibled.length) {
+        const div = document.createElement('div');
+        div.classList.add('devProcess__visibled');
+        $(div).insertAfter($(item).last());
+        visibled = $('.devProcess__visibled');
+    }
 
     itemInit.addClass('active');
     renderActive();
@@ -484,25 +501,17 @@ function toggleDevList() {
 }
 
 function playStopReviewVideo() {
-    let isPlayed = false;
-
     $('.devReviews__play').on('click', function(e) {
         const btn = $(this);
-        const wrap = btn.closest('.devReviews__video');
-        const prev = wrap.find('.devReviews__video_prev');
-        const video = wrap.find('video');
+        const modal = btn.data('target');
+        const video = $(modal).find('video');
 
-        isPlayed = true;
-        btn.hide();
-        prev.hide();
         video.trigger('play');
 
-
-        video.on('click', () => {
-            btn.show();
-            prev.show();
+        $(modal).on('hide.bs.modal', () => {
+            console.log('close');
             video.trigger('pause');
-        })
+        });
     })
 }
 

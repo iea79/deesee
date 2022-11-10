@@ -9,7 +9,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.0.2' );
+	define( '_S_VERSION', '1.0.3' );
 }
 
 if ( ! function_exists( 'frondendie_setup' ) ) :
@@ -179,9 +179,14 @@ function frondendie_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 
-	if (is_page_template('page-development-template.php') || is_page_template('page-seo-template-new.php')) {
+	if (is_page_template('page-development-template.php') || is_page_template('page-seo-template-new.php') || is_page_template('page-web-design-template.php')) {
 		wp_enqueue_style( 'development-style', get_template_directory_uri() . '/css/development.css', array(), _S_VERSION );
 		wp_enqueue_script( 'development-scripts', get_template_directory_uri() . '/js/development.js', '', _S_VERSION, true );
+	}
+
+	if (is_page_template('page-web-design-template.php')) {
+		wp_enqueue_style( 'webdisign-style', get_template_directory_uri() . '/css/webdisign.css', array(), _S_VERSION );
+		wp_enqueue_script( 'webdisign-scripts', get_template_directory_uri() . '/js/webdisign.js', '', _S_VERSION, true );
 	}
 
 }
@@ -219,6 +224,11 @@ require get_template_directory() . '/inc/customizer.php';
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
+
+/**
+ * SCF fields functions
+ */
+require get_template_directory() . '/scf/functions.php';
 
 /**
  * Template case developement
@@ -269,6 +279,11 @@ require get_template_directory() . '/scf/team.php';
  * Get About us pages template
  */
 require get_template_directory() . '/scf/about-us.php';
+
+/**
+ * Get Web design pages template
+ */
+require get_template_directory() . '/scf/web-design-template.php';
 
 
 /**
@@ -442,7 +457,7 @@ function breadcrumbs(){
 
 		} elseif ( is_single() && !is_front_page() ){ // записи
 
-			echo '<a href="' . site_url() . '/blog">Blog</a>' . $separator . get_the_title();
+			echo '<a href="' . site_url() . '/blog/">Blog</a>' . $separator . get_the_title();
 
 		} elseif ( is_page() && !is_front_page() ){ // страницы WordPress
 
@@ -609,3 +624,9 @@ function save_sticky_project_option( $post_id ) {
 
 // Disable Wordpress Big Image Size Scaling
 add_filter( 'big_image_size_threshold', '__return_false' );
+
+
+function getUrlMimeType($url) {
+	$file_info = pathinfo($url);
+	return $file_info['extension'];
+}

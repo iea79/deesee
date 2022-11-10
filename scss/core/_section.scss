@@ -30,4 +30,30 @@
             font-size: 1.5em;
         }
     }
+
+    &_light {
+        background: #FEFAF1;
+        color: #202020;
+
+        .section {
+            &__title {
+                color: #202020;
+            }
+
+        }
+
+        .devAnchore {
+            &:after {
+                color: #202020;
+            }
+
+            span {
+                color: #202020;
+
+                &:before {
+                    background: #202020;
+                }
+            }
+        }
+    }
 }

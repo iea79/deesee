@@ -208,10 +208,10 @@ get_header();
 								</div>
 								<div class="seoServices__body">
 									<div class="devServices__title"><?php echo $item['services__item_title'] ?></div>
+									<div class="devServices__price"><span><?php echo $item['services__item_price_link'] ?></span></div>
 									<div class="devServices__text"><?php echo $item['services__item_text'] ?></div>
 									<div class="devServices__action">
 										<button data-form="<?php echo $item['services__item_title'] ?>" class="btn btn_round btn_border btn_round_md" data-toggle="modal" data-target="#orderModal">Order</button>
-										<span><?php echo $item['services__item_price_link'] ?></span>
 										<a href="#" data-form="<?php echo $item['services__item_title'] ?>" data-toggle="modal" data-target="#sampleModal">Sample</a>
 									</div>
 								</div>
@@ -301,73 +301,9 @@ get_header();
 	</section>
 	<!-- end devChoose -->
 
-	<!-- begin devReviews -->
-	<section id="devReviews" class="devReviews section section_light">
-	    <div class="container_center">
-			<div class="devAnchore" id="<?php echo SCF::get( 'reiew__anchor_name' ); ?>">
-				<span><?php echo SCF::get( 'reiew__anchor_name' ); ?></span>
-			</div>
-			<h2 class="section__title"><?php echo strip_tags(SCF::get( 'reiew__title' ), '<span>, <br>'); ?></h2>
-	        <div class="devReviews__slider">
-				<?php
-					$reiew_list = SCF::get('reiew__name');
-					// var_dump($reiew_list);
+	<?php require get_template_directory() . '/inc/dev-review-section.php'; ?>
 
-					$reviews = new WP_Query([
-						'post_type'   => 'reviews',
-						'orderby' => 'post__in',
-						'post__in'	  => $reiew_list
-					]);
-
-					while ( $reviews->have_posts() ) {
-						$reviews->the_post();
-						$title = get_the_title();
-						$head = explode(',', $title);
-						$headCount = count($head);
-						$scf = SCF::gets();
-						// var_dump($scf);
-						// var_dump(count($head));
-						$ytlink = $scf['review__video'];
-						$video = $scf['review__video_file'];
-						$preview = $scf['review__video_prev'];
-						?>
-							<div class="devReviews__item">
-								<div class="devReviews__video desktop">
-									<?php if ($video): ?>
-										<div class="devReviews__video_file">
-											<video src="<?php echo wp_get_attachment_url($video) ?>" poster="<?php echo wp_get_attachment_url($preview) ?>" data-play-btn></video>
-											<div class="devReviews__video_prev">
-												<?php echo wp_get_attachment_image($preview,'full') ?>
-											</div>
-											<div class="devReviews__play"></div>
-										</div>
-									<?php else: ?>
-										<?php the_post_thumbnail(); ?>
-									<?php endif; ?>
-								</div>
-								<div class="devReviews__content">
-									<div class="devReviews__head">
-										<div class="devReviews__video mobile">
-											<?php the_post_thumbnail(); ?>
-										</div>
-										<div class="devReviews__col">
-											<div class="devReviews__name"><?php echo $head[0]; ?></div>
-											<?php if ($headCount > 1): ?>
-												<div class="devReviews__comp"><?php echo $head[1]; ?></div>
-											<?php endif; ?>
-										</div>
-									</div>
-									<div class="devReviews__text"><?php the_content(); ?></div>
-								</div>
-							</div>
-						<?php
-					};
-					wp_reset_postdata();
-				?>
-	        </div>
-	    </div>
-	</section>
-	<!-- end devReviews -->
+	<?php require get_template_directory() . '/inc/dev-price-section.php'; ?>
 
 	<!-- begin devProcess -->
 	<section id="devProcess" class="devProcess section">
@@ -421,11 +357,9 @@ get_header();
 					};
 				?>
 	        </div>
-
 			<div class="devAnchore" id="contact">
 				<span>Contact</span>
 			</div>
-
 	    </div>
 	</section>
 	<!-- end devProcess -->

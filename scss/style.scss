@@ -254,6 +254,7 @@
             min-height: 12.4em;
             width: 20%;
             padding-bottom: 2em;
+            flex-grow: 1;
         }
 
         &:after {
@@ -363,7 +364,7 @@
         @media (min-width: 768px) {
             width: 42.8em;
             // height: 25.1875em;
-            height: 100%;
+            height: auto;
         }
 
         img {
@@ -432,18 +433,32 @@
             .slick-arrow {
                 position: absolute;
                 z-index: 2;
-                background-image: url("../img/barrow.svg");
+                background-image: url("img/barrow.svg");
                 top: 50%;
                 border: 0;
                 margin-top: -6.57em;
+
+                .home & {
+                    background-image: url("img/warrow.svg");
+                }
             }
 
             .slick-next {
                 right: -2.1em;
+                transform: rotate(180deg);
+
+                .home & {
+                    transform: rotate(0deg);
+                }
             }
 
             .slick-prev {
                 left: -3.9em;
+                transform: rotate(0deg);
+
+                .home & {
+                    transform: rotate(180deg);
+                }
             }
         }
 
@@ -484,8 +499,8 @@
     }
 
     &__video {
-        width: 6.25em;
-        height: 8.6875em;
+        // width: 6.25em;
+        // height: 8.6875em;
         margin-right: 1.1875em;
         position: relative;
         flex: none;
@@ -495,7 +510,7 @@
 
         @media (min-width: 768px) {
             width: 24.875em;
-            height: auto;
+            // height: auto;
             margin-right: 0;
         }
 
@@ -506,14 +521,25 @@
             height: 100%;
         }
 
+        > img {
+            @media (max-width: 767px) {
+                width: 6.4em;
+            }
+        }
+
         &_file {
             background: #202020;
             position: relative;
             display: flex;
             align-items: center;
             flex-grow: 1;
-            width: 100%;
-            height: 100%;
+            height: 12.5em;
+            width: 9.1em;
+
+            @media (min-width: 768px) {
+                width: 100%;
+                height: 100%;
+            }
 
             .home & {
                 background: #191919;
@@ -542,8 +568,8 @@
     }
 
     &__play {
-        width: 106px;
-        height: 106px;
+        width: 6.625em;
+        height: 6.625em;
         position: absolute;
         left: 50%;
         top: 50%;
@@ -551,7 +577,13 @@
         transition: opacity 0.4s;
         transform: translate(-50%, -50%);
         background: url("img/play-gold.svg") 0 0 no-repeat;
+        background-size: contain;
         cursor: pointer;
+        font-size: 0.7em;
+
+        @media (min-width: 768px) {
+            font-size: 1em;
+        }
 
         &:hover {
             opacity: 0.8;
@@ -576,8 +608,12 @@
     }
 
     &__name {
-        font-size: 2.25em;
+        font-size: 2.03em;
         margin-bottom: 0.2em;
+
+        @media (min-width: 768px) {
+            font-size: 2.25em;
+        }
     }
 
     &__comp {
@@ -593,3 +629,65 @@
     }
 
 }
+
+.devReviewsVideo {
+    .modal {
+        &-dialog {
+            width: auto;
+            max-width: 100%;
+
+            @media (min-width: 768px) {
+                max-width: 90em;
+            }
+        }
+
+        &-close {
+            top: 1em;
+            right: 1em;
+        }
+
+        &-content {
+            background-color: transparent;
+
+            video {
+                max-width: 100%;
+                max-height: 90vh;
+                display: block;
+            }
+        }
+    }
+}
+
+$loader-size: 7em;
+$animation-duration: 1.5s;
+
+.cf7__loader {
+    display: none;
+    position: absolute;
+    width: $loader-size;
+    height: $loader-size;
+    margin: 0 auto;
+    border-radius: 100%;
+    background-color: #DDC181;
+    opacity: 1;
+    animation: pulse $animation-duration infinite ease-in-out;
+
+    .submitting & {
+        display: block;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+@import "./core/faq";
+@import "./core/custom-block";

@@ -2,11 +2,13 @@
 global $post;
 $ideas = get_posts( array(
 	'numberposts' => 6,
+	'exclude'	  => 1383,
 	'post_type'   => 'post',
 ));
 if (SCF::get('ideas_post')) {
 	$ideas = get_posts( array(
 		'numberposts' => 6,
+		'exclude'	  => 1383,
 		'post_type'   => 'post',
 		'include'     => SCF::get('ideas_post'),
 		'orderby' 	  => 'post__in',
@@ -17,11 +19,23 @@ if (SCF::get('ideas_post')) {
 if ($ideas) {
 ?>
 <!-- begin ideas -->
-<section id="ideas" class="ideas section">
-	<div class="container_center">
+<?php if (is_page_template('page-web-design-template.php')): ?>
+	<section id="ideas" class="ideas related">
+		<div class="container_center">
+			<div class="devAnchore" id="blog">
+		        <span>our blog</span>
+		    </div>
+<?php else: ?>
+	<section id="ideas" class="ideas section">
+		<div class="container_center">
+<?php endif; ?>
 		<div class="ideas__content">
 			<div class="slider__head">
-				<h2 class="section__title"><span style="color: #DDC181">Ideas</span> & Advice</h2>
+				<?php if (is_page_template('page-web-design-template.php')): ?>
+					<h2 class="section__title">Related <span style="color: #DDC181">articles</span></h2>
+				<?php else: ?>
+					<h2 class="section__title"><span style="color: #DDC181">Ideas</span> & Advice</h2>
+				<?php endif; ?>
 				<div class="slider__arrow">
 					<div class="slick-arrow slick-prev ideas__prev"></div>
 					<div class="slick-arrow slick-next ideas__next"></div>
@@ -71,7 +85,7 @@ if ($ideas) {
 			</div>
 
 			<div class="ideas__action">
-				<a href="/blog" class="btn btn_round btn_border">Read More</a>
+				<a href="/blog/" class="btn btn_round btn_border">Read More</a>
 			</div>
 		</div>
 	</div>

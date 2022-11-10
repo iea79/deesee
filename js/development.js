@@ -18,17 +18,18 @@
     $('[data-form]').on('click', function() {
         const id = $(this).data('target');
         const modal = $(id);
+        const form = modal.find('form');
         const title = $(this).data('form');
         const subject = modal.find('[name=subject]');
         const modalTitle = modal.find('.modal-title');
 
         subject.val(title);
+        form.attr('id', title);
         if (id !== '#sampleModal') {
             modalTitle.html(`${title} Service Request`);
             // modalTitle.html(`Do you want to order <br>a ${title} service?`);
         }
     });
-
 
 
     // playStopReviewVideo();
@@ -105,3 +106,47 @@ function countdown() {
         clearInterval(interval);
     }
 }
+
+
+function setLoaderFromCF7() {
+    const wpcf7forms = document.querySelectorAll( '.wpcf7' );
+
+    wpcf7forms.forEach((form, i) => {
+        const button = form.querySelector('.btn');
+        const loader = document.createElement('span');
+        loader.classList.add('cf7__loader');
+        button.appendChild(loader);
+
+        button.addEventListener('click', () => {
+            // loader.style.display = 'block';
+            button.classList.add('disabled');
+            // button.setAttribute('disabled', 'disabled');
+        });
+
+        form.addEventListener( 'wpcf7beforesubmit', function( event ) {
+            // hide(event);
+        }, false );
+
+        form.addEventListener( 'wpcf7invalid', function( event ) {
+            hide(event);
+        }, false );
+
+        form.addEventListener( 'wpcf7spam', function( event ) {
+            hide(event);
+        }, false );
+
+        form.addEventListener( 'wpcf7mailsent', function( event ) {
+            hide(event);
+        }, false );
+
+        function hide(e) {
+            // loader.style.display = 'none';
+            button.classList.remove('disabled');
+            // button.disabled = false;
+            // button.removeAttribute('disabled');
+            console.log(e.type);
+        }
+    });
+}
+
+setLoaderFromCF7();

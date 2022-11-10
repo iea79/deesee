@@ -592,4 +592,67 @@ function dev_process_section_template_fields( $settings, $type, $id, $meta_type,
 
 	return $settings;
 }
-add_filter( 'smart-cf-register-fields', 'dev_process_section_template_fields', 9, 5 );
+add_filter( 'smart-cf-register-fields', 'dev_process_section_template_fields', 10, 5 );
+
+
+function dev_price_section_template_fields( $settings, $type, $id, $meta_type, $types ) {
+
+    if ( get_page_template_slug( $id ) == DEV_TEMPL_NAME ) {
+
+		$Section = SCF::add_setting( 'dev-10', 'Price section' );
+
+		$Section->add_group(
+			'price-section',
+			false,
+			array(
+				array(
+					'name'        => 'price__anchor_name',
+					'label'       => 'Section anchor name',
+					'type'        => 'text',
+				),
+				array(
+					'name'        => 'price__anchor',
+					'label'       => 'Section anchor',
+					'type'        => 'text',
+				),
+				array(
+					'name'        => 'price__title',
+					'label'       => 'Section title',
+					'type'        => 'wysiwyg',
+				),
+			)
+		);
+
+		$Section->add_group(
+			'price_list',
+			true,
+			array(
+				array(
+					'name'        => 'price__name',
+					'label'       => 'Price column name',
+					'type'        => 'text',
+				),
+				array(
+					'name'        => 'price__summ',
+					'label'       => 'Price column price',
+					'type'        => 'text',
+				),
+				array(
+					'name'        => 'price__text',
+					'label'       => 'Price column text',
+					'type'        => 'wysiwyg',
+				),
+				array(
+					'name'        => 'price__link',
+					'label'       => 'Process column link text',
+					'type'        => 'text',
+					'default'     => 'GET STARTED',
+				),
+			)
+		);
+		$settings[] = $Section;
+	}
+
+	return $settings;
+}
+add_filter( 'smart-cf-register-fields', 'dev_price_section_template_fields', 9, 5 );

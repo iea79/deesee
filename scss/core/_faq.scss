@@ -1,0 +1,97 @@
+.faq {
+    @media (min-width: 768px) {
+        &.section {
+            padding-bottom: 8.25em;
+        }
+    }
+
+    &__content {
+        @media (min-width: 768px) {
+            display: flex;
+            margin-top: 3em;
+        }
+    }
+
+    &__img {
+        display: none;
+
+        @media (min-width: 768px) {
+            display: block;
+            flex: none;
+            width: 43.6875em;
+            margin-right: 20.125em;
+        }
+
+        img {
+            display: block;
+            position: sticky;
+            top: 0;
+        }
+    }
+
+    &__right {
+        flex-grow: 1;
+    }
+
+    &__list {}
+
+    &__item {
+        border-bottom: $main_border;
+    }
+
+    &__name {
+        display: flex;
+        justify-content: space-between;
+        padding: 2.3em 0;
+        cursor: pointer;
+
+        span {
+            font-size: 1.5em;
+            line-height: 1.1;
+            font-weight: 500;
+            color: $color_withe;
+            margin-right: 0.5em;
+
+            @media (min-width: 768px) {
+                font-size: 1.625em;
+            }
+        }
+    }
+
+    &__toggle {
+        &:before {
+            content: '+';
+            display: block;
+            font-size: 3em;
+            line-height: 0;
+            margin-top: 0.25em;
+            font-weight: 300;
+        }
+
+        .open & {
+            &:before {
+                content: '—';
+                margin-top: 0.3em;
+                font-size: 2em;
+            }
+        }
+    }
+
+    &__text {
+        display: none;
+
+        p {
+            margin: 0.2em 0;
+            line-height: 1.4;
+
+            @media (min-width: 768px) {
+                font-size: 1.25em;
+            }
+        }
+
+        .open & {
+            display: block;
+        }
+    }
+
+}
