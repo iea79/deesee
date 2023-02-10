@@ -454,6 +454,12 @@ function project_moodboard_section_fields( $settings, $type, $id, $meta_type, $t
 					'label'       => 'Moodboard video',
 					'type'        => 'file',
 				),
+				array(
+					'name'        => 'moodboard__image',
+					'label'       => 'Moodboard image',
+					'type'        => 'image',
+					'size'        => 'medium',
+				),
 			)
 		);
 
@@ -1008,7 +1014,7 @@ function project_map_section_fields( $settings, $type, $id, $meta_type, $types )
 	if ( $type === PROJ_TYPE_NAME && get_page_template_slug( $id ) == '' ) {
 
 		// Создаем блок настроек (метабокс).
-		$Section = SCF::add_setting( 'project-14', 'Map image' );
+		$Section = SCF::add_setting( 'project-15', 'Map image' );
 
 
 		// Добавляем в метабокс произвольные поля.

@@ -1,0 +1,264 @@
+.devReviews {
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+    padding-bottom: 2em;
+
+    @media (min-width: 768px) {
+        padding-bottom: 5.28em;
+
+        .home & {
+            padding-top: 7em;
+        }
+    }
+
+    .devAnchore {
+        @media (min-width: 768px) {
+            margin-bottom: 2.125em;
+        }
+    }
+
+    &__slider {
+        @media (min-width: 768px) {
+            margin: 7.5em auto 0;
+            max-width: 83.38em;
+
+            .slick-list {
+                overflow: inherit;
+            }
+
+            .slick-track {
+                display: flex;
+            }
+
+            .slick-slide {
+                height: auto;
+            }
+
+            .slick-arrow {
+                position: absolute;
+                z-index: 2;
+                background-image: url("img/barrow.svg");
+                top: 50%;
+                border: 0;
+                margin-top: -6.57em;
+
+                .home & {
+                    background-image: url("/wp-content/themes/deesee/img/warrow.svg");
+                }
+            }
+
+            .slick-next {
+                right: -2.1em;
+                transform: rotate(180deg);
+
+                .home & {
+                    transform: rotate(0deg);
+                }
+            }
+
+            .slick-prev {
+                left: -3.9em;
+                transform: rotate(0deg);
+
+                .home & {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+
+        @media (max-width: 767px) {
+            .slick-list {
+                margin: 0 -1.2em;
+            }
+        }
+
+        .slick-dots {
+            position: relative;
+
+            li {
+                background: #E0DACB;
+                width: 0.75em;
+                height: 0.75em;
+                margin: 1.6em 0.6em;
+
+                &.slick-active {
+                    background: #202020;
+                }
+            }
+        }
+    }
+
+    &__item {
+        background: #202020;
+        color: #FEFAF1;
+        display: flex !important;
+        @media (min-width: 768px) {
+            margin: 0 4.5625em;
+            // border: $main_border;
+
+            .home & {
+                background: #191919;
+            }
+        }
+    }
+
+    &__video {
+        // width: 6.25em;
+        // height: 8.6875em;
+        margin-right: 1.1875em;
+        position: relative;
+        flex: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @media (min-width: 768px) {
+            width: 24.875em;
+            // height: auto;
+            margin-right: 0;
+        }
+
+        img {
+            display: block;
+            object-fit: contain;
+            width: 100%;
+            height: 100%;
+        }
+
+        > img {
+            @media (max-width: 767px) {
+                width: 6.4em;
+            }
+        }
+
+        &_file {
+            background: #202020;
+            position: relative;
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+            height: 12.5em;
+            width: 9.1em;
+
+            @media (min-width: 768px) {
+                width: 100%;
+                height: 100%;
+            }
+
+            .home & {
+                background: #191919;
+            }
+
+            video {
+                display: block;
+                object-fit: contain;
+                width: 100%;
+                z-index: 1;
+            }
+        }
+
+        &_prev {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+
+            img {
+                object-fit: cover;
+            }
+        }
+    }
+
+    &__play {
+        width: 6.625em;
+        height: 6.625em;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 3;
+        transition: opacity 0.4s;
+        transform: translate(-50%, -50%);
+        background: url("/wp-content/themes/deesee/img/play-gold.svg") 0 0 no-repeat;
+        background-size: contain;
+        cursor: pointer;
+        font-size: 0.7em;
+
+        @media (min-width: 768px) {
+            font-size: 1em;
+        }
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    &__head {
+        @media (max-width: 767px) {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.375em;
+        }
+    }
+
+    &__content {
+        padding: 1.875em 1.25em;
+
+        @media (min-width: 768px) {
+            padding: 4.625em 3.5em 5em;
+            // border-left: $main_border;
+        }
+    }
+
+    &__name {
+        font-size: 2.03em;
+        margin-bottom: 0.2em;
+
+        @media (min-width: 768px) {
+            font-size: 2.25em;
+        }
+    }
+
+    &__comp {
+        font-size: 1.25em;
+        color: #6C6C6C;
+        margin-bottom: 0.875em;
+    }
+
+    &__text {
+        font-size: 1.25em;
+        font-weight: 300;
+        line-height: 1.6;
+    }
+
+}
+
+.devReviewsVideo {
+    .modal {
+        &-dialog {
+            width: auto;
+            max-width: 100%;
+
+            @media (min-width: 768px) {
+                max-width: 90em;
+            }
+        }
+
+        &-close {
+            top: 1em;
+            right: 1em;
+        }
+
+        &-content {
+            background-color: transparent;
+
+            video {
+                max-width: 100%;
+                max-height: 90vh;
+                display: block;
+            }
+        }
+    }
+}

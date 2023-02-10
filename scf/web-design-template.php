@@ -20,6 +20,11 @@ function webdesign_first_section_template_fields( $settings, $type, $id, $meta_t
 					'type'        => 'wysiwyg',
 				),
 				array(
+					'name'        => 'first__sub',
+					'label'       => 'Section subtitle',
+					'type'        => 'wysiwyg',
+				),
+				array(
 					'name'        => 'first__btn',
 					'label'       => 'Section button text',
 					'type'        => 'text',
@@ -39,6 +44,11 @@ function webdesign_first_section_template_fields( $settings, $type, $id, $meta_t
 				array(
 					'name'        => 'slider__title',
 					'label'       => 'First slide text',
+					'type'        => 'text',
+				),
+				array(
+					'name'        => 'slider__link',
+					'label'       => 'First slide link',
 					'type'        => 'text',
 				),
 				array(
@@ -67,6 +77,16 @@ function webdesign_promo_section_template_fields( $settings, $type, $id, $meta_t
 			'promo-section',
 			false,
 			array(
+				array(
+					'name'        => 'promo__anchor_name',
+					'label'       => 'Section anchor name',
+					'type'        => 'text',
+				),
+				array(
+					'name'        => 'promo__anchor',
+					'label'       => 'Section anchor',
+					'type'        => 'text',
+				),
 				array(
 					'name'        => 'promo__title',
 					'label'       => 'Section title',
@@ -147,6 +167,32 @@ function webdesign_why_section_template_fields( $settings, $type, $id, $meta_typ
 			)
 		);
 
+		$Section->add_group(
+			'faq_counter',
+			false,
+			array(
+				array(
+					'type'            => 'check', // Тип поля. Обязательный.
+					'name'            => 'counter__toggle', // Ключ поля. Обязательный.
+					'label'           => 'Enable counter', // Заголовок поля.
+					'choices'         => array( // Массив с вариантами выбора.
+						'enabled' => 'Enabled',
+					),
+					'check_direction' => 'horizontal', // или vertical. Вариант отображения пунктов.
+				),
+				array(
+					'name'        => 'counter__title',
+					'label'       => 'Counter title',
+					'type'        => 'text',
+				),
+				array(
+					'name'        => 'counter__sub',
+					'label'       => 'Counter bottom text',
+					'type'        => 'wysiwyg',
+				),
+			)
+		);
+
 		$settings[] = $Section;
 	}
 
@@ -164,6 +210,16 @@ function webdesign_necessit_section_template_fields( $settings, $type, $id, $met
 			'necessit-section',
 			false,
 			array(
+				array(
+					'name'        => 'necessit__anchor_name',
+					'label'       => 'Section anchor name',
+					'type'        => 'text',
+				),
+				array(
+					'name'        => 'necessit__anchor',
+					'label'       => 'Section anchor',
+					'type'        => 'text',
+				),
 				array(
 					'name'        => 'necessit__title',
 					'label'       => 'Section title',
@@ -320,28 +376,33 @@ function webdis_choose_section_template_fields( $settings, $type, $id, $meta_typ
 			array(
 				array(
 					'name'        => 'choose__anchor_name',
-					'label'       => 'Why choose section anchor name',
+					'label'       => 'Section anchor name',
 					'type'        => 'text',
 				),
 				array(
 					'name'        => 'choose__anchor',
-					'label'       => 'Why choose section anchor',
+					'label'       => 'Section anchor',
 					'type'        => 'text',
 				),
 				array(
 					'name'        => 'choose__title',
-					'label'       => 'Why choose section title',
+					'label'       => 'Section title',
 					'type'        => 'wysiwyg',
 				),
 				array(
 					'name'        => 'choose__img',
-					'label'       => 'Why choose image',
+					'label'       => 'Section button choose image',
 					'type'        => 'image',
 					'size'        => 'medium',
 				),
 				array(
 					'name'        => 'choose__text',
-					'label'       => 'Why choose text',
+					'label'       => 'Section button choose text',
+					'type'        => 'text',
+				),
+				array(
+					'name'        => 'choose__link',
+					'label'       => 'Section button choose link',
 					'type'        => 'text',
 				),
 			)
@@ -538,3 +599,31 @@ function faq_section_template_fields( $settings, $type, $id, $meta_type, $types 
 	return $settings;
 }
 add_filter( 'smart-cf-register-fields', 'faq_section_template_fields', 9, 5 );
+
+function posts_section_template_fields( $settings, $type, $id, $meta_type, $types ) {
+
+    if ( get_page_template_slug( $id ) == WEB_DESIGN_TEMPL_NAME ) {
+
+		$Section = SCF::add_setting( 'wd-10', 'Posts section' );
+
+		$Section->add_group(
+			'posts-section',
+			false,
+			array(
+				array(
+					'type'        => 'relation',
+					'name'        => 'ideas_post',
+					'label'       => 'Select posts',
+					'post-type'   => array('post'),
+					'limit'       => 5,
+					'notes'       => 'Max 5 posts',
+				),
+			)
+		);
+
+		$settings[] = $Section;
+	}
+
+	return $settings;
+}
+add_filter( 'smart-cf-register-fields', 'posts_section_template_fields', 10, 5 );

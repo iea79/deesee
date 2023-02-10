@@ -57,7 +57,7 @@ if ($ideas) {
 						<div class="ideas__item">
 							<div class="ideas__video">
 								<div class="video__wrapper">
-									<video src="<?php echo wp_get_attachment_url($video); ?>" loop muted preload="auto" playsinline></video>
+									<video src="<?php echo wp_get_attachment_url($video); ?>" loop muted preload="auto" playsinline loading="lazy"></video>
 								</div>
 							</div>
 							<a href="<?php echo get_the_permalink($post_id); ?>" class="ideas__text">

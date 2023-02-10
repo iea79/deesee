@@ -39,14 +39,14 @@
                                 <?php if ($video): ?>
                                     <div class="devReviews__video_file">
                                         <div class="devReviews__video_prev">
-                                            <?php echo wp_get_attachment_image($preview,'full') ?>
+                                            <?php echo wp_get_attachment_image($preview,'full', array('loading' => 'lazy')) ?>
                                         </div>
                                         <div class="devReviews__play" data-toggle="modal" data-target="#devReviewsVideo-<?php echo $postId; ?>"></div>
                                     </div>
                                 <?php else: ?>
                                     <?php if ($preview): ?>
                                         <div class="devReviews__video_prev">
-                                            <?php echo wp_get_attachment_image($preview,'full') ?>
+                                            <?php echo wp_get_attachment_image($preview,'full', array('loading' => 'lazy')) ?>
                                         </div>
                                     <?php else: ?>
                                         <?php the_post_thumbnail(); ?>
@@ -59,14 +59,14 @@
                                         <?php if ($video): ?>
                                             <div class="devReviews__video_file">
                                                 <div class="devReviews__video_prev">
-                                                    <?php echo wp_get_attachment_image($preview,'full') ?>
+                                                    <?php echo wp_get_attachment_image($preview,'full', array('loading' => 'lazy')) ?>
                                                 </div>
                                                 <div class="devReviews__play" data-toggle="modal" data-target="#devReviewsVideo-<?php echo $postId; ?>"></div>
                                             </div>
                                         <?php else: ?>
                                             <?php if ($preview): ?>
                                                 <div class="devReviews__video_prev">
-                                                    <?php echo wp_get_attachment_image($preview,'full') ?>
+                                                    <?php echo wp_get_attachment_image($preview,'full', array('loading' => 'lazy')) ?>
                                                 </div>
                                             <?php else: ?>
                                                 <?php the_post_thumbnail(); ?>

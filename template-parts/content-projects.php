@@ -216,10 +216,16 @@
 				<div class="project__text"><?php echo SCF::get( 'moodboard__text' ); ?></div>
 			</div>
 			<div class="projectMoodboard__right">
-				<div class="video__wrapper">
-					<video src="<?php echo wp_get_attachment_url(SCF::get( 'moodboard__video' )) ?>" muted loop preload="auto" playsinline></video>
-				</div>
-				<div class="projectMoodboard__gallery">
+					<?php if (SCF::get( 'moodboard__video' )): ?>
+						<div class="video__wrapper">
+							<video src="<?php echo wp_get_attachment_url(SCF::get( 'moodboard__video' )) ?>" muted loop preload="auto" playsinline></video>
+						</div>
+					<?php else: ?>
+						<div class="projectMoodboard__img">
+							<?php echo wp_get_attachment_image(SCF::get( 'moodboard__image' ), 'full'); ?>
+						</div>
+					<?php endif; ?>
+				<!-- <div class="projectMoodboard__gallery"> -->
 
 					<?php
 						// $moodboard_gallery = SCF::get('moodboard-gallery');
@@ -234,7 +240,7 @@
 						// 	';
 						// };
 					?>
-				</div>
+				<!-- </div> -->
 			</div>
 		</div>
 	</div>

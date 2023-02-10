@@ -16,45 +16,6 @@ var app = {
     touchDevice: function() { return navigator.userAgent.match(/iPhone|iPad|iPod|Android|BlackBerry|Opera Mini|IEMobile/i); }
 };
 
-jQuery(function ($) {
-    $.fn.hScroll = function (amount) {
-        amount = amount || 100;
-        $(this).on("DOMMouseScroll mousewheel", function (event) {
-            let oEvent = event.originalEvent,
-                direction = oEvent.detail ? oEvent.detail * -amount : oEvent.wheelDelta,
-                position = $(this).scrollLeft(), start, end,
-                scrollWidth = $(this).get(0).scrollWidth,
-                pageWidth = document.querySelector('body').offsetWidth;
-
-            start = position;
-            // console.log('scrollWidth', scrollWidth);
-            // console.log('event', oEvent);
-            // console.log('direction', direction);
-            // console.log('start', start);
-            position += direction > 0 ? -amount : amount;
-            // console.log($(this).innerWidth());
-            end = position;
-            // console.log('end', position);
-            // console.log(app.pageScroll);
-            if (scrollWidth > pageWidth) {
-                $(this).scrollLeft(position);
-                event.preventDefault();
-            }
-            // if (app.pageScroll === 'down') {
-                // if (pageWidth !== scrollWidth - start || start !== 0) {
-                // }
-            // } else {
-                // if (start !== 0 ) {
-                //     $(this).scrollLeft(position);
-                //     event.preventDefault();
-                // }
-                // event.preventDefault();
-            // }
-        })
-    };
-});
-
-
 function isLgWidth() { return $(window).width() >= app.lgWidth; } // >= 1200
 function isMdWidth() { return $(window).width() >= app.mdWidth && $(window).width() < app.lgWidth; } //  >= 992 && < 1200
 function isSmWidth() { return $(window).width() >= app.smWidth && $(window).width() < app.mdWidth; } // >= 768 && < 992
@@ -69,18 +30,16 @@ $(document).ready(function() {
         $(function(){$(document).on('touchend', 'a', $.noop)});
     }
 
+    if (location.hash === '#website-questionnaire') {
+        $('.startProject').modal('show');
+    }
+
 	// Запрет "отскока" страницы при клике по пустой ссылке с href="#"
 	$('[href="#"]').click(function(event) {
 		event.preventDefault();
 	});
 
-    // Inputmask.js
-    // $('[name=tel]').inputmask("+9(999)999 99 99",{ showMaskOnHover: false });
-    // formSubmit();
-
     checkOnResize();
-
-    // stikyMenu();
 
     $('.ideas__slider').slick({
         dots: false,
@@ -103,43 +62,6 @@ $(document).ready(function() {
             }
         ]
     });
-
-    // $('.review__slider').slick({
-    //     dots: false,
-    //     infinite: true,
-    //     speed: 500,
-    //     arrows: true,
-    //     adaptiveHeight: true,
-    //     nextArrow: $('.review__next'),
-    //     prevArrow: $('.review__prev'),
-    //     slidesToShow: 1,
-    //     slidesToScroll: 1,
-    //     responsive: [
-    //         {
-    //             breakpoint: 450,
-    //             settings: {
-    //                 arrows: false,
-    //                 dots: true
-    //             }
-    //         }
-    //     ]
-    // });
-
-    // $('.horizontallScroll').hScroll(0);
-
-    let $hor = $(".horizontallScroll");
-
-    // $("body").css('padding-bottom', $hor[0].scrollWidth - $hor.outerWidth());
-    //
-    // $(window).on('scroll', function () {
-    //     let top = $(document).scrollTop(),
-    //         lim = $hor.position().top - $hor[0].scrollLeft - ($(window).height() - $hor.outerHeight()) / 2,
-    //         width = $hor[0].scrollWidth - $hor.outerWidth(),
-    //         delta = Math.min(Math.max(top - lim, 0), width);
-    //
-    //     $hor[0].scrollLeft = delta;
-    //     $("body").css({'padding-top': delta, 'padding-bottom': width - delta});
-    // });
 
     selectStyler();
 
@@ -169,16 +91,14 @@ $(document).ready(function() {
         ]
     });
 
-
-
     showPlaceholderInDateField();
 
     toggleDevList();
-    // toggleRequiredEmail();
 
     playStopReviewVideo();
 
 });
+
 
 function showPlaceholderInDateField() {
     const date = $('[type=date]');
@@ -208,15 +128,6 @@ function toggleRequiredEmail() {
         }
     });
 }
-
-// $(window).on('scroll', function(){
-//     let scrollPos = $(window).scrollTop();
-//     console.log(scrollPos);
-//     $('.panther__img').css({
-//         transform: 'translate(0px, '+scrollPos+'px) scale('+scrollPos/1000+')',
-//         // opacity: scrollPos/1000
-//     });
-// });
 
 $(window).resize(function(event) {
     var windowWidth = $(window).width();
@@ -333,25 +244,6 @@ function srollToId() {
         return false;
     });
 }
-
-
-// Проверка направления прокрутки вверх/вниз
-function checkDirectionScroll() {
-    var tempScrollTop, currentScrollTop = 0;
-
-    $(window).scroll(function(){
-        currentScrollTop = $(window).scrollTop();
-
-        if (tempScrollTop < currentScrollTop ) {
-            app.pageScroll = "down";
-        } else if (tempScrollTop > currentScrollTop ) {
-            app.pageScroll = "up";
-        }
-        tempScrollTop = currentScrollTop;
-
-    });
-}
-checkDirectionScroll();
 
 // Видео youtube для страницы
 function uploadYoutubeVideo() {
@@ -565,13 +457,15 @@ function selectStyler() {
 
 
 onVisible( 'video:not([data-play-btn])', function(video) {
-    // console.log('visible');
     video.play();
-    // if (!video.onplaying) {
-    // }
 }, function(video) {
-    // console.log('hidden');
     video.pause();
-    // if (video.onplaying) {
-    // }
 });
+
+// const questions = document.querySelectorAll('.blockAccordeon__name');
+// questions.forEach((question) => {
+//     question.addEventListener('click', ({target}) => {
+//         const parent = target.closest('.blockAccordeon');
+//         parent.classList.toggle('open');
+//     });
+// });

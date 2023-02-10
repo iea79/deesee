@@ -1,6 +1,6 @@
 (function () {
     const homeSlider = $('.webdisHome__images');
-    const homeLinks = $('.webdisHome__links span');
+    const homeLinks = $('.webdisHome__links span, .webdisHome__links a');
 
     homeSlider.slick({
         fade: true,

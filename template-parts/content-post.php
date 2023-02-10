@@ -133,7 +133,7 @@
                     }
                     ?>
                     <div class="postsAside__more">
-                        <a href="/projects" class="btn btn_border">More works</a>
+                        <a href="/portfolio/" class="btn btn_border">More works</a>
                     </div>
                 </div>
                 <?php

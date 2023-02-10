@@ -26,7 +26,7 @@ if ($speaks) {
                             if ($image) {
                                 ?>
                                 <div class="speaks__img">
-                                    <?php echo wp_get_attachment_image($item['speaks__img'], 'full'); ?>
+                                    <?php echo wp_get_attachment_image($item['speaks__img'], 'full', array('loading' => 'lazy')); ?>
                                 </div>
 
                                 <?php

@@ -9,7 +9,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.0.3' );
+	define( '_S_VERSION', '1.0.5' );
 }
 
 if ( ! function_exists( 'frondendie_setup' ) ) :
@@ -139,28 +139,39 @@ function frondendie_widgets_init() {
 }
 add_action( 'widgets_init', 'frondendie_widgets_init' );
 
+remove_action('wp_head', 'print_emoji_detection_script', 7);
+remove_action('wp_print_styles', 'print_emoji_styles');
+remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+remove_action( 'admin_print_styles', 'print_emoji_styles' );
+
+// remove_action( 'wp_head',   'wp_print_styles',          8 );
+// remove_action( 'wp_head',   'wp_print_head_scripts',    9 );
+
 /**
  * Enqueue scripts and styles.
  */
 function frondendie_scripts() {
-	wp_enqueue_style( 'frondendie-style', get_stylesheet_uri(), array(), _S_VERSION );
 	wp_style_add_data( 'frondendie-style', 'rtl', 'replace' );
 
 	// wp_style_add_data( 'galaxyr-style', 'rtl', 'replace' );
 	wp_deregister_script( 'jquery' );
 	wp_deregister_script( 'wp-embed-js' );
-	wp_register_script( 'jquery', get_template_directory_uri() . '/js/jquery.js', array(), _S_VERSION, true );
-	wp_enqueue_script( 'jquery' );
+	// wp_register_script( 'jquery', get_template_directory_uri() . '/js/jquery.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'jquery', get_template_directory_uri() . '/js/jquery.js', array(), _S_VERSION, true  );
+
+	if (is_front_page()) {
+		wp_enqueue_style( 'critical-style', get_template_directory_uri() . '/css/home-style.css', array(), _S_VERSION );
+		wp_enqueue_script( 'gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js', '', _S_VERSION, true );
+		wp_enqueue_script( 'gsap-st', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/ScrollTrigger.min.js', '', _S_VERSION, true );
+		wp_enqueue_script( 'panther', get_template_directory_uri() . '/js/panther.js', array('jquery'), _S_VERSION, true );
+	} else {
+		wp_enqueue_style( 'frondendie-style', get_stylesheet_uri(), array(), _S_VERSION );
+	}
 
 	wp_enqueue_script( 'slick-slider', get_template_directory_uri() . '/js/slick.min.js', array('jquery'), _S_VERSION, true );
 	wp_enqueue_script( 'modal', get_template_directory_uri() . '/js/modal.js', array('jquery'), _S_VERSION, true );
-	wp_enqueue_script( 'site-js', get_template_directory_uri() . '/js/function.js', array('jquery'), _S_VERSION, true );
+	wp_enqueue_script( 'site-js', get_template_directory_uri() . '/js/function.js', array('jquery', 'slick-slider'), _S_VERSION, true );
 
-	if (is_front_page()) {
-		wp_enqueue_script( 'gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js', '', _S_VERSION, true );
-		wp_enqueue_script( 'gsap-st', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/ScrollTrigger.min.js', '', _S_VERSION, true );
-		wp_enqueue_script( 'panther', get_template_directory_uri() . '/js/panther.js', '', _S_VERSION, true );
-	}
 
 	if ( is_singular( 'projects' ) ) {
 		wp_enqueue_style( 'projects-style', get_template_directory_uri() . '/css/projects.css', array(), _S_VERSION );
@@ -179,14 +190,16 @@ function frondendie_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 
-	if (is_page_template('page-development-template.php') || is_page_template('page-seo-template-new.php') || is_page_template('page-web-design-template.php')) {
-		wp_enqueue_style( 'development-style', get_template_directory_uri() . '/css/development.css', array(), _S_VERSION );
-		wp_enqueue_script( 'development-scripts', get_template_directory_uri() . '/js/development.js', '', _S_VERSION, true );
-	}
-
 	if (is_page_template('page-web-design-template.php')) {
 		wp_enqueue_style( 'webdisign-style', get_template_directory_uri() . '/css/webdisign.css', array(), _S_VERSION );
 		wp_enqueue_script( 'webdisign-scripts', get_template_directory_uri() . '/js/webdisign.js', '', _S_VERSION, true );
+		// wp_enqueue_script( 'countdown-scripts', get_template_directory_uri() . '/js/countdown.js', '', _S_VERSION, true );
+	}
+
+	if (is_page_template('page-development-template.php') || is_page_template('page-seo-template-new.php') || is_page_template('page-web-design-template.php')) {
+		wp_enqueue_style( 'development-style', get_template_directory_uri() . '/css/development.css', array(), _S_VERSION );
+		wp_enqueue_script( 'development-scripts', get_template_directory_uri() . '/js/development.js', '', _S_VERSION, true );
+		wp_enqueue_script( 'countdown-scripts', get_template_directory_uri() . '/js/countdown.js', '', _S_VERSION, true );
 	}
 
 }
@@ -198,37 +211,37 @@ function frondendie_admin_scripts() {
 
 add_action( 'admin_enqueue_scripts', 'frondendie_admin_scripts' );
 
-/**
- * Implement the Custom Header feature.
- */
-require get_template_directory() . '/inc/custom-header.php';
+// /**
+//  * Implement the Custom Header feature.
+//  */
+// require get_template_directory() . '/inc/custom-header.php';
+//
+// /**
+//  * Custom template tags for this theme.
+//  */
+// require get_template_directory() . '/inc/template-tags.php';
+//
+// /**
+//  * Functions which enhance the theme by hooking into WordPress.
+//  */
+// require get_template_directory() . '/inc/template-functions.php';
+//
+// /**
+//  * Customizer additions.
+//  */
+// require get_template_directory() . '/inc/customizer.php';
 
-/**
- * Custom template tags for this theme.
- */
-require get_template_directory() . '/inc/template-tags.php';
-
-/**
- * Functions which enhance the theme by hooking into WordPress.
- */
-require get_template_directory() . '/inc/template-functions.php';
-
-/**
- * Customizer additions.
- */
-require get_template_directory() . '/inc/customizer.php';
-
-/**
- * Load Jetpack compatibility file.
- */
-if ( defined( 'JETPACK__VERSION' ) ) {
-	require get_template_directory() . '/inc/jetpack.php';
-}
+// /**
+//  * Load Jetpack compatibility file.
+//  */
+// if ( defined( 'JETPACK__VERSION' ) ) {
+// 	require get_template_directory() . '/inc/jetpack.php';
+// }
 
 /**
  * SCF fields functions
  */
-require get_template_directory() . '/scf/functions.php';
+// require get_template_directory() . '/scf/functions.php';
 
 /**
  * Template case developement
@@ -285,6 +298,13 @@ require get_template_directory() . '/scf/about-us.php';
  */
 require get_template_directory() . '/scf/web-design-template.php';
 
+/**
+ * Get Start project form
+ */
+require get_template_directory() . '/inc/start-project-form.php';
+require get_template_directory() . '/inc/start-project-form-script.php';
+
+add_filter( 'big_image_size_threshold', '__return_false' );
 
 /**
 * Customize menu

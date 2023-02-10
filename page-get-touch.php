@@ -18,6 +18,18 @@ breadcrumbs();
                 <?php the_post_thumbnail(); ?>
             </div>
             <?php echo do_shortcode( '[contact-form-7 id="308" title="Page get in touch"]' ); ?>
+            <script>
+                var wpcf7Elm = document.querySelector( '.pageGetTouch .wpcf7' );
+
+                wpcf7Elm.addEventListener( 'wpcf7mailsent', function( event ) {
+                    location.href = '/get-in-touch-success/';
+                }, false );
+            </script>
+            <style>
+                .form__check .wpcf7-not-valid-tip {
+                    display: none !important;
+                }
+            </style>
         </div>
     </div>
 </div>

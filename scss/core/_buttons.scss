@@ -43,7 +43,7 @@
 		transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
 	}
 
-	&:hover {
+	&:hover:not(:disabled) {
 		// background-color: darken($btn_default_bg_color, 7%);
 		color: $btn_default_bg_color;
 		text-decoration: none;
@@ -59,8 +59,7 @@
 		}
 	}
 
-	&:active,
-	&:focus {
+	&:active:not(:disabled) {
 		// background-color: lighten($btn_default_bg_color, 7%);
 		background: $color_withe;
 		color: $btn_default_bg_color;
@@ -79,13 +78,13 @@
 			border-color: $color_bg;
 			color: $btn_contrast_text_color;
 
-			&:hover {
+			&:hover:not(:disabled) {
 				background-color: darken($color_bg, 7%);
 				color: $btn_contrast_text_color;
 			}
 
-			&:active,
-			&:focus {
+			&:active:not(:disabled),
+			&:focus:not(:disabled) {
 				background-color: darken($color_bg, 10%);
 				color: $btn_contrast_text_color;
 			}
@@ -145,7 +144,7 @@
 				border: 1px solid #202020;
 				color: #202020;
 
-				&:hover {
+				&:hover:not(:disabled) {
 					color: $color_withe;
 
 					&:before {
@@ -186,9 +185,13 @@
 		background-color: transparent;
 
 		&:before,
-		&:hover:before {
+		&:hover:not(:disabled):before {
 			display: none !important;
 		}
+	}
+
+	&:disabled {
+		cursor: default;
 	}
 
 }

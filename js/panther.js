@@ -172,18 +172,18 @@ gsap.utils.toArray('.canHelp__item').forEach(item => {
 //     // }, 10);
 //     gsap.from(item, options);
 // });
-gsap.from('.speaks__item:not(:first-child)', {
-    scrollTrigger: {
-        trigger: '.speaks',
-        start: "top 70%",
-        end: 'bottom bottom',
-    },
-    y: '50%',
-    x: 0,
-    duration: 0.5,
-    opacity: 0,
-    stagger: 0.3
-});
+// gsap.from('.speaks__item:not(:first-child)', {
+//     scrollTrigger: {
+//         trigger: '.speaks',
+//         start: "top 70%",
+//         end: 'bottom bottom',
+//     },
+//     y: '50%',
+//     x: 0,
+//     duration: 0.5,
+//     opacity: 0,
+//     stagger: 0.3
+// });
 
 // gsap.from('.speaks__item:not(:first-child)', {
 //     scrollTrigger: {
@@ -199,45 +199,45 @@ gsap.from('.speaks__item:not(:first-child)', {
 //     stagger: 0.2
 // });
 
-gsap.utils.toArray('.fadeRight').forEach(item => {
-    gsap.from(item, {
-        scrollTrigger: {
-            trigger: item,
-            start: "top 90%",
-            end: 'bottom 40%',
-            // scrub: true,
-            // pin: true,
-        },
-        stagger: 0.1,
-        x: '-10%',
-        opacity: 0
-    });
-});
+// gsap.utils.toArray('.fadeRight').forEach(item => {
+//     gsap.from(item, {
+//         scrollTrigger: {
+//             trigger: item,
+//             start: "top 90%",
+//             end: 'bottom 40%',
+//             // scrub: true,
+//             // pin: true,
+//         },
+//         stagger: 0.1,
+//         x: '-10%',
+//         opacity: 0
+//     });
+// });
 
-gsap.utils.toArray('.review__item').forEach(item => {
-    gsap.from(item, {
-        scrollTrigger: {
-            trigger: item,
-            start: "top 70%",
-            // end: 'bottom 40%',
-            // scrub: true,
-            // pin: true,
-        },
-        stagger: 0.1,
-        y: '20%',
-        opacity: 0
-    });
-});
-
-gsap.from('.review__video', {
-    scrollTrigger: {
-        trigger: '.review__video',
-        start: "top 70%",
-        // end: 'bottom 40%',
-        // scrub: true,
-        // pin: true,
-    },
-    stagger: 0.1,
-    x: '-20%',
-    opacity: 0
-});
+// gsap.utils.toArray('.review__item').forEach(item => {
+//     gsap.from(item, {
+//         scrollTrigger: {
+//             trigger: item,
+//             start: "top 70%",
+//             // end: 'bottom 40%',
+//             // scrub: true,
+//             // pin: true,
+//         },
+//         stagger: 0.1,
+//         y: '20%',
+//         opacity: 0
+//     });
+// });
+//
+// gsap.from('.review__video', {
+//     scrollTrigger: {
+//         trigger: '.review__video',
+//         start: "top 70%",
+//         // end: 'bottom 40%',
+//         // scrub: true,
+//         // pin: true,
+//     },
+//     stagger: 0.1,
+//     x: '-20%',
+//     opacity: 0
+// });

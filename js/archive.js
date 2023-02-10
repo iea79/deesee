@@ -16,7 +16,7 @@ $(document).ready(function() {
     });
 
     sortingProject();
-
+    playPause();
 });
 
 function sortingProject() {
@@ -40,4 +40,46 @@ function sortingProject() {
             }
         });
     }
+}
+
+
+function playPause() {
+    const playBtns = document.querySelectorAll('.archiveReview .archiveReview__play');
+    const videos = document.querySelectorAll('.archiveReview video');
+
+    videos.forEach((video, i) => {
+        video.addEventListener("playing", ({target}) => {
+            if (target.style.width !== '100%' && target.offsetWidth > target.offsetHeight) {
+                target.classList.add('cover');
+            }
+            target.style.width = '100%';
+            target.parentNode.querySelector('.archiveReview__poster').style.display = 'none';
+            target.dataset.play = "true"
+            playBtns[i].classList.add('paused');
+        });
+        video.addEventListener("pause", ({target}) => {
+            target.dataset.play = "false";
+            playBtns[i].classList.remove('paused');
+        });
+    });
+
+
+    playBtns.forEach((btn, i) => {
+        let played = false;
+        btn.addEventListener('click', ev => {
+            videos.forEach((video, k) => {
+                if (i !== k && video.dataset.play === "true") {
+                    video.pause();
+                }
+            });
+            if (videos[i].dataset.play === "true") {
+                videos[i].pause();
+                videos[i].dataset.play = "false";
+            } else {
+                videos[i].play();
+                videos[i].dataset.play = "true";
+            }
+        });
+    });
+
 }

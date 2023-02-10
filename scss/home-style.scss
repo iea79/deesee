@@ -1,0 +1,42 @@
+/*!
+    Theme Name: FrontendIE
+    Author: Evgeniy Ivanov
+    Author URI: http://frontendie.ru
+    Version:      1.0.0
+  */
+@import 'mixins/mixin'; // Fonts
+// @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,900);
+// Import files
+@import 'core/fonts';
+@import 'variables/variables';
+@import 'core/reset';
+@import 'core/template';
+@import 'core/header';
+@import 'core/navbar';
+@import 'core/footer';
+@import 'core/form';
+@import 'core/soc';
+@import 'core/buttons';
+@import 'core/video';
+
+@import "./vendor/slick";
+@import "./vendor/modal";
+
+@import 'core/section';
+@import 'core/panther';
+@import 'core/firstScreen';
+@import 'core/facts';
+@import 'core/canHelp';
+@import 'core/devProcess';
+@import 'core/devReviews';
+@import 'core/claimOffer';
+@import 'core/speaks';
+@import 'core/ideas';
+@import 'core/bottomBox';
+
+@import 'core/slick';
+@import 'core/slider';
+@import 'core/getTouch';
+
+@import "./core/startProject";
+@import "./core/dropArea";

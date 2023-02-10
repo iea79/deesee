@@ -9,6 +9,7 @@
         background: center no-repeat;
         background-size: 2.1em;
         transition: background 0.5s;
+        background-image: url("/wp-content/themes/deesee/img/prev.svg");
 
         &.slick-disabled {
             cursor: default;
@@ -24,12 +25,9 @@
     }
 
     &-prev {
-        background-image: url("img/prev.svg");
-
-    }
+        }
 
     &-next {
-        background-image: url("img/prev.svg");
         transform: rotate(180deg);
     }
 

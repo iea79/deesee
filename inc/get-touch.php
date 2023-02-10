@@ -20,9 +20,9 @@
             <div class="getTouch__right">
                 <div class="map">
                     <?php if (SCF::get( 'map_image' ) && !is_archive()): ?>
-                        <?php echo wp_get_attachment_image(SCF::get( 'map_image' ), 'full') ?>
+                        <?php echo wp_get_attachment_image(SCF::get( 'map_image' ), 'full', array('loading' => 'lazy')) ?>
                     <?php else: ?>
-                        <?php echo wp_get_attachment_image(834, 'full') ?>
+                        <?php echo wp_get_attachment_image(834, 'full', array('loading' => 'lazy')) ?>
                     <?php endif; ?>
                 </div>
             </div>

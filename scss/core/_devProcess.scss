@@ -1,0 +1,182 @@
+.devProcess {
+    padding-top: 5em;
+    color: #F7F5EB;
+
+    @media (min-width: 768px) {
+        padding-top: 8.75em;
+
+        .home & {
+            padding-top: 4em;
+        }
+    }
+
+    .section {
+        &__title {
+            @media (min-width: 768px) {
+                font-size: 5em;
+                margin-top: 0.3em;
+                margin-bottom: 1.05em;
+            }
+        }
+    }
+
+    &__list {
+        margin-bottom: 5em;
+        counter-reset: process;
+
+        @media (min-width: 768px) {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 11.25em;
+        }
+    }
+
+    &__item {
+        counter-increment: process;
+        min-height: 11.4em;
+        border: 1px solid rgba(254, 250, 241, 0.2);
+        position: relative;
+        transition: background 0.4s;
+
+        @media (min-width: 768px) {
+            min-height: 12.4em;
+            width: 20%;
+            padding-bottom: 2em;
+            flex-grow: 1;
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 8em;
+            left: 1.7em;
+            width: 1.3em;
+            height: 1.3em;
+            background: url("/wp-content/themes/deesee/img/proc-arrow.svg") center no-repeat;
+            background-size: contain;
+
+            @media (min-width: 768px) {
+                top: auto;
+                bottom: 1.3em;
+            }
+        }
+
+        @media (min-width: 768px) {
+            &:nth-child(n+2) {
+                border-left: 0;
+            }
+
+            &:nth-child(7) {
+                border-left: 1px solid rgba(254, 250, 241, 0.2);
+            }
+        }
+
+        @media (max-width: 767px) {
+            &:nth-child(n+2) {
+                border-top: 0;
+            }
+        }
+
+        &.active {
+            @media (min-width: 768px) {
+                background: #F7F5EB;
+                color: #202020;
+            }
+            @media (max-width: 767px) {
+                height: auto;
+            }
+
+            &:after {
+                @media (min-width: 768px) {
+                    background-image: url("/wp-content/themes/deesee/img/proc-arrow-down.svg");
+                }
+                @media (max-width: 767px) {
+                    transform: rotate(90deg);
+                }
+            }
+
+            @media (max-width: 767px) {
+                .devProcess__content {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    &__toggle {
+        padding: 2em 1.5em;
+    }
+
+    &__name {
+        font-size: 1.8em;
+        font-weight: 500;
+        display: flex;
+        justify-content: space-between;
+
+        &:after {
+            content: counter(process, decimal-leading-zero);
+            margin-left: 1em;
+        }
+    }
+
+    &__content {
+        display: none;
+    }
+
+    &__descr {
+        padding: 6em 1.5em 0;
+
+        @media (min-width: 768px) {
+            flex-grow: 1;
+            padding: 7em 15em 5em 5em;
+        }
+    }
+
+    &__title {
+        font-size: 2.25em;
+        font-weight: 500;
+    }
+
+    &__text {
+        font-size: 1.25em;
+        line-height: 1.4;
+        max-width: 28em;
+    }
+
+    &__img {
+        width: 100%;
+        height: 20em;
+        flex: none;
+        background: #292929;
+
+        @media (min-width: 768px) {
+            width: 42.8em;
+            // height: 25.1875em;
+            height: auto;
+        }
+
+        img {
+            display: block;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &__visibled {
+        display: none;
+
+        @media (min-width: 768px) {
+            display: block;
+            width: 100%;
+            margin: 0.5em 0;
+            border: 1px solid rgba(254, 250, 241, 0.2);
+
+            .devProcess__content {
+                display: flex;
+                // align-items: center;
+            }
+        }
+    }
+
+}

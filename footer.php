@@ -42,5 +42,7 @@
 
 <?php wp_footer(); ?>
 
+<?php echo do_shortcode( '[start_project]' ); ?>
+
 </body>
 </html>

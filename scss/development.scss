@@ -1353,7 +1353,7 @@ body .ssa-leadgen-widget {
         display: flex;
         align-items: center;
         justify-content: center;
-        overflow: hidden;
+        // overflow: hidden;
         text-decoration: none;
 
         @media (min-width: 768px) {
@@ -1368,6 +1368,7 @@ body .ssa-leadgen-widget {
             object-fit: cover;
             width: 100%;
             height: 100%;
+            border-radius: 50%;
         }
 
         span {
@@ -1385,6 +1386,11 @@ body .ssa-leadgen-widget {
             span {
                 text-decoration-color: transparent;
             }
+        }
+
+        &.desktop {
+            position: sticky;
+            top: 3em;
         }
     }
 
@@ -1449,13 +1455,13 @@ body .ssa-leadgen-widget {
     &__text {
         font-weight: 500;
 
+        @media (min-width: 768px) {
+            font-size: 1.25em;
+        }
+
         p {
             line-height: 1.4;
             margin: 0;
-
-            @media (min-width: 768px) {
-                font-size: 1.25em;
-            }
         }
 
         .page-template-page-web-design-template & {
@@ -1806,5 +1812,81 @@ body .ssa-leadgen-widget {
             height: 90vh;
             max-width: 100%;
         }
+    }
+}
+
+.auditForm {
+    max-width: 47em;
+    margin: 0 auto;
+
+    &__fields {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        gap: 0.625em;
+
+        @media (min-width: 768px) {
+            flex-direction: row;
+        }
+
+        .wpcf7-form-control-wrap {
+            flex-grow: 1;
+        }
+
+        .wpcf7-form-control {
+            width: 100%;
+            font-size: 1em;
+            padding: 1.1875em 1.1875em 1.1875em 3.125em;
+            color: #868174;
+
+            @include placeholder {
+                color: #868174;
+            }
+
+            &.wpcf7-validates-as-url {
+                background: url("../img/chain.svg") 0.7em center no-repeat;
+                background-size: 1.7em;
+            }
+
+            &.wpcf7-validates-as-email {
+                background: url("../img/mail.svg") 0.9em center no-repeat;
+                background-size: 1.4em;
+            }
+        }
+    }
+
+    &__btn {
+        text-align: center;
+        margin-top: 3.0625em;
+
+        .btn {
+            // text-decoration: underline;
+        }
+    }
+
+    .wpcf7-text {}
+
+    .wpcf7-url {}
+
+    .wpcf7-validates-as-required {}
+
+    .wpcf7-email {}
+
+    .btn {}
+
+    .btn_round {}
+
+    .btn_round_md {}
+
+    .btn_small {}
+
+    .btn_border {}
+
+    .btn_round_contrast {}
+
+    .cf7__loader {}
+
+    .wpcf7 form .wpcf7-response-output {
+        color: #202020;
     }
 }

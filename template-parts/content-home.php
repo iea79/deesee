@@ -1,7 +1,8 @@
 <div class="panther">
 	<div class="panther__text">deesee media</div>
 	<div class="panther__img">
-		<img src="<?php echo get_template_directory_uri() . '/img/panther.png' ?>" alt="" id="panther">
+		<?php echo wp_get_attachment_image(1519,'full', false, array('loading' => 'lazy', 'class' =>'desktop')) ?>
+		<?php echo wp_get_attachment_image(1520,'full', false, array('loading' => 'lazy', 'class' =>'mobile')) ?>
 	</div>
 </div>
 <!-- begin firstScreen -->
@@ -16,7 +17,7 @@
 		<div class="firstScreen__text"><?php echo SCF::get( 'firstScreen__text' ); ?></div>
 		<div class="firstScreen__go"><?php echo SCF::get( 'firstScreen__go' ); ?></div>
 		<div class="firstScreen__action">
-			<a href="<?php echo SCF::get( 'first_screen_button_link' ); ?>" class="btn"><?php echo SCF::get( 'firstScreen__action' ); ?></a>
+			<a href="#" class="btn" data-toggle="modal" data-target="#startProject"><?php echo SCF::get( 'firstScreen__action' ); ?></a>
 		</div>
 	</div>
 	<div class="facts">
@@ -104,7 +105,7 @@
 									<div class="devProcess__text"><?php echo $item['design__text'] ?></div>
 								</div>
 								<div class="devProcess__img">
-									<?php echo wp_get_attachment_image($item['design__img'],'full') ?>
+									<?php echo wp_get_attachment_image($item['design__img'],'full', array('loading' => 'lazy')) ?>
 								</div>
 							</div>
 						</div>
@@ -165,7 +166,7 @@
 				?>
 				<div class="design__plate <?php echo $active ?>" data-plate="d<?php echo $index ?>">
 					<div class="design__img">
-						<?php echo wp_get_attachment_image($item['design__img'], 'full') ?>
+						<?php echo wp_get_attachment_image($item['design__img'], 'full', array('loading' => 'lazy')) ?>
 					</div>
 					<div class="design__text">
 						<?php echo $item['design__text'] ?>
