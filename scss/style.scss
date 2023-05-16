@@ -22,8 +22,8 @@
 @import 'core/buttons';
 @import 'core/video';
 
-@import "./vendor/slick";
-@import "./vendor/modal";
+@import './vendor/slick';
+@import './vendor/modal';
 
 @import 'core/section';
 @import 'core/panther';
@@ -78,7 +78,8 @@
             justify-content: space-between;
         }
 
-        .page__title {}
+        .page__title {
+        }
 
         .section__sub {
             @media (min-width: 768px) {
@@ -86,7 +87,6 @@
                 flex: none;
             }
         }
-
     }
 
     &__form {
@@ -115,6 +115,32 @@
             width: 100%;
         }
 
+        .form {
+            &__top {
+                @media (min-width: 768px) {
+                    display: flex;
+                    flex-wrap: wrap;
+                    margin-left: -2em;
+    
+                    .form__line {
+                        padding-left: 2em;
+                        width: 50%;
+                    }
+                }
+            }
+
+            &__field {
+                // display: flex;
+                input {
+                    &:not([type="checkbox"]),
+                    &:not([type="radio"]) {
+                        // width: 100%;
+                        // flex-grow: 1;
+                        // min-width: 0;
+                    }
+                }
+            }
+        }
     }
 
     &__thumb {
@@ -128,7 +154,6 @@
             width: 38em;
         }
     }
-
 }
 
 .select {
@@ -150,7 +175,7 @@
         width: 100%;
 
         &:after {
-            content: "";
+            content: '';
             border: 0.3125em solid transparent;
             border-color: $color_withe transparent transparent transparent;
             margin-right: -0.625em;
@@ -208,8 +233,8 @@
 .wpcf7 form.invalid .wpcf7-response-output,
 .wpcf7 form.payment-required .wpcf7-response-output,
 .wpcf7 form.unaccepted .wpcf7-response-output {
-    border-color: #DDC181;
-    color: #DDC181;
+    border-color: #ddc181;
+    color: #ddc181;
 }
 
 $loader-size: 7em;
@@ -222,7 +247,7 @@ $animation-duration: 1.5s;
     height: $loader-size;
     margin: 0 auto;
     border-radius: 100%;
-    background-color: #DDC181;
+    background-color: #ddc181;
     opacity: 1;
     animation: pulse $animation-duration infinite ease-in-out;
 
@@ -243,11 +268,10 @@ $animation-duration: 1.5s;
     }
 }
 
-@import "./core/faq";
-@import "./core/custom-block";
+@import './core/faq';
+@import './core/custom-block';
 
 .successPage {
-
     @media (min-width: 768px) {
         position: relative;
         min-height: 47.4375em;
@@ -269,7 +293,7 @@ $animation-duration: 1.5s;
         font-size: 2.8em;
         line-height: 1.1;
         text-transform: uppercase;
-        color: #F5F2ED;
+        color: #f5f2ed;
 
         @media (min-width: 768px) {
             font-size: 5em;
@@ -298,13 +322,8 @@ $animation-duration: 1.5s;
             height: 100%;
         }
     }
-
 }
 
-@import "./core/stikedTop";
-@import "./core/startProject";
-@import "./core/dropArea";
-
-.modal {}
-
-.fade {}
+@import './core/stikedTop';
+@import './core/startProject';
+@import './core/dropArea';

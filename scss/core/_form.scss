@@ -1,442 +1,458 @@
 .form {
-	&__row {
-		margin-bottom: -1px;
+    &__row {
+        margin-bottom: -1px;
 
-		@media (min-width: 768px) {
-			width: 50%;
-			margin-left: -1px;
-		}
+        @media (min-width: 768px) {
+            width: 50%;
+            margin-left: -1px;
+        }
 
-		&_full {
-			// margin-left: 0;
-			width: 100%;
-			margin-right: 2px;
-		}
+        &_full {
+            // margin-left: 0;
+            width: 100%;
+            margin-right: 2px;
+        }
 
-		.btn,
-		input:not([type]),
-		input[type=date],
-		input[type=datetime],
-		input[type=email],
-		input[type=number],
-		input[type=password],
-		input[type=search],
-		input[type=tel],
-		input[type=text],
-		input[type=url],
-		textarea {
-			width: 100%;
-		}
+        .btn,
+        input:not([type]),
+        input[type='date'],
+        input[type='datetime'],
+        input[type='email'],
+        input[type='number'],
+        input[type='password'],
+        input[type='search'],
+        input[type='tel'],
+        input[type='text'],
+        input[type='url'],
+        textarea {
+            width: 100%;
+        }
 
-		textarea {
-			width: 100%;
-			resize: vertical;
-			min-height: 10.16em;
-		}
-	}
+        textarea {
+            width: 100%;
+            resize: vertical;
+            min-height: 10.16em;
+        }
+    }
 
-	&__top {
-		margin-bottom: 3em;
+    &__top {
+        margin-bottom: 3em;
 
-		@media (min-width: 768px) {
-			width: 76.5625em;
-			margin-bottom: 6.25em;
+        @media (min-width: 768px) {
+            width: 76.5625em;
+            margin-bottom: 6.25em;
+        }
 
-		}
+        label {
+            color: $color_withe;
+            margin-bottom: 0.5em;
+            display: block;
 
-		label {
-			color: $color_withe;
-			margin-bottom: 0.5em;
-			display: block;
+            @media (min-width: 768px) {
+                margin-bottom: 0;
+                flex: none;
+                font-size: 1.5em;
+                width: 17em;
+            }
+        }
 
-			@media (min-width: 768px) {
-				margin-bottom: 0;
-				flex: none;
-				font-size: 1.5em;
-				width: 17em;
-			}
-		}
+        input {
+            width: 100%;
+        }
+    }
 
-		input {
-			width: 100%;
-		}
-	}
+    &__line {
+        margin-bottom: 1.4em;
+        > p {
+            width: 100%;
+        }
 
-	&__line {
-		margin-bottom: 1.4em;
+        @media (min-width: 768px) {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.875em;
+        }
 
-		@media (min-width: 768px) {
-			display: flex;
-			align-items: center;
-			margin-bottom: 1.875em;
-		}
+        // textarea {
+        // 	width: 100%;
+        // }
+    }
 
-		// textarea {
-		// 	width: 100%;
-		// }
+    &__legend {
+        font-size: 1.5em;
+        line-height: 150.4%;
+        color: #ffffff;
+        margin-bottom: 0.7em;
 
-	}
+        @media (min-width: 768px) {
+            font-size: 2.5em;
+        }
+    }
 
-	&__legend {
-		font-size: 1.5em;
-		line-height: 150.4%;
-		color: #FFFFFF;
-		margin-bottom: 0.7em;
+    &__col {
+        @media (min-width: 768px) {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
 
-		@media (min-width: 768px) {
-			font-size: 2.5em;
-		}
-	}
+        textarea {
+            width: 100%;
+            display: block;
+            margin-bottom: 1em;
 
-	&__col {
+            @media (min-width: 768px) {
+                margin-bottom: 0;
 
-		@media (min-width: 768px) {
-			display: flex;
-			flex-direction: column;
-			width: 100%;
-		}
+                &:nth-child(n + 2) {
+                    margin-top: -1px;
+                }
+            }
+        }
+    }
 
-		textarea {
-			width: 100%;
-			display: block;
-			margin-bottom: 1em;
+    &__group {
+        .btn,
+        input:not([type]),
+        input[type='date'],
+        input[type='datetime'],
+        input[type='email'],
+        input[type='number'],
+        input[type='password'],
+        input[type='search'],
+        input[type='tel'],
+        input[type='text'],
+        input[type='url'],
+        textarea {
+            width: 100%;
+        }
 
-			@media (min-width: 768px) {
-				margin-bottom: 0;
+        @media (min-width: 768px) {
+            width: 100%;
+            display: flex;
+            align-items: stretch;
+            min-height: 6.4375em;
+            // margin-left: -2em;
+        }
 
-				&:nth-child(n+2) {
-					margin-top: -1px;
-				}
-			}
-		}
-	}
 
-	&__group {
-		.btn,
-		input:not([type]),
-		input[type=date],
-		input[type=datetime],
-		input[type=email],
-		input[type=number],
-		input[type=password],
-		input[type=search],
-		input[type=tel],
-		input[type=text],
-		input[type=url],
-		textarea {
-			width: 100%;
-		}
+        .select,
+        select {
+            width: 100%;
+        }
 
-		@media (min-width: 768px) {
-			width: 100%;
-			display: flex;
-			align-items: stretch;
-			min-height: 6.4375em;
-		}
+        label:not([class]) {
+            display: block;
+            color: $color_withe;
+            margin-bottom: 0.5em;
 
-		.select,
-		select {
-			width: 100%;
-		}
+            @media (min-width: 768px) {
+                padding-left: 2em;
+                margin-bottom: 0;
+                display: flex;
+                align-items: center;
+                width: 100%;
+                font-size: 1.5em;
+                border: 1px solid $color_withe;
+            }
+        }
 
-		label:not([class]) {
-			display: block;
-			color: $color_withe;
-			margin-bottom: 0.5em;
+        .form__check {
+            display: flex;
+            align-items: center;
+            color: $color_withe;
 
-			@media (min-width: 768px) {
-				padding-left: 2em;
-				margin-bottom: 0;
-				display: flex;
-				align-items: center;
-				width: 100%;
-				font-size: 1.5em;
-				border: 1px solid $color_withe;
+            @media (min-width: 768px) {
+                border: 1px solid $color_withe;
+                width: 100%;
+                padding-left: 3.2em;
+                min-height: 6.4375em;
+            }
 
-			}
-		}
+            input {
+                margin-right: 0.625em;
+            }
 
-		.form__check {
-			display: flex;
-			align-items: center;
-			color: $color_withe;
+            span {
+                // font-size: 1.125em;
 
-			@media (min-width: 768px) {
-				border: 1px solid $color_withe;
-				width: 100%;
-				padding-left: 3.2em;
-				min-height: 6.4375em;
-			}
+                &.wpcf7-list-item-label {
+                    // font-size: 0.8em;
+                }
+            }
+        }
 
-			input {
-				margin-right: 0.625em;
-			}
+        .form__field {
+            margin-bottom: 1em;
+            > p {
+                width: 100%;
+            }
+    
+            @media (min-width: 768px) {
+                display: flex;
+                flex: none;
+                margin-bottom: 0;
+                // width: 50%;
+                // padding-left: 2em;
 
-			span {
-				// font-size: 1.125em;
+                > p {
+                    display: flex;
+                }
 
-				&.wpcf7-list-item-label {
-					// font-size: 0.8em;
-				}
-			}
-		}
+                &:nth-child(n + 2) {
+                    margin-left: -1px;
+                }
 
-		.form__field {
-			margin-bottom: 1em;
+                &:nth-child(1) {
+                    width: 45.5625em;
+                }
 
-			@media (min-width: 768px) {
-				display: flex;
-				flex: none;
-				margin-bottom: 0;
+                &:nth-child(2) {
+                    width: 30.8em;
+                }
 
-				&:nth-child(n+2) {
-					margin-left: -1px;
-				}
+                &:nth-child(3) {
+                    flex-grow: 1;
+                    min-width: 0;
+                }
+            }
+        }
+    }
 
-				&:nth-child(1) {
-					width: 45.5625em;
-				}
+    &__grid {
+        @media (min-width: 768px) {
+            > p {
+                display: flex;
+                flex-wrap: wrap;
+                flex-grow: 1;
+                min-width: 0;
 
-				&:nth-child(2) {
-					width: 30.8em;
-				}
+                > br {
+                    display: none;
+                }
+            }
+        }
 
-				&:nth-child(3) {
-					flex-grow: 1;
-					min-width: 0;
-				}
-			}
+        .form__check {
+            margin-bottom: 1em;
 
-		}
-	}
+            @media (min-width: 768px) {
+                width: 50%;
+                border-left: 0;
+                margin-bottom: 0;
 
-	&__grid {
+                &:nth-child(odd) {
+                }
 
-		@media (min-width: 768px) {
-			display: flex;
-			flex-wrap: wrap;
-			flex-grow: 1;
-			min-width: 0;
+                &:nth-child(n + 4) {
+                    border-top: 0;
+                }
+            }
+        }
+    }
 
-		}
+    &__action {
+        @media (min-width: 768px) {
+            margin-top: 2.5em;
+        }
 
-		.form__check {
-			margin-bottom: 1em;
+        .btn {
+            width: 100%;
 
-			@media (min-width: 768px) {
-				width: 50%;
-				border-left: 0;
-				margin-bottom: 0;
+            @media (min-width: 768px) {
+                font-size: 1.9em;
+                width: 9em;
+                height: 9em;
+            }
+        }
+    }
 
-				&:nth-child(odd) {}
+    &__pane {
+        display: none;
 
-				&:nth-child(n+3) {
-					border-top: 0;
-				}
-			}
-
-		}
-	}
-
-	&__action {
-		@media (min-width: 768px) {
-			margin-top: 2.5em;
-		}
-
-		.btn {
-			width: 100%;
-
-			@media (min-width: 768px) {
-				font-size: 1.9em;
-				width: 9em;
-				height: 9em;
-			}
-		}
-	}
-
-	&__pane {
-		display: none;
-
-		&.active {
-			display: block;
-		}
-	}
+        &.active {
+            display: block;
+        }
+    }
 }
 // Input text and textarea ================================================
 .select__current,
 input:not([type]),
-input[type=date],
-input[type=datetime],
-input[type=email],
-input[type=number],
-input[type=password],
-input[type=search],
-input[type=tel],
-input[type=text],
-input[type=url],
+input[type='date'],
+input[type='datetime'],
+input[type='email'],
+input[type='number'],
+input[type='password'],
+input[type='search'],
+input[type='tel'],
+input[type='text'],
+input[type='url'],
 select,
 textarea {
-	background-color: transparent;
-	border: 1px solid $input_border_color;
-	padding: 1.5em;
-	outline: none;
-	font-size: 1.13em;
-	font-weight: 400;
-	font-family: $main_font_family;
-	border-radius: 0;
-	transition: all 0.3s;
-	position: relative;
-	color: $color_withe;
+    background-color: transparent;
+    border: 1px solid $input_border_color;
+    padding: 1.5em;
+    outline: none;
+    font-size: 1.13em;
+    font-weight: 400;
+    font-family: $main_font_family;
+    border-radius: 0;
+    transition: all 0.3s;
+    position: relative;
+    color: $color_withe;
 
-	@media (min-width: 768px) {
-		padding: 2.15em 2.6em;
-	}
+    @media (min-width: 768px) {
+        padding: 2.15em 2.6em;
+    }
 
-	&:hover {
-		border: 1px solid $input_hover_border_color;
-		background-color: transparent;
-		z-index: 1;
-	}
+    &:hover {
+        border: 1px solid $input_hover_border_color;
+        background-color: transparent;
+        z-index: 1;
+    }
 
-	&:focus {
-		border: 1px solid $input_focus_border_color;
-		background-color: transparent;
-	}
+    &:focus {
+        border: 1px solid $input_focus_border_color;
+        background-color: transparent;
+    }
 
-	&.invalid,
-	&[aria-invalid="true"] {
-		background-color: transparent;
-		border: 1px solid #DDC181;
-	}
-	// Placeholder for input +++++++++++++++
-	@include placeholder {
-		color: $color_withe;
-	}
-
+    &.invalid,
+    &[aria-invalid='true'] {
+        background-color: transparent;
+        border: 1px solid #ddc181;
+    }
+    // Placeholder for input +++++++++++++++
+    @include placeholder {
+        color: $color_withe;
+    }
 }
 
-input[type=date] {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
+input[type='date'] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
-input[type="date"]::-webkit-inner-spin-button,
-input[type="date"]::-webkit-calendar-picker-indicator {
-	display: none;
-	-webkit-appearance: none;
+input[type='date']::-webkit-inner-spin-button,
+input[type='date']::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
 }
 
 textarea {
-	width: 100%;
-	resize: vertical;
-	height: 9.56em;
+    width: 100%;
+    resize: vertical;
+    height: 9.56em;
 }
 
-input[type=search]::-webkit-search-cancel-button,
-input[type=search]::-webkit-search-decoration {
-	-webkit-appearance: none;
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-decoration {
+    -webkit-appearance: none;
 }
 
 /* Для Chrome */
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-	height: auto;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	margin: 0;
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    height: auto;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
 }
 /* Для Firefox */
-input[type=number] {
-	-moz-appearance: textfield;
+input[type='number'] {
+    -moz-appearance: textfield;
 }
 
 // Input checkbox and radio ===============================================
-input[type=checkbox],
-input[type=radio] {
-	padding: 0;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	height: 1.8125em;
-	width: 1.8125em;
-	background: #262626;
-	border: 1px solid #FFFFFF;
-	overflow: hidden;
-	vertical-align: middle;
-	-webkit-appearance: none;
-	outline: 0;
-	text-align: center;
-	position: relative;
-	flex: none;
+input[type='checkbox'],
+input[type='radio'] {
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 1.8125em;
+    width: 1.8125em;
+    background: #262626;
+    border: 1px solid #ffffff;
+    overflow: hidden;
+    vertical-align: middle;
+    -webkit-appearance: none;
+    outline: 0;
+    text-align: center;
+    position: relative;
+    flex: none;
 
-	&:not(:disabled),
-	&:not(:disabled) {
-		cursor: pointer;
-	}
+    &:not(:disabled),
+    &:not(:disabled) {
+        cursor: pointer;
+    }
 
-	&:before,
-	&:before {
-		display: block;
-	}
+    &:before,
+    &:before {
+        display: block;
+    }
 
-	&:disabled,
-	&:disabled {
-		border-color: #ddd;
-	}
+    &:disabled,
+    &:disabled {
+        border-color: #ddd;
+    }
 }
 
-input[type=radio] {
-	border-radius: 50%;
+input[type='radio'] {
+    border-radius: 50%;
 
-	&:checked {
-		background: #DDC181;
-		border-color: #DDC181;
+    &:checked {
+        background: #ddc181;
+        border-color: #ddc181;
 
-		&:before {
-			content: '';
-			position: absolute;
-			width: 0.6875em;
-			height: 0.6875em;
-			display: block;
-			position: absolute;
-			border-radius: 50%;
-			background: $color_withe;
-		}
-	}
+        &:before {
+            content: '';
+            position: absolute;
+            width: 0.6875em;
+            height: 0.6875em;
+            display: block;
+            position: absolute;
+            border-radius: 50%;
+            background: $color_withe;
+        }
+    }
 
-	&:disabled:checked:before {
-		background-color: #aaa;
-	}
+    &:disabled:checked:before {
+        background-color: #aaa;
+    }
 }
 
-input[type=checkbox] {
-	&:checked,
-	&:indeterminate {
-		background: #DDC181;
-		border-color: #DDC181;
-		color: $color_withe;
+input[type='checkbox'] {
+    &:checked,
+    &:indeterminate {
+        background: #ddc181;
+        border-color: #ddc181;
+        color: $color_withe;
 
-		&:before {
-			content: "";
-			position: absolute;
-			height: 10px;
-			width: 8px;
-			border-right: 3px solid;
-			border-bottom: 3px solid;
-			transform: rotate(45deg);
-			-webkit-font-smoothing: antialiased;
-			text-align: center;
-		}
-	}
+        &:before {
+            content: '';
+            position: absolute;
+            height: 10px;
+            width: 8px;
+            border-right: 3px solid;
+            border-bottom: 3px solid;
+            transform: rotate(45deg);
+            -webkit-font-smoothing: antialiased;
+            text-align: center;
+        }
+    }
 
-	&:indeterminate:before {
-		content: "";
-	}
+    &:indeterminate:before {
+        content: '';
+    }
 
-	&:disabled:checked:before,
-	&:disabled:indeterminate:before {
-		color: #aaa;
-	}
+    &:disabled:checked:before,
+    &:disabled:indeterminate:before {
+        color: #aaa;
+    }
+}
+
+input[type='checkbox'].agree {
+    display: none !important;
 }

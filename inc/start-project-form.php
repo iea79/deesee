@@ -21,7 +21,9 @@ function start_project() {
 			<div class="modal-content">
 				<a href="#" class="modal-close" data-dismiss="modal"></a>
 				<form class="startProject__steps">
-					<input type="hidden" name="subject" value="Order from deessemedia.com">
+					<input type="checkbox" name="agree" class="agree" value="Yes" checked>
+					<input type="hidden" name="subject" value="Website Questionnaire">
+					<input type="hidden" name="form_title" value="Website Questionnaire form">
 					<input type="hidden" name="page_name" value="<?php echo get_the_title(); ?>">
 					<div class="startProject__head">
 						<div class="startProject__info">Complete the survey and get the cost of the site</div>
@@ -429,8 +431,7 @@ function start_project() {
 		</div>
 	</div>
 	<!-- end Modal startProject -->
-
 	<?php
-
+	
 	return ob_get_clean();
 }

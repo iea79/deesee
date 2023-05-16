@@ -1,5 +1,5 @@
-@import "./variables/variables";
-@import "./core/section";
+@import './variables/variables';
+@import './core/section';
 
 .wp-admin {
     &.post-type-projects {
@@ -47,5 +47,9 @@ html .post-type-wp_block .block-editor-writing-flow > .block-editor-block-list__
     }
 }
 
-@import "./core/custom-block";
-@import "./core/stikedTop";
+@import './core/custom-block';
+@import './core/stikedTop';
+
+.dataTable {
+    border-collapse: collapse;
+}

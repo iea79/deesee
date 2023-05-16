@@ -93,9 +93,11 @@ function start_project_form() {
 	}
 
 	// Проверяем на спам. Если скрытое поле заполнено или снят чек, то блокируем отправку
-	// if ( false === $_POST['form_anticheck'] || ! empty( $_POST['form_submitted'] ) ) {
-	// 	wp_die( 'Spam, spam, param-pam-pam!' );
-	// }
+	// if ( $_POST['agree'] == 'Yes' ) {
+	if ( isset($_POST['agree']) ) {
+		// wp_die( 'Spam, spam, param-pam-pam!' );
+		$err_message['name'] = 'Spam, spam, param-pam-pam!';
+	}
 
 	// // Проверяем полей имени, если пустое, то пишем сообщение в массив ошибок
 	// if ( empty( $_POST['art_name'] ) || ! isset( $_POST['art_name'] ) ) {
@@ -116,8 +118,8 @@ function start_project_form() {
 
 		// Указываем адресата
         $subject = $_POST['subject'];
-		// $email_to = 'busforward@gmail.com';
-		$email_to = '';
+		$email_to = 'busforward@gmail.com';
+		// $email_to = '';
 
 		// Если адресат не указан, то берем данные из настроек сайта
 		if ( ! $email_to ) {
@@ -144,6 +146,7 @@ function start_project_form() {
         $body .= '<p><b>Phone:</b> '. $_POST['phone'] .'</p>';
         $body .= '</body></html>';
 
+		do_shortcode( ' [cfdb-save-form-post] ' );
 		$res = wp_mail($email_to, $subject, $body, $headers);
 		if ($res) {
 			$message_success['body'] = $body;

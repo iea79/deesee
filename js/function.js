@@ -12,32 +12,49 @@ var app = {
     mdWidth: 992,
     smWidth: 768,
     resized: false,
-    iOS: function() { return navigator.userAgent.match(/iPhone|iPad|iPod/i); },
-    touchDevice: function() { return navigator.userAgent.match(/iPhone|iPad|iPod|Android|BlackBerry|Opera Mini|IEMobile/i); }
+    iOS: function () {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+    },
+    touchDevice: function () {
+        return navigator.userAgent.match(/iPhone|iPad|iPod|Android|BlackBerry|Opera Mini|IEMobile/i);
+    },
 };
 
-function isLgWidth() { return $(window).width() >= app.lgWidth; } // >= 1200
-function isMdWidth() { return $(window).width() >= app.mdWidth && $(window).width() < app.lgWidth; } //  >= 992 && < 1200
-function isSmWidth() { return $(window).width() >= app.smWidth && $(window).width() < app.mdWidth; } // >= 768 && < 992
-function isXsWidth() { return $(window).width() < app.smWidth; } // < 768
-function isIOS() { return app.iOS(); } // for iPhone iPad iPod
-function isTouch() { return app.touchDevice(); } // for touch device
+function isLgWidth() {
+    return $(window).width() >= app.lgWidth;
+} // >= 1200
+function isMdWidth() {
+    return $(window).width() >= app.mdWidth && $(window).width() < app.lgWidth;
+} //  >= 992 && < 1200
+function isSmWidth() {
+    return $(window).width() >= app.smWidth && $(window).width() < app.mdWidth;
+} // >= 768 && < 992
+function isXsWidth() {
+    return $(window).width() < app.smWidth;
+} // < 768
+function isIOS() {
+    return app.iOS();
+} // for iPhone iPad iPod
+function isTouch() {
+    return app.touchDevice();
+} // for touch device
 
-
-$(document).ready(function() {
+$(document).ready(function () {
     // Хак для клика по ссылке на iOS
     if (isIOS()) {
-        $(function(){$(document).on('touchend', 'a', $.noop)});
+        $(function () {
+            $(document).on('touchend', 'a', $.noop);
+        });
     }
 
     if (location.hash === '#website-questionnaire') {
         $('.startProject').modal('show');
     }
 
-	// Запрет "отскока" страницы при клике по пустой ссылке с href="#"
-	$('[href="#"]').click(function(event) {
-		event.preventDefault();
-	});
+    // Запрет "отскока" страницы при клике по пустой ссылке с href="#"
+    $('[href="#"]').click(function (event) {
+        event.preventDefault();
+    });
 
     checkOnResize();
 
@@ -57,15 +74,15 @@ $(document).ready(function() {
                 settings: {
                     slidesToShow: 1,
                     arrows: false,
-                    dots: true
-                }
-            }
-        ]
+                    dots: true,
+                },
+            },
+        ],
     });
 
     selectStyler();
 
-    $('#projectTypeToggle').on('change', function() {
+    $('#projectTypeToggle').on('change', function () {
         $('.form__pane').removeClass('active');
         $('#' + $(this).val()).addClass('active');
         $('[project-type]').val($(this).val());
@@ -85,10 +102,10 @@ $(document).ready(function() {
                 settings: {
                     arrows: false,
                     dots: true,
-                    adaptiveHeight: true
-                }
-            }
-        ]
+                    adaptiveHeight: true,
+                },
+            },
+        ],
     });
 
     showPlaceholderInDateField();
@@ -97,30 +114,47 @@ $(document).ready(function() {
 
     playStopReviewVideo();
 
+    $('.agree').prop('checked', false);
 });
 
+// window.onload = () => {
+//     const spamCheck = document.querySelectorAll('.agree');
+
+//     spamCheck.forEach((checkbox) => {
+//         checkbox.checked = false;
+//         checkbox.removeAttribute('checked');
+//     });
+// };
 
 function showPlaceholderInDateField() {
     const date = $('[type=date]');
+    const defaultPlaceholder = date.attr('placeholder');
     date.attr('type', 'text');
-    date.on('focus', function() {
+    date.on('focus', function () {
         $(this).attr('type', 'date');
+        if (isIOS()) {
+            $(this).attr('placeholder', 'dd.mm.yyyy');
+            $(this).attr('pattern', 'd{2}.d{2}.d{4}');
+        }
     });
 
-    date.on('blur', function() {
+    date.on('blur', function () {
         if (!$(this).val()) {
             $(this).attr('type', 'text');
+            if (isIOS()) {
+                $(this).attr('placeholder', defaultPlaceholder);
+                $(this).attr('pattern', 'd{2}.d{2}.d{4}');
+            }
         }
     });
 }
 
 function toggleRequiredEmail() {
-
     const form = $('.pageGetTouch__form'),
-          email = form.find('[type=email]'),
-          tel = form.find('[type=tel]');
+        email = form.find('[type=email]'),
+        tel = form.find('[type=tel]');
 
-    email.blur(function() {
+    email.blur(function () {
         if ($(this).val()) {
             tel.removeAttr('aria-required').removeClass('wpcf7-validates-as-required');
         } else {
@@ -129,13 +163,15 @@ function toggleRequiredEmail() {
     });
 }
 
-$(window).resize(function(event) {
+$(window).resize(function (event) {
     var windowWidth = $(window).width();
     // Запрещаем выполнение скриптов при смене только высоты вьюпорта (фикс для скролла в IOS и Android >=v.5)
-    if (app.resized == windowWidth) { return; }
+    if (app.resized == windowWidth) {
+        return;
+    }
     app.resized = windowWidth;
 
-	checkOnResize();
+    checkOnResize();
 });
 
 function checkOnResize() {
@@ -150,15 +186,14 @@ function replaceMenu() {
         subnav.appendTo('.nav');
     } else {
         subnav.appendTo('.header__right');
-
     }
 }
 
 function replaceDesignTabs() {
-    $('[data-plate]').each(function(index, el) {
+    $('[data-plate]').each(function (index, el) {
         let id = $(el).data('plate');
         if (isXsWidth()) {
-            $(el).insertAfter('[data-tab='+id+']');
+            $(el).insertAfter('[data-tab=' + id + ']');
         } else {
             $(el).appendTo('.design__content');
         }
@@ -172,20 +207,20 @@ function stikyMenu() {
 
     setNavbarPosition();
 
-    $(window).scroll(function(){
+    $(window).scroll(function () {
         setNavbarPosition();
     });
 
     function setNavbarPosition() {
         currentTop = $(window).scrollTop();
 
-        if( currentTop > HeaderTop ) {
+        if (currentTop > HeaderTop) {
             $('header').addClass('stiky');
         } else {
             $('header').removeClass('stiky');
         }
 
-        $('.navbar__link').each(function(index, el) {
+        $('.navbar__link').each(function (index, el) {
             let section = $(this).attr('href');
 
             if ($('section').is(section)) {
@@ -208,7 +243,7 @@ function toggleTabs() {
         $('[data-tab]').removeClass('active');
         $(self).addClass('active');
         $('[data-plate]').removeClass('active');
-        $('[data-plate='+self.dataset.tab+']').addClass('active');
+        $('[data-plate=' + self.dataset.tab + ']').addClass('active');
     });
 }
 toggleTabs();
@@ -216,15 +251,15 @@ toggleTabs();
 function collapseElem() {
     const toggle = $('[data-collapse]');
 
-    toggle.on('click', function() {
+    toggle.on('click', function () {
         const wrapper = $(this).parent();
         wrapper.toggleClass('open');
     });
 }
-collapseElem()
+collapseElem();
 
 function openMobileNav() {
-    $('.menu__toggle').on('click', function() {
+    $('.menu__toggle').on('click', function () {
         var wrapp = $('.nav');
 
         wrapp.toggleClass('open');
@@ -236,7 +271,7 @@ openMobileNav();
 
 // Scroll to ID // Плавный скролл к элементу при нажатии на ссылку. В ссылке указываем ID элемента
 function srollToId() {
-    $('body').on('click', '[data-scroll-to]', function() {
+    $('body').on('click', '[data-scroll-to]', function () {
         var scroll_el = $(this).attr('href');
         if ($(scroll_el).length != 0) {
             $('html, body').animate({ scrollTop: $(scroll_el).offset().top }, 500);
@@ -251,35 +286,32 @@ function uploadYoutubeVideo() {
     if (isXsWidth()) {
         resolutionImg = 'hqdefault';
     }
-    if ($(".js-youtube")) {
-
-        $(".js-youtube").each(function () {
+    if ($('.js-youtube')) {
+        $('.js-youtube').each(function () {
             // Зная идентификатор видео на YouTube, легко можно найти его миниатюру
-            $(this).css('background-image', 'url(http://i.ytimg.com/vi/' + this.id + '/'+resolutionImg+'.jpg)');
+            $(this).css('background-image', 'url(http://i.ytimg.com/vi/' + this.id + '/' + resolutionImg + '.jpg)');
 
             // Добавляем иконку Play поверх миниатюры, чтобы было похоже на видеоплеер
             // $(this).append($('<img src="img/play.svg" alt="Play" class="video__play">'));
-
         });
 
         $('.video__play:not([data-video-id])').on('click', function () {
             // создаем iframe со включенной опцией autoplay
             let wrapp = $(this).closest('.js-youtube'),
                 videoId = wrapp.attr('id'),
-                url = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&autohide=1&modestbranding=1&rel=0&playlist="+videoId+"&fs=0&showinfo=0&iv_load_policy=3";
+                url = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&autohide=1&modestbranding=1&rel=0&playlist=' + videoId + '&fs=0&showinfo=0&iv_load_policy=3';
 
             if (wrapp.data('params')) url += '&' + wrapp.data('params');
 
             // Высота и ширина iframe должны быть такими же, как и у родительского блока
             let iframe = $('<iframe/>', {
-                'frameborder': '0',
-                'src': url,
-                'allow': "autoplay",
+                frameborder: '0',
+                src: url,
+                allow: 'autoplay',
             });
 
             // Заменяем миниатюру HTML5 плеером с YouTube
             $(this).closest('.video__wrapper').append(iframe);
-
         });
     }
 }
@@ -291,12 +323,12 @@ function openYoutubeModal() {
         modalBody = $('.videoReview .video__wrapper'),
         play = $('[data-video-id]');
 
-    play.on('click', function() {
+    play.on('click', function () {
         let id = $(this).data('videoId'),
             iframe = $('<iframe/>', {
-                'frameborder': '0',
-                'src': "https://www.youtube.com/embed/" + id + "?autoplay=1&autohide=1",
-                'allow': "autoplay"
+                frameborder: '0',
+                src: 'https://www.youtube.com/embed/' + id + '?autoplay=1&autohide=1',
+                allow: 'autoplay',
             });
 
         modalBody.append(iframe);
@@ -314,12 +346,12 @@ function openVideoModal() {
         modalBody = $('.videoReview .video__wrapper'),
         play = $('[data-video]');
 
-    play.on('click', function() {
+    play.on('click', function () {
         let url = $(this).data('video'),
             video = $('<video/>', {
-                'autoplay': true,
-                'src': url,
-                'controls': true,
+                autoplay: true,
+                src: url,
+                controls: true,
             });
 
         modalBody.append(video);
@@ -332,31 +364,30 @@ function openVideoModal() {
 }
 openVideoModal();
 
-function onVisible( selector, callback, playback, threshold=[0.5] ) {
-
+function onVisible(selector, callback, playback, threshold = [0.5]) {
     let options = {
-        threshold: threshold
+        threshold: threshold,
     };
-    let observer = new IntersectionObserver( onEntry, options );
-    let elements = document.querySelectorAll( selector );
+    let observer = new IntersectionObserver(onEntry, options);
+    let elements = document.querySelectorAll(selector);
     // let play = selector.querySelector('.video__play');
 
-    for ( let elm of elements ) {
-        observer.observe( elm );
+    for (let elm of elements) {
+        observer.observe(elm);
     }
 
-    function onEntry( entry ) {
-        entry.forEach( change => {
+    function onEntry(entry) {
+        entry.forEach((change) => {
             let elem = change.target;
             let frame = elem.querySelector('iframe');
-            if ( change.isIntersecting ) {
+            if (change.isIntersecting) {
                 // console.log('show', elem);
                 callback(elem);
             } else {
                 // console.log('hidden', elem);
                 playback(elem);
             }
-        } );
+        });
     }
 }
 
@@ -375,7 +406,7 @@ function toggleDevList() {
     itemInit.addClass('active');
     renderActive();
 
-    item.on('click', function() {
+    item.on('click', function () {
         item.removeClass('active');
         $(this).addClass('active');
         renderActive();
@@ -393,7 +424,7 @@ function toggleDevList() {
 }
 
 function playStopReviewVideo() {
-    $('.devReviews__play').on('click', function(e) {
+    $('.devReviews__play').on('click', function (e) {
         const btn = $(this);
         const modal = btn.data('target');
         const video = $(modal).find('video');
@@ -404,9 +435,8 @@ function playStopReviewVideo() {
             console.log('close');
             video.trigger('pause');
         });
-    })
+    });
 }
-
 
 function selectStyler() {
     $('select').each(function () {
@@ -418,16 +448,16 @@ function selectStyler() {
         $this.after('<div class="select__current"></div>');
 
         var $styledSelect = $this.next('div.select__current');
-            $styledSelect.text($this.children('option').eq(0).text());
+        $styledSelect.text($this.children('option').eq(0).text());
 
         var $list = $('<ul />', {
-            'class': 'select__options'
+            class: 'select__options',
         }).insertAfter($styledSelect);
 
         for (var i = 0; i < numberOfOptions; i++) {
             $('<li />', {
                 text: $this.children('option').eq(i).text(),
-                rel: $this.children('option').eq(i).val()
+                rel: $this.children('option').eq(i).val(),
             }).appendTo($list);
         }
 
@@ -455,12 +485,15 @@ function selectStyler() {
     });
 }
 
-
-onVisible( 'video:not([data-play-btn])', function(video) {
-    video.play();
-}, function(video) {
-    video.pause();
-});
+onVisible(
+    'video:not([data-play-btn])',
+    function (video) {
+        video.play();
+    },
+    function (video) {
+        video.pause();
+    }
+);
 
 // const questions = document.querySelectorAll('.blockAccordeon__name');
 // questions.forEach((question) => {

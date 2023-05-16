@@ -12,7 +12,7 @@ function checkForm() {
     let stepNumber = 1;
 
     radios.forEach((radio, i) => {
-        radio.addEventListener('change', ({target}) => {
+        radio.addEventListener('change', ({ target }) => {
             switchRadio(radio);
         });
     });
@@ -32,14 +32,14 @@ function checkForm() {
         }
     }
 
-    next.addEventListener('click', e => {
+    next.addEventListener('click', (e) => {
         e.preventDefault();
         if (stepNumber < steps.length) {
             checkStepsField(stepNumber);
         }
     });
 
-    back.addEventListener('click', e => {
+    back.addEventListener('click', (e) => {
         e.preventDefault();
         if (stepNumber > 1) {
             toggleSteps(--stepNumber);
@@ -47,7 +47,7 @@ function checkForm() {
     });
 
     genders.forEach((gender) => {
-        gender.addEventListener('change', ({target}) => {
+        gender.addEventListener('change', ({ target }) => {
             const { value, checked } = target;
             // console.log(checked);
             gendersRows.forEach((row) => {
@@ -86,22 +86,21 @@ function checkForm() {
 
     // File upload ==================================================================
     const dropAreaChecked = document.querySelectorAll('[name="step2"]');
-    const dropArea = document.getElementById("drop-area");
-    const inputFile = document.getElementById("file");
-    const dropText = document.querySelector(".dropArea__text");
+    const dropArea = document.getElementById('drop-area');
+    const inputFile = document.getElementById('file');
+    const dropText = document.querySelector('.dropArea__text');
     const dropPercent = document.querySelector('.dropArea__percent');
     const dropIcon = document.querySelector('.dropArea__icon');
     let loadedFiles;
-    let dropTextName = "";
+    let dropTextName = '';
     let uploadProgress = [];
 
-
-    inputFile.addEventListener('change', function(e) {
+    inputFile.addEventListener('change', function (e) {
         handleFiles(this.files);
     });
 
     dropAreaChecked.forEach((item, i) => {
-        item.addEventListener('change', ({target}) => {
+        item.addEventListener('change', ({ target }) => {
             if (target.value === 'no') {
                 inputFile.disabled = true;
                 dropArea.classList.add('disable');
@@ -113,17 +112,17 @@ function checkForm() {
     });
 
     // Prevent default drag behaviors
-    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach((eventName) => {
         dropArea.addEventListener(eventName, preventDefaults, false);
         document.body.addEventListener(eventName, preventDefaults, false);
     });
 
     // Highlight drop area when item is dragged over it
-    ['dragenter', 'dragover'].forEach(eventName => {
+    ['dragenter', 'dragover'].forEach((eventName) => {
         dropArea.addEventListener(eventName, highlight, false);
     });
 
-    ['dragleave', 'drop'].forEach(eventName => {
+    ['dragleave', 'drop'].forEach((eventName) => {
         dropArea.addEventListener(eventName, unhighlight, false);
     });
 
@@ -133,15 +132,15 @@ function checkForm() {
     function preventDefaults(e) {
         e.preventDefault();
         e.stopPropagation();
-    };
+    }
 
     function highlight(e) {
         dropArea.classList.add('highlight');
-    };
+    }
 
     function unhighlight(e) {
         dropArea.classList.remove('active');
-    };
+    }
 
     function handleDrop(e) {
         var dt = e.dataTransfer;
@@ -152,49 +151,49 @@ function checkForm() {
             handleFiles(files);
             uplpoadFiles(files);
         } else {
-            inputFile.value = "";
+            inputFile.value = '';
         }
-    };
+    }
 
     function initializeProgress(numFiles) {
         // progressBar.value = 0;
-        dropTextName = "";
+        dropTextName = '';
         uploadProgress = [];
         dropIcon.classList.remove('loading');
-        dropPercent.innerHTML = "0%";
-        dropText.innerHTML = "Uploading file...";
+        dropPercent.innerHTML = '0%';
+        dropText.innerHTML = 'Uploading file...';
         setProgress(0);
 
-        for(let i = numFiles; i > 0; i--) {
+        for (let i = numFiles; i > 0; i--) {
             uploadProgress.push(0);
         }
-    };
+    }
 
     function updateProgress(fileNumber, percent) {
         dropIcon.classList.add('loading');
         uploadProgress[fileNumber] = percent;
         setProgress(percent);
-        dropPercent.innerHTML = percent + "%";
+        dropPercent.innerHTML = percent + '%';
         if (percent === 100) {
             dropArea.classList.add('highlight');
-            dropText.innerHTML = "Loaded " + dropTextName;
+            dropText.innerHTML = 'Loaded ' + dropTextName;
         }
-    };
+    }
 
     function handleFiles(files) {
         files = [...files];
         initializeProgress(files.length);
         files.forEach((item, i) => {
             setTimeout(function () {
-                uploadFile(item, i)
+                uploadFile(item, i);
             }, 350 * i);
         });
-    };
+    }
 
     function uploadFile(file, i) {
-        dropTextName += file.name + ", ";
-        updateProgress(i, ((i+1) * 100.0 / uploadProgress.length) || 100);
-    };
+        dropTextName += file.name + ', ';
+        updateProgress(i, ((i + 1) * 100.0) / uploadProgress.length || 100);
+    }
 
     // Upload progress
     let circle = dropArea.querySelector('circle');
@@ -205,7 +204,7 @@ function checkForm() {
     circle.style.strokeDashoffset = `${circumference}`;
 
     function setProgress(percent) {
-        const offset = circumference - percent / 100 * circumference;
+        const offset = circumference - (percent / 100) * circumference;
         circle.style.strokeDashoffset = offset;
     }
     setProgress(0);
@@ -220,31 +219,33 @@ function checkForm() {
 
         await fetch(start_project_object.url, {
             method: 'POST',
-            body: data
+            body: data,
         })
-        .then(resp => resp.json())
-        .then(json => {
-            if (json.success === true) {
-                location.href = '/get-in-touch-success/';
-            }
-            loader.classList.remove('show');
-        })
-        .catch(err => {
-            loader.classList.remove('show');
-        })
+            .then((resp) => resp.json())
+            .then((json) => {
+                console.log(json);
+                if (json.success === true) {
+                    location.href = '/get-in-touch-success/';
+                }
+                loader.classList.remove('show');
+            })
+            .catch((err) => {
+                console.log(err);
+                loader.classList.remove('show');
+            });
     };
 
     function showError(text) {
         const box = form.querySelector('.startProject__err');
         box.innerHTML = text;
         timer = setTimeout(function () {
-            box.innerHTML = "";
+            box.innerHTML = '';
         }, 7000);
         // console.log(text);
     }
 
     function checkStepsField(step) {
-        const content = form.querySelector('[data-step="'+step+'"]');
+        const content = form.querySelector('[data-step="' + step + '"]');
         // const fields = content.querySelectorAll('input');
         const textarea = content.querySelector('textarea');
         // console.log(fields);
@@ -264,7 +265,7 @@ function checkForm() {
                 const ages = content.querySelectorAll('.gender__plate [type=checkbox]:checked');
                 let ageNames = '';
 
-                ages.forEach(checkbox => {
+                ages.forEach((checkbox) => {
                     ageNames += checkbox.value + ', ';
                     age.value = ageNames;
                 });
@@ -278,7 +279,7 @@ function checkForm() {
             case 6:
                 const emotions = content.querySelectorAll('[type=checkbox]:checked');
                 const emotion = content.querySelector('[type=hidden]');
-                let names = "";
+                let names = '';
 
                 emotions.forEach((checkbox, i) => {
                     names += checkbox.value + ', ';
@@ -300,7 +301,6 @@ function checkForm() {
                 textareaCheck(textarea);
                 break;
             case 9:
-
                 break;
             default:
                 toggleSteps(++stepNumber);
@@ -320,45 +320,45 @@ function checkForm() {
         const input = form.querySelector('[name="uploaded"]');
 
         // ничего не делаем если files пустой
-        if( typeof files == 'undefined' ) return;
+        if (typeof files == 'undefined') return;
 
         // создадим объект данных формы
         var data = new FormData();
 
         // заполняем объект данных файлами в подходящем для отправки формате
         files.forEach((value, key) => {
-            data.append( key, value );
+            data.append(key, value);
         });
 
         // добавим переменную для идентификации запроса
-        data.append( 'action', 'file_upload');
+        data.append('action', 'file_upload');
         // data.append( 'nonce', nonce );
 
         fetch('/wp-admin/admin-ajax.php', {
             method: 'POST',
-            body: data
+            body: data,
         })
-        .then(resp => resp.json())
-        .then(json => {
-            if (json.success === true) {
-                let vals = "";
-                json.data.forEach(item => {
-                    vals += item + ', ';
-                    input.value = vals;
-                });
-            } else {
-                inputFile.value = "";
+            .then((resp) => resp.json())
+            .then((json) => {
+                if (json.success === true) {
+                    let vals = '';
+                    json.data.forEach((item) => {
+                        vals += item + ', ';
+                        input.value = vals;
+                    });
+                } else {
+                    inputFile.value = '';
+                    setProgress(0);
+                    showError('File not uploaded');
+                }
+                // console.log(json)
+            })
+            .catch((err) => {
+                // console.log(err);
                 setProgress(0);
+                inputFile.value = '';
                 showError('File not uploaded');
-            }
-            // console.log(json)
-        })
-        .catch(err => {
-            // console.log(err);
-            setProgress(0);
-            inputFile.value = "";
-            showError('File not uploaded');
-        })
+            });
     }
 }
 
