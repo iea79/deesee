@@ -97,6 +97,7 @@ function checkForm() {
 
     inputFile.addEventListener('change', function (e) {
         handleFiles(this.files);
+        uplpoadFiles(this.files);
     });
 
     dropAreaChecked.forEach((item, i) => {
@@ -181,6 +182,7 @@ function checkForm() {
     }
 
     function handleFiles(files) {
+        console.log(files);
         files = [...files];
         initializeProgress(files.length);
         files.forEach((item, i) => {
@@ -188,6 +190,7 @@ function checkForm() {
                 uploadFile(item, i);
             }, 350 * i);
         });
+        loadedFiles = files;
     }
 
     function uploadFile(file, i) {
@@ -316,7 +319,9 @@ function checkForm() {
     }
 
     function uplpoadFiles(files) {
-        console.log(files);
+        console.log(1, files);
+        files = [...files];
+        console.log(2, files);
         const input = form.querySelector('[name="uploaded"]');
 
         // ничего не делаем если files пустой
@@ -351,7 +356,7 @@ function checkForm() {
                     setProgress(0);
                     showError('File not uploaded');
                 }
-                // console.log(json)
+                console.log(json)
             })
             .catch((err) => {
                 // console.log(err);

@@ -1,13 +1,14 @@
 <?php
-if ( ! defined( 'DEV_TEMPL_NAME' ) ) {
-	define( 'DEV_TEMPL_NAME', 'page-development-template.php' );
+if (!defined('DEV_TEMPL_NAME')) {
+	define('DEV_TEMPL_NAME', 'page-development-template.php');
 }
 
-function dev_first_section_template_fields( $settings, $type, $id, $meta_type, $types ) {
+function dev_first_section_template_fields($settings, $type, $id, $meta_type, $types)
+{
 
-    if ( get_page_template_slug( $id ) == DEV_TEMPL_NAME ) {
+	if (get_page_template_slug($id) == DEV_TEMPL_NAME) {
 
-		$Section = SCF::add_setting( 'dev-1', 'First section' );
+		$Section = SCF::add_setting('dev-1', 'First section');
 
 		$Section->add_group(
 			'first-section',
@@ -46,13 +47,14 @@ function dev_first_section_template_fields( $settings, $type, $id, $meta_type, $
 
 	return $settings;
 }
-add_filter( 'smart-cf-register-fields', 'dev_first_section_template_fields', 1, 5 );
+add_filter('smart-cf-register-fields', 'dev_first_section_template_fields', 1, 5);
 
-function dev_portfolio_section_template_fields( $settings, $type, $id, $meta_type, $types ) {
+function dev_portfolio_section_template_fields($settings, $type, $id, $meta_type, $types)
+{
 
-    if ( get_page_template_slug( $id ) == DEV_TEMPL_NAME ) {
+	if (get_page_template_slug($id) == DEV_TEMPL_NAME) {
 
-		$Section = SCF::add_setting( 'dev-2', 'Portfolio section' );
+		$Section = SCF::add_setting('dev-2', 'Portfolio section');
 
 		$Section->add_group(
 			'portfolio-section',
@@ -123,13 +125,14 @@ function dev_portfolio_section_template_fields( $settings, $type, $id, $meta_typ
 
 	return $settings;
 }
-add_filter( 'smart-cf-register-fields', 'dev_portfolio_section_template_fields', 2, 5 );
+add_filter('smart-cf-register-fields', 'dev_portfolio_section_template_fields', 2, 5);
 
-function dev_why_section_template_fields( $settings, $type, $id, $meta_type, $types ) {
+function dev_why_section_template_fields($settings, $type, $id, $meta_type, $types)
+{
 
-    if ( get_page_template_slug( $id ) == DEV_TEMPL_NAME ) {
+	if (get_page_template_slug($id) == DEV_TEMPL_NAME) {
 
-		$Section = SCF::add_setting( 'dev-3', 'Why section' );
+		$Section = SCF::add_setting('dev-3', 'Why section');
 
 		$Section->add_group(
 			'why-section',
@@ -195,13 +198,14 @@ function dev_why_section_template_fields( $settings, $type, $id, $meta_type, $ty
 
 	return $settings;
 }
-add_filter( 'smart-cf-register-fields', 'dev_why_section_template_fields', 3, 5 );
+add_filter('smart-cf-register-fields', 'dev_why_section_template_fields', 3, 5);
 
-function dev_noticed_section_template_fields( $settings, $type, $id, $meta_type, $types ) {
+function dev_noticed_section_template_fields($settings, $type, $id, $meta_type, $types)
+{
 
-    if ( get_page_template_slug( $id ) == DEV_TEMPL_NAME ) {
+	if (get_page_template_slug($id) == DEV_TEMPL_NAME) {
 
-		$Section = SCF::add_setting( 'dev-4', 'Noticed section' );
+		$Section = SCF::add_setting('dev-4', 'Noticed section');
 
 		$Section->add_group(
 			'noticed-section',
@@ -252,13 +256,14 @@ function dev_noticed_section_template_fields( $settings, $type, $id, $meta_type,
 
 	return $settings;
 }
-add_filter( 'smart-cf-register-fields', 'dev_noticed_section_template_fields', 4, 5 );
+add_filter('smart-cf-register-fields', 'dev_noticed_section_template_fields', 4, 5);
 
-function dev_cons_section_template_fields( $settings, $type, $id, $meta_type, $types ) {
+function dev_cons_section_template_fields($settings, $type, $id, $meta_type, $types)
+{
 
-    if ( get_page_template_slug( $id ) == DEV_TEMPL_NAME ) {
+	if (get_page_template_slug($id) == DEV_TEMPL_NAME) {
 
-		$Section = SCF::add_setting( 'dev-5', 'Pros&cons section' );
+		$Section = SCF::add_setting('dev-5', 'Pros&cons section');
 
 		$Section->add_group(
 			'cons-section',
@@ -363,13 +368,14 @@ function dev_cons_section_template_fields( $settings, $type, $id, $meta_type, $t
 
 	return $settings;
 }
-add_filter( 'smart-cf-register-fields', 'dev_cons_section_template_fields', 5, 5 );
+add_filter('smart-cf-register-fields', 'dev_cons_section_template_fields', 5, 5);
 
-function dev_services_section_template_fields( $settings, $type, $id, $meta_type, $types ) {
+function dev_services_section_template_fields($settings, $type, $id, $meta_type, $types)
+{
 
-    if ( get_page_template_slug( $id ) == DEV_TEMPL_NAME ) {
+	if (get_page_template_slug($id) == DEV_TEMPL_NAME) {
 
-		$Section = SCF::add_setting( 'dev-6', 'Services section' );
+		$Section = SCF::add_setting('dev-6', 'Services section');
 
 		$Section->add_group(
 			'services-section',
@@ -430,13 +436,14 @@ function dev_services_section_template_fields( $settings, $type, $id, $meta_type
 
 	return $settings;
 }
-add_filter( 'smart-cf-register-fields', 'dev_services_section_template_fields', 6, 5 );
+add_filter('smart-cf-register-fields', 'dev_services_section_template_fields', 6, 5);
 
-function dev_choose_section_template_fields( $settings, $type, $id, $meta_type, $types ) {
+function dev_choose_section_template_fields($settings, $type, $id, $meta_type, $types)
+{
 
-    if ( get_page_template_slug( $id ) == DEV_TEMPL_NAME ) {
+	if (get_page_template_slug($id) == DEV_TEMPL_NAME) {
 
-		$Section = SCF::add_setting( 'dev-7', 'Why choose section' );
+		$Section = SCF::add_setting('dev-7', 'Why choose section');
 
 		$Section->add_group(
 			'choose-section',
@@ -468,6 +475,11 @@ function dev_choose_section_template_fields( $settings, $type, $id, $meta_type, 
 					'label'       => 'Why choose text',
 					'type'        => 'text',
 				),
+				array(
+					'name'        => 'choose__link',
+					'label'       => 'Why choose link',
+					'type'        => 'text',
+				),
 			)
 		);
 
@@ -487,13 +499,14 @@ function dev_choose_section_template_fields( $settings, $type, $id, $meta_type, 
 
 	return $settings;
 }
-add_filter( 'smart-cf-register-fields', 'dev_choose_section_template_fields', 7, 5 );
+add_filter('smart-cf-register-fields', 'dev_choose_section_template_fields', 7, 5);
 
-function dev_reiew_section_template_fields( $settings, $type, $id, $meta_type, $types ) {
+function dev_reiew_section_template_fields($settings, $type, $id, $meta_type, $types)
+{
 
-    if ( get_page_template_slug( $id ) == DEV_TEMPL_NAME ) {
+	if (get_page_template_slug($id) == DEV_TEMPL_NAME) {
 
-		$Section = SCF::add_setting( 'dev-8', 'Review section' );
+		$Section = SCF::add_setting('dev-8', 'Review section');
 
 		$Section->add_group(
 			'reiew-section',
@@ -535,13 +548,14 @@ function dev_reiew_section_template_fields( $settings, $type, $id, $meta_type, $
 
 	return $settings;
 }
-add_filter( 'smart-cf-register-fields', 'dev_reiew_section_template_fields', 8, 5 );
+add_filter('smart-cf-register-fields', 'dev_reiew_section_template_fields', 8, 5);
 
-function dev_process_section_template_fields( $settings, $type, $id, $meta_type, $types ) {
+function dev_process_section_template_fields($settings, $type, $id, $meta_type, $types)
+{
 
-    if ( get_page_template_slug( $id ) == DEV_TEMPL_NAME ) {
+	if (get_page_template_slug($id) == DEV_TEMPL_NAME) {
 
-		$Section = SCF::add_setting( 'dev-9', 'Process section' );
+		$Section = SCF::add_setting('dev-9', 'Process section');
 
 		$Section->add_group(
 			'process-section',
@@ -592,14 +606,15 @@ function dev_process_section_template_fields( $settings, $type, $id, $meta_type,
 
 	return $settings;
 }
-add_filter( 'smart-cf-register-fields', 'dev_process_section_template_fields', 10, 5 );
+add_filter('smart-cf-register-fields', 'dev_process_section_template_fields', 10, 5);
 
 
-function dev_price_section_template_fields( $settings, $type, $id, $meta_type, $types ) {
+function dev_price_section_template_fields($settings, $type, $id, $meta_type, $types)
+{
 
-    if ( get_page_template_slug( $id ) == DEV_TEMPL_NAME ) {
+	if (get_page_template_slug($id) == DEV_TEMPL_NAME) {
 
-		$Section = SCF::add_setting( 'dev-10', 'Price section' );
+		$Section = SCF::add_setting('dev-10', 'Price section');
 
 		$Section->add_group(
 			'price-section',
@@ -655,4 +670,4 @@ function dev_price_section_template_fields( $settings, $type, $id, $meta_type, $
 
 	return $settings;
 }
-add_filter( 'smart-cf-register-fields', 'dev_price_section_template_fields', 9, 5 );
+add_filter('smart-cf-register-fields', 'dev_price_section_template_fields', 9, 5);

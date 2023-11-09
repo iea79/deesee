@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The header for our theme
  *
@@ -9,26 +10,48 @@
  * @package frondendie
  */
 
-$bgColor = SCF::get( 'project_bg_color' );
+$bgColor = SCF::get('project_bg_color');
 $bodyColor = '';
-if ( $bgColor && !is_archive() ) {
-	$bodyColor = 'style="background: '.$bgColor.'"';
+if ($bgColor && !is_archive()) {
+	$bodyColor = 'style="background: ' . $bgColor . '"';
 }
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
+
 <head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<meta charset="<?php bloginfo('charset'); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
 	<?php wp_head(); ?>
+	<!-- Google Tag Manager -->
+	<script>
+		(function(w, d, s, l, i) {
+			w[l] = w[l] || [];
+			w[l].push({
+				'gtm.start': new Date().getTime(),
+				event: 'gtm.js'
+			});
+			var f = d.getElementsByTagName(s)[0],
+				j = d.createElement(s),
+				dl = l != 'dataLayer' ? '&l=' + l : '';
+			j.async = true;
+			j.src =
+				'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+			f.parentNode.insertBefore(j, f);
+		})(window, document, 'script', 'dataLayer', 'GTM-5J4SDQ8');
+	</script>
+	<!-- End Google Tag Manager -->
 </head>
 
 <body <?php body_class(); ?> <?php echo $bodyColor ?>>
-<?php wp_body_open(); ?>
-<!-- <div id="page" class="site"> -->
-	<!-- <a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'frondendie' ); ?></a> -->
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5J4SDQ8" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+	<?php wp_body_open(); ?>
+	<!-- <div id="page" class="site"> -->
+	<!-- <a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e('Skip to content', 'frondendie'); ?></a> -->
 
 	<header id="masthead" class="header">
 		<div class="header__content">

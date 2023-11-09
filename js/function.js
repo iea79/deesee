@@ -115,6 +115,8 @@ $(document).ready(function () {
     playStopReviewVideo();
 
     $('.agree').prop('checked', false);
+
+    postSlider();
 });
 
 // window.onload = () => {
@@ -125,6 +127,28 @@ $(document).ready(function () {
 //         checkbox.removeAttribute('checked');
 //     });
 // };
+
+function postSlider() {
+    const isPost = $('body').hasClass('post-template-post-custom');
+    console.log('isPost', isPost);
+    if (isPost) {
+        $('.custom_block .wp-block-gallery').slick({
+            dots: true,
+            arrows: false,
+            // nextArrow: '<button class="slick-next"></button>',
+            // prevArrow: '<button class="slick-prev"></button>',
+            adaptiveHeight: true,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        dots: true
+                    }
+                }
+            ]
+        });
+    }
+}
 
 function showPlaceholderInDateField() {
     const date = $('[type=date]');

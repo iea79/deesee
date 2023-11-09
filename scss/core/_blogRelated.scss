@@ -63,11 +63,14 @@
             object-fit: cover;
             width: 100%;
             height: 100%;
-            transition: transform 1s;
+            filter: grayscale(1);
+            transition: 1s;
+            transition-property: filter, transform;
             transform: scale(1);
 
             &:hover {
                 transform: scale(1.1);
+                filter: grayscale(0);
             }
         }
 
@@ -76,6 +79,12 @@
             object-fit: cover;
             width: 100%;
             height: 100%;
+            filter: grayscale(1);
+            transition: filter 0.3s;
+
+            &:hover {
+                filter: grayscale(0);
+            }
         }
     }
 
