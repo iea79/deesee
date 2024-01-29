@@ -22,7 +22,7 @@ breadcrumbs();
                 var wpcf7Elm = document.querySelector( '.pageGetTouch .wpcf7' );
 
                 wpcf7Elm.addEventListener( 'wpcf7mailsent', function( event ) {
-                    location.href = '/get-in-touch-success/';
+                    location.href = '/get-in-touch-page-success/';
                 }, false );
             </script>
             <style>
@@ -35,3 +35,4 @@ breadcrumbs();
 </div>
 <?php
 get_footer();
+

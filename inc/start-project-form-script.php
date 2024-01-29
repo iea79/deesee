@@ -1,24 +1,25 @@
 <?php
-add_action( 'wp_enqueue_scripts', 'start_project_script' );
+add_action('wp_enqueue_scripts', 'start_project_script');
 
 /**
  * Display errors
  */
-if ( ! function_exists('debug_wpmail') ) {
+if (!function_exists('debug_wpmail')) {
 
-	function debug_wpmail( $result = false ) {
+	function debug_wpmail($result = false)
+	{
 
-		if ( $result ) {
+		if ($result) {
 			return;
 		}
 
 		global $ts_mail_errors, $phpmailer;
 
-		if ( ! isset($ts_mail_errors) ) {
+		if (!isset($ts_mail_errors)) {
 			$ts_mail_errors = array();
 		}
 
-		if ( isset($phpmailer) ) {
+		if (isset($phpmailer)) {
 			$ts_mail_errors[] = $phpmailer->ErrorInfo;
 		}
 
@@ -49,10 +50,11 @@ if ( ! function_exists('debug_wpmail') ) {
  *
  * @see https://wpruse.ru/?p=3224
  */
-function start_project_script() {
+function start_project_script()
+{
 
-    // Обрабтка полей формы
-	wp_enqueue_script( 'jquery-form' );
+	// Обрабтка полей формы
+	wp_enqueue_script('jquery-form');
 
 	// Подключаем файл скрипта
 	wp_enqueue_script(
@@ -68,33 +70,33 @@ function start_project_script() {
 		'start_project',
 		'start_project_object',
 		array(
-			'url'   => admin_url( 'admin-ajax.php' ),
-			'nonce' => wp_create_nonce( 'start_project-nonce' ),
+			'url'   => admin_url('admin-ajax.php'),
+			'nonce' => wp_create_nonce('start_project-nonce'),
 		)
 	);
-
 };
 
-add_action( 'wp_ajax_start_project_form', 'start_project_form' );
-add_action( 'wp_ajax_nopriv_start_project_form', 'start_project_form' );
+add_action('wp_ajax_start_project_form', 'start_project_form');
+add_action('wp_ajax_nopriv_start_project_form', 'start_project_form');
 /**
  * Обработка скрипта
  *
  * @see https://wpruse.ru/?p=3224
  */
-function start_project_form() {
+function start_project_form()
+{
 
 	// Массив ошибок
 	$err_message = array();
 
 	// Проверяем nonce. Если проверкане прошла, то блокируем отправку
-	if ( ! wp_verify_nonce( $_POST['nonce'], 'start_project-nonce' ) ) {
-		wp_die( 'Submit brake' );
+	if (!wp_verify_nonce($_POST['nonce'], 'start_project-nonce')) {
+		wp_die('Submit brake');
 	}
 
 	// Проверяем на спам. Если скрытое поле заполнено или снят чек, то блокируем отправку
 	// if ( $_POST['agree'] == 'Yes' ) {
-	if ( isset($_POST['agree']) ) {
+	if (isset($_POST['agree'])) {
 		// wp_die( 'Spam, spam, param-pam-pam!' );
 		$err_message['name'] = 'Spam, spam, param-pam-pam!';
 	}
@@ -106,57 +108,62 @@ function start_project_form() {
 	// 	$art_name = sanitize_text_field( $_POST['art_name'] );
 	// }
 
-    // $genderAge = $_POST['ages'];
+	// $genderAge = $_POST['ages'];
 	$clientName = $_POST["first-name"] . ' ' . $_POST["last-name"];
 
 	// Проверяем массив ошибок, если не пустой, то передаем сообщение. Иначе отправляем письмо
-	if ( $err_message ) {
+	if ($err_message) {
 
-		wp_send_json_error( $err_message );
-
+		wp_send_json_error($err_message);
 	} else {
 
 		// Указываем адресата
-        $subject = $_POST['subject'];
-		$email_to = 'busforward@gmail.com';
-		// $email_to = '';
+		$subject = $_POST['subject'];
+		$email_to = 'lana@deessemedia.com,hello@deessemedia.com';
+	   // $email_to = '';
 
 		// Если адресат не указан, то берем данные из настроек сайта
-		if ( ! $email_to ) {
-			$email_to = get_option( 'admin_email' );
+		if (!$email_to) {
+			$email_to = get_option('admin_email');
 		}
 
-        $headers  = 'MIME-Version: 1.0' . "\r\n";
-        $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-        $headers .= 'From: DeesseMedia <' . $email_to . '>' . "\r\n" . 'Reply-To: ' . $email_to;
+		$headers  = 'MIME-Version: 1.0' . "\r\n";
+		$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+		$headers .= 'From: DeesseMedia <' . $email_to . '>' . "\r\n" . 'Reply-To: ' . $email_to;
 
-        $body = '<html><body>';
-        $body .= '<p><b>Order from page - ' . $_POST['page_name'] . '</b></p>';
-        $body .= '<p><b>Which website do you need?:</b> '. $_POST['step1'] .'</p>';
-        $body .= '<p><b>Do you have a corporate identity?:</b> '. $_POST['uploaded'] .'</p>';
-        $body .= '<p><b>What is your target audience?:</b> '. $_POST['ages'] .'</p>';
-        $body .= '<p><b>Which style do you like?:</b> '. $_POST['step4'] .'</p>';
-        $body .= '<p><b>What color palette do you like?:</b> '. $_POST['step5'] .'</p>';
-        $body .= '<p><b>Which emotions should the website evoke?:</b> '. $_POST['emotions'] .'</p>';
-        $body .= '<p><b>Who are your main competitors?:</b> '. $_POST['step7'] .'</p>';
-        $body .= '<p><b>Comments & Wishes:</b> '. $_POST['step8'] .'</p>';
-        $body .= '<p><b>Best desired launch date:</b> '. $_POST['step9'] .'</p>';
-        $body .= '<p><b>Name:</b> '. $clientName .'</p>';
-        $body .= '<p><b>Email:</b> '. $_POST['email'] .'</p>';
-        $body .= '<p><b>Phone:</b> '. $_POST['phone'] .'</p>';
-        $body .= '</body></html>';
+		$body = '<html><body>';
+		$body .= '<p><b>Order from page - ' . $_POST['page_name'] . '</b></p>';
+		$body .= '<p><b>Which website do you need?:</b> ' . $_POST['step1'] . '</p>';
+		$body .= '<p><b>Do you have a corporate identity?:</b> ' . $_POST['uploaded'] . '</p>';
+		$body .= '<p><b>What is your target audience?:</b> ' . $_POST['ages'] . '</p>';
+		$body .= '<p><b>Which style do you like?:</b> ' . $_POST['step4'] . '</p>';
+		$body .= '<p><b>What color palette do you like?:</b> ' . $_POST['step5'] . '</p>';
+		$body .= '<p><b>Which emotions should the website evoke?:</b> ' . $_POST['emotions'] . '</p>';
+		$body .= '<p><b>Who are your main competitors?:</b> ' . $_POST['step7'] . '</p>';
+		$body .= '<p><b>Comments & Wishes:</b> ' . $_POST['step8'] . '</p>';
+		$body .= '<p><b>Best desired launch date:</b> ' . $_POST['step9'] . '</p>';
+		$body .= '<p><b>Name:</b> ' . $clientName . '</p>';
+		$body .= '<p><b>Email:</b> ' . $_POST['email'] . '</p>';
+		$body .= '<p><b>Phone:</b> ' . $_POST['phone'] . '</p>';
+		$body .= '</body></html>';
 
-		do_shortcode( ' [cfdb-save-form-post] ' );
+
 		$res = wp_mail($email_to, $subject, $body, $headers);
 		if ($res) {
+			// Save to cfdb
+			// do_shortcode(' [cfdb-save-form-post] ');
+			require_once(ABSPATH . 'wp-content/plugins/contact-form-7-to-database-extension/CFDBShortCodeSavePostData.php');
+			$handler = new CFDBShortCodeSavePostData;
+			$handler->handleShortcode(null);
+
 			$message_success['body'] = $body;
-			$message_success['name'] = $_POST["fname"] .' '. $_POST["lname"];
+			$message_success['name'] = $_POST["fname"] . ' ' . $_POST["lname"];
 			$message_success['phone'] = $_POST['phone'];
 			$message_success['email'] = $_POST['email'];
-			wp_send_json_success( $message_success );
+			wp_send_json_success($message_success);
 		} else {
 			// $err_message['debug'] = debug_wpmail($res);
-			wp_send_json_error( debug_wpmail($res) );
+			wp_send_json_error(debug_wpmail($res));
 			// wp_send_json_error( $err_message );
 		}
 
@@ -174,51 +181,48 @@ function start_project_form() {
 
 	// На всякий случай убиваем еще раз процесс ajax
 	wp_die();
-
 }
 
 
-add_action( 'wp_ajax_file_upload', 'file_upload' );
-add_action( 'wp_ajax_nopriv_file_upload', 'file_upload' );
-function file_upload() {
-	// check_ajax_referer( 'uplfile', 'nonce' ); // защита
+add_action('wp_ajax_file_upload', 'file_upload_func');
+add_action('wp_ajax_nopriv_file_upload', 'file_upload_func');
+function file_upload_func()
+{
+	// check_ajax_referer('uplfile', 'nonce'); // защита
 
-	if( empty($_FILES) )
-		wp_send_json_error( 'Файлов нет...' );
+	if (empty($_FILES))
+		wp_send_json_error('Файлов нет...');
 
 	$post_id = (int) $_POST['post_id'];
-
-	// ограничим размер загружаемой картинки
-	$sizedata = getimagesize( $_FILES['upfile']['tmp_name'] );
-	$max_size = 2000;
-	if( $sizedata[0]/*width*/ > $max_size || $sizedata[1]/*height*/ > $max_size )
-		wp_send_json_error( __('Картинка не может быть больше чем '. $max_size .'px в ширину или высоту...','km') );
 
 	// обрабатываем загрузку файла
 	require_once ABSPATH . 'wp-admin/includes/image.php';
 	require_once ABSPATH . 'wp-admin/includes/file.php';
 	require_once ABSPATH . 'wp-admin/includes/media.php';
 
-	// фильтр допустимых типов файлов - разрешим только картинки
-	add_filter( 'upload_mimes', function( $mimes ){
+	// фильтр допустимых типов файлов
+	add_filter('upload_mimes', function ($mimes) {
 		return [
 			'jpg|jpeg|jpe' => 'image/jpeg',
 			'gif'          => 'image/gif',
 			'png'          => 'image/png',
+			'pdf'          => 'application/pdf',
 		];
-	} );
+	});
 
 	$uploaded_imgs = array();
 
-	foreach( $_FILES as $file_id => $data ){
-		$attach_id = media_handle_upload( $file_id, $post_id );
+	foreach ($_FILES as $file_id => $data) {
+		$attach_id = media_handle_upload($file_id, $post_id);
 
 		// ошибка
-		if( is_wp_error( $attach_id ) )
-			$uploaded_imgs[] = 'Ошибка загрузки файла `'. $data['name'] .'`: '. $attach_id->get_error_message();
+		if (is_wp_error($attach_id))
+			$uploaded_imgs[] = 'Ошибка загрузки файла `' . $data['name'] . '`: ' . $attach_id->get_error_message();
 		else
-			$uploaded_imgs[] = wp_get_attachment_url( $attach_id );
+			$uploaded_imgs[] = wp_get_attachment_url($attach_id);
 	}
 
-	wp_send_json_success( $uploaded_imgs );
+	wp_send_json_success($uploaded_imgs);
+
+    die();
 }

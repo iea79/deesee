@@ -10,7 +10,7 @@
 
 if (!defined('_S_VERSION')) {
 	// Replace the version number of the theme on each release.
-	define('_S_VERSION', '1.1.1');
+	define('_S_VERSION', '1.1.3');
 }
 
 if (!function_exists('frondendie_setup')) :
@@ -302,6 +302,11 @@ require get_template_directory() . '/scf/about-us.php';
  * Get Web design pages template
  */
 require get_template_directory() . '/scf/web-design-template.php';
+
+/**
+ * Get Subscribe thanks pages template
+ */
+require get_template_directory() . '/scf/subscribe-thank.php';
 
 /**
  * Get Web design pages template

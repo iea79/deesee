@@ -228,7 +228,7 @@ function checkForm() {
             .then((json) => {
                 console.log(json);
                 if (json.success === true) {
-                    location.href = '/get-in-touch-success/';
+                    location.href = '/get-in-touch-page-success/';
                 }
                 loader.classList.remove('show');
             })
@@ -343,7 +343,10 @@ function checkForm() {
             method: 'POST',
             body: data,
         })
-            .then((resp) => resp.json())
+            .then((resp) => {
+                console.log(resp);
+                return resp.json();
+            })
             .then((json) => {
                 if (json.success === true) {
                     let vals = '';

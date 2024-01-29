@@ -1,5 +1,7 @@
 @import "./variables/variables";
 @import "./mixins/mixin.scss";
+@import "./core/devReviews";
+@import "./core/devProcess";
 
 .devFirst {
     .section {
