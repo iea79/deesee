@@ -10,7 +10,7 @@
 
 if (!defined('_S_VERSION')) {
 	// Replace the version number of the theme on each release.
-	define('_S_VERSION', '1.1.3');
+	define('_S_VERSION', '1.1.8');
 }
 
 if (!function_exists('frondendie_setup')) :
@@ -159,10 +159,10 @@ function frondendie_scripts()
 	wp_style_add_data('frondendie-style', 'rtl', 'replace');
 
 	// wp_style_add_data( 'galaxyr-style', 'rtl', 'replace' );
-	wp_deregister_script('jquery');
+	// wp_deregister_script('jquery');
 	wp_deregister_script('wp-embed-js');
-	// wp_register_script( 'jquery', get_template_directory_uri() . '/js/jquery.js', array(), _S_VERSION, true );
-	wp_enqueue_script('jquery', get_template_directory_uri() . '/js/jquery.js', array(), _S_VERSION, true);
+	// wp_register_script('jquery', get_template_directory_uri() . '/js/jquery.js', array(), _S_VERSION, true);
+	// wp_enqueue_script('jquery', get_template_directory_uri() . '/js/jquery.js', array(), _S_VERSION, true);
 
 	if (is_front_page()) {
 		wp_enqueue_style('critical-style', get_template_directory_uri() . '/css/home-style.css', array(), _S_VERSION);
@@ -173,9 +173,12 @@ function frondendie_scripts()
 		wp_enqueue_style('frondendie-style', get_stylesheet_uri(), array(), _S_VERSION);
 	}
 
-	wp_enqueue_script('slick-slider', get_template_directory_uri() . '/js/slick.min.js', array('jquery'), _S_VERSION, true);
+	wp_enqueue_script('slick-slider', get_template_directory_uri() . '/js/slick.min.js', array('jquery'), _S_VERSION, [
+		'in_footer' => true,
+		'strategy'  => 'async',
+	]);
 	wp_enqueue_script('modal', get_template_directory_uri() . '/js/modal.js', array('jquery'), _S_VERSION, true);
-	wp_enqueue_script('site-js', get_template_directory_uri() . '/js/function.js', array('jquery', 'slick-slider'), _S_VERSION, true);
+	wp_enqueue_script('site-js', get_template_directory_uri() . '/js/function.js', array('jquery', 'slick-slider', 'modal'), _S_VERSION, true);
 
 
 	if (is_singular('projects')) {
@@ -193,6 +196,10 @@ function frondendie_scripts()
 
 	if (is_singular() && comments_open() && get_option('thread_comments')) {
 		wp_enqueue_script('comment-reply');
+	}
+
+	if (is_page('get-in-touch')) {
+		wp_enqueue_script('ui-scripts', 'https://code.jquery.com/ui/1.13.2/jquery-ui.js', array('jquery'), _S_VERSION, true);
 	}
 
 	if (is_page_template('page-web-design-template.php')) {
@@ -318,6 +325,10 @@ require get_template_directory() . '/inc/template-tags.php';
  */
 require get_template_directory() . '/inc/start-project-form.php';
 require get_template_directory() . '/inc/start-project-form-script.php';
+require get_template_directory() . '/scf/website-questionary.php';
+add_action('init', function () {
+	SCF::add_options_page('Website Questionnaire form', 'Website Questionnaire', 'manage_options', 'website-questionnaire', 'dashicons-feedback', 30);
+});
 
 add_filter('big_image_size_threshold', '__return_false');
 

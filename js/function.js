@@ -5,8 +5,8 @@
  * Skype: ivanov_ea
  *
  */
-
-var app = {
+const $ = jQuery;
+const app = {
     pageScroll: '',
     lgWidth: 1200,
     mdWidth: 992,
@@ -21,16 +21,16 @@ var app = {
 };
 
 function isLgWidth() {
-    return $(window).width() >= app.lgWidth;
+    return window.innerWidth >= app.lgWidth;
 } // >= 1200
 function isMdWidth() {
-    return $(window).width() >= app.mdWidth && $(window).width() < app.lgWidth;
+    return window.innerWidth >= app.mdWidth && window.innerWidth < app.lgWidth;
 } //  >= 992 && < 1200
 function isSmWidth() {
-    return $(window).width() >= app.smWidth && $(window).width() < app.mdWidth;
+    return window.innerWidth >= app.smWidth && window.innerWidth < app.mdWidth;
 } // >= 768 && < 992
 function isXsWidth() {
-    return $(window).width() < app.smWidth;
+    return window.innerWidth < app.smWidth;
 } // < 768
 function isIOS() {
     return app.iOS();
@@ -39,25 +39,26 @@ function isTouch() {
     return app.touchDevice();
 } // for touch device
 
-$(document).ready(function () {
+window.addEventListener('DOMContentLoaded', ev => {
+    console.log('loaded');
     // Хак для клика по ссылке на iOS
     if (isIOS()) {
         $(function () {
             $(document).on('touchend', 'a', $.noop);
         });
     }
-
+    
     if (location.hash === '#website-questionnaire') {
         $('.startProject').modal('show');
     }
-
+    
     // Запрет "отскока" страницы при клике по пустой ссылке с href="#"
     $('[href="#"]').click(function (event) {
         event.preventDefault();
     });
-
+    
     checkOnResize();
-
+    
     $('.ideas__slider').slick({
         dots: false,
         infinite: true,
@@ -79,15 +80,15 @@ $(document).ready(function () {
             },
         ],
     });
-
+    
     selectStyler();
-
+    
     $('#projectTypeToggle').on('change', function () {
         $('.form__pane').removeClass('active');
         $('#' + $(this).val()).addClass('active');
         $('[project-type]').val($(this).val());
     });
-
+    
     $('.devReviews__slider').slick({
         dots: true,
         infinite: true,
@@ -107,17 +108,17 @@ $(document).ready(function () {
             },
         ],
     });
-
-    showPlaceholderInDateField();
-
+    
+    getTouchFormFunctions();
+    
     toggleDevList();
-
+    
     playStopReviewVideo();
-
+    
     $('.agree').prop('checked', false);
-
+    
     postSlider();
-});
+})
 
 // window.onload = () => {
 //     const spamCheck = document.querySelectorAll('.agree');
@@ -150,27 +151,32 @@ function postSlider() {
     }
 }
 
-function showPlaceholderInDateField() {
-    const date = $('[type=date]');
-    const defaultPlaceholder = date.attr('placeholder');
-    date.attr('type', 'text');
-    date.on('focus', function () {
-        $(this).attr('type', 'date');
-        if (isIOS()) {
-            $(this).attr('placeholder', 'dd.mm.yyyy');
-            $(this).attr('pattern', 'd{2}.d{2}.d{4}');
+function getTouchFormFunctions() {
+    $( ".datepicker" ).datepicker({
+        dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        showOtherMonths: true,
+        selectOtherMonths: true,
+        firstDay: 1,
+        showButtonPanel: true,
+        currentText: "Delete"
+    });
+
+    $('.styleguidefile').hide();
+    
+    $('[name="styleguide"]').on('change', function (e) {
+        console.log(e.target.value);
+        if (e.target.value === 'Yes, I do') {
+            $('.styleguidefile').show();
+        } else {
+            $('.styleguidefile').hide();
         }
     });
 
-    date.on('blur', function () {
-        if (!$(this).val()) {
-            $(this).attr('type', 'text');
-            if (isIOS()) {
-                $(this).attr('placeholder', defaultPlaceholder);
-                $(this).attr('pattern', 'd{2}.d{2}.d{4}');
-            }
-        }
-    });
+    // $('body').on('click', '[data-handler="today"]', function (e) {
+    //     e.preventDefault();
+    //     e.stopPropagation();
+    //     console.log('clicked');
+    // });
 }
 
 function toggleRequiredEmail() {
@@ -187,16 +193,16 @@ function toggleRequiredEmail() {
     });
 }
 
-$(window).resize(function (event) {
+window.addEventListener('resize', () => {
     var windowWidth = $(window).width();
     // Запрещаем выполнение скриптов при смене только высоты вьюпорта (фикс для скролла в IOS и Android >=v.5)
     if (app.resized == windowWidth) {
         return;
     }
     app.resized = windowWidth;
-
+    
     checkOnResize();
-});
+})
 
 function checkOnResize() {
     replaceMenu();

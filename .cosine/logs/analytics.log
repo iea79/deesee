@@ -1,0 +1,5 @@
+
+INFO [2024-02-13T17:41:42.225Z]: Set User: busforward@gmail.com
+INFO [2024-02-13T17:41:42.226Z]: {"Telemetry":true}
+INFO [2024-02-13T17:41:42.861Z]: extension_initialized
+INFO [2024-02-13T17:41:42.861Z]: {"timeToInit":4717,"agent":"cosine-vscode","version":"1.1.2","package":"@cosine/analytics"}

@@ -328,15 +328,19 @@ textarea {
 }
 
 input[type='date'] {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+    color-scheme: dark;
 }
 
-input[type='date']::-webkit-inner-spin-button,
+// input[type='date']::-webkit-inner-spin-button,
+// input[type='date']::-webkit-calendar-picker-indicator {
+//     // display: none;
+//     // -webkit-appearance: none;
+// }
+
 input[type='date']::-webkit-calendar-picker-indicator {
-    display: none;
-    -webkit-appearance: none;
+    color-scheme: dark;
+    cursor: pointer;
+    // background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4=");
 }
 
 textarea {

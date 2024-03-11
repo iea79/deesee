@@ -10,11 +10,12 @@ function start_project()
 {
 
 	ob_start();
+	$fields = SCF::get_option_meta('website-questionnaire');
 ?>
 	<!-- Button trigger modal startProject -->
 	<!-- <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#startProject">
-	        Посмотреть демо
-	      </button> -->
+		Посмотреть демо
+	</button> -->
 
 	<!-- begin Modal startProject -->
 	<div class="modal fade startProject" id="startProject">
@@ -27,13 +28,13 @@ function start_project()
 					<input type="hidden" name="form_title" value="Website Questionnaire form">
 					<input type="hidden" name="page_name" value="<?php echo get_the_title(); ?>">
 					<div class="startProject__head">
-						<div class="startProject__info">Complete the survey and get the cost of the site</div>
+						<div class="startProject__info"><?php echo $fields['form__title'] ?></div>
 						<div class="startProject__counter">1/10</div>
 					</div>
 					<div class="startProject__body">
 						<!-- Step 1 -->
 						<div class="startProject__step active" data-step="1">
-							<div class="startProject__title">Which website do you need?</div>
+							<div class="startProject__title"><?php echo $fields['first__title'] ?></div>
 							<div class="startProject__form">
 								<label class="startProject__col checked">
 									<span class="startProject__img">
@@ -66,7 +67,7 @@ function start_project()
 						</div>
 						<!-- Step 2 -->
 						<div class="startProject__step" data-step="2">
-							<div class="startProject__title">2. Do you have a corporate identity?</div>
+							<div class="startProject__title"><?php echo $fields['seccond__title'] ?></div>
 							<input type="hidden" name="uploaded" value="">
 							<div class="startProject__form">
 								<label class="startProject__col checked">
@@ -96,7 +97,7 @@ function start_project()
 						</div>
 						<!-- Step 3 -->
 						<div class="startProject__step gender" id="gender" data-step="3">
-							<div class="startProject__title">3. What is your target audience?</div>
+							<div class="startProject__title"><?php echo $fields['three__title'] ?></div>
 							<input type="hidden" name="ages" value="">
 							<div class="startProject__label"></div>
 							<div class="startProject__form gender__toggle">
@@ -197,7 +198,7 @@ function start_project()
 						</div>
 						<!-- Step 4 -->
 						<div class="startProject__step" data-step="4">
-							<div class="startProject__title">4. Which style do you like?</div>
+							<div class="startProject__title"><?php echo $fields['four__title'] ?></div>
 							<div class="startProject__form">
 								<label class="startProject__col checked">
 									<span class="startProject__img">
@@ -239,7 +240,7 @@ function start_project()
 						</div>
 						<!-- Step 5 -->
 						<div class="startProject__step" data-step="5">
-							<div class="startProject__title">5. What color palette do you like?</div>
+							<div class="startProject__title"><?php echo $fields['five__title'] ?></div>
 							<div class="startProject__form">
 								<label class="startProject__col checked">
 									<span class="startProject__img">
@@ -272,7 +273,7 @@ function start_project()
 						</div>
 						<!-- Step 6 -->
 						<div class="startProject__step" data-step="6">
-							<div class="startProject__title">6. Which emotions should the website evoke?</div>
+							<div class="startProject__title"><?php echo $fields['six__title'] ?></div>
 							<input type="hidden" name="emotions" value="">
 							<div class="startProject__form">
 								<label class="startProject__row">
@@ -363,32 +364,32 @@ function start_project()
 						</div>
 						<!-- Step 7 -->
 						<div class="startProject__step" data-step="7">
-							<div class="startProject__title">7. Who are your main competitors?</div>
-							<div class="startProject__sub">Include links to their websites or write the names of the companies</div>
+							<div class="startProject__title"><?php echo $fields['seven__title'] ?></div>
+							<div class="startProject__sub"><?php echo $fields['seven__text'] ?></div>
 							<div class="startProject__form">
 								<textarea name="step7" placeholder="Start typing"></textarea>
 							</div>
 						</div>
 						<!-- Step 8 -->
 						<div class="startProject__step" data-step="8">
-							<div class="startProject__title">8. Comments & Wishes</div>
-							<div class="startProject__sub">Write what you would like to see on your website</div>
+							<div class="startProject__title"><?php echo $fields['eight__title'] ?></div>
+							<div class="startProject__sub"><?php echo $fields['eight__text'] ?></div>
 							<div class="startProject__form">
 								<textarea name="step8" placeholder="Start typing"></textarea>
 							</div>
 						</div>
 						<!-- Step 9 -->
 						<div class="startProject__step" data-step="9">
-							<div class="startProject__title">9. Best desired launch date</div>
-							<div class="startProject__sub">Write the dates on which you want to launch the website</div>
+							<div class="startProject__title"><?php echo $fields['nine__title'] ?></div>
+							<div class="startProject__sub"><?php echo $fields['nine__text'] ?></div>
 							<div class="startProject__form">
 								<textarea name="step9" placeholder="Start typing"></textarea>
 							</div>
 						</div>
 						<!-- Step 10 -->
 						<div class="startProject__step" data-step="10">
-							<div class="startProject__title">10. Contact information</div>
-							<div class="startProject__sub">Leave your contact information so we can contact you</div>
+							<div class="startProject__title"><?php echo $fields['ten__title'] ?></div>
+							<div class="startProject__sub"><?php echo $fields['ten__text'] ?></div>
 							<div class="startProject__form">
 								<div class="startProject__fields">
 									<div class="form__row">

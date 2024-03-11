@@ -1,4 +1,8 @@
 <?php
+/*
+Template Name: successPage
+Template Post Type: page
+*/
 get_header();
 ?>
 <main class="main">

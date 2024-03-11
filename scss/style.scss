@@ -51,6 +51,8 @@ $main_border: 1px solid rgba($color_withe, 0.1);
 @import 'core/lrBorder';
 @import 'core/teamList';
 @import 'core/blog-page';
+@import 'core/blogTop';
+@import 'core/blogRelated';
 @import 'core/page-template-page-about-us';
 
 
@@ -228,6 +230,26 @@ $main_border: 1px solid rgba($color_withe, 0.1);
     border-bottom: $main_border;
 }
 
+.page-template-page-get-touch {
+    @media (min-width: 768px) {
+        position: relative;
+    
+        &:before,&:after {
+          content: '';
+          position: absolute;
+          top: 7.7em;
+          bottom: 0;
+          display: block;border-left: 1px solid #363636;
+        }
+        &:before {
+            left: 5.65em;
+        }
+        &:after {
+            right: 5.65em;
+        }
+    }
+}
+
 .pageGetTouch {
     &__header {
         @media (min-width: 768px) {
@@ -254,6 +276,10 @@ $main_border: 1px solid rgba($color_withe, 0.1);
         @media (min-width: 768px) {
             margin-top: 0;
             margin-bottom: 7.1875em;
+
+            .form__top {
+                width: 78.3625em;
+            }
         }
 
         .btn {
@@ -275,13 +301,21 @@ $main_border: 1px solid rgba($color_withe, 0.1);
         .form {
             &__top {
                 @media (min-width: 768px) {
-                    display: flex;
-                    flex-wrap: wrap;
+                    // display: flex;
+                    // flex-wrap: wrap;
                     margin-left: -2em;
     
                     .form__line {
                         padding-left: 2em;
-                        width: 50%;
+                        // width: 50%;
+
+                        @media (min-width: 768px) {
+                            > p {
+                                margin: 0;
+                                display: flex;
+                                align-items: center;
+                            }
+                        }
                     }
                 }
             }
@@ -295,6 +329,68 @@ $main_border: 1px solid rgba($color_withe, 0.1);
                         // flex-grow: 1;
                         // min-width: 0;
                     }
+                }
+            }
+            
+        }
+        .styleguide, .styleguidefile {
+            p {
+                margin: 0;
+            }
+        }
+        .styleguide {
+            // margin-bottom: 0;
+        }
+        .styleguidefile {
+            // margin-top: -1px;
+            .form__group {
+                > p {
+                    min-width: 0;
+                    flex-grow: 1;
+                    input, .form__field {
+                        width: 100%;
+                    }
+                }
+
+                .form__field {
+                    &:first-child label {
+                        border: 0;
+                    }
+                }
+            }
+            .form__file {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-grow: 1;
+                width: 100%;
+                border: 1px solid #fff;
+                padding: 1.5em;
+                
+                @media (min-width: 768px) {
+                    border-right: 0;
+                    margin: 0 0 1px;
+                    padding-left: 3.2em;
+                }
+                .wpcf7-form-control-wrap {
+                    display: none;
+                }
+
+                &Label {
+                    color: #fff;
+
+                    i {
+                        font-style: normal;
+                        color: #616161;
+                    }
+                }
+            }
+        }
+
+        .coast {
+            .form__grid {
+                .form__check {
+                    flex-grow: 1;
                 }
             }
         }
